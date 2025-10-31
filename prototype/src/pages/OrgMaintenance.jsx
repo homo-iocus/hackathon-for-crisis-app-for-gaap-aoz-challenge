@@ -20,14 +20,26 @@ import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined'
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
-// 👉 single, correct import of your UI kit:
-import {
-  PageHeader, Section, KPI, StatusPill, ReadinessBar, Donut, ToolbarHint, ActionBar, DividerMuted
-} from '../ui/Kit.jsx'
+// Shared kit
+import { PageHeader, Section, KPI, StatusPill, Donut, ToolbarHint, ActionBar } from '../ui/Kit.jsx'
 
-// -----------------------------------------------------
-// Rollen & Berechtigungen (RBAC – Prototyp, clientseitig)
-// -----------------------------------------------------
+// ==== Kleine Hilfs-Komponenten für konsistente Tooltips ====
+const InfoLabel = ({ children, title }) => (
+  <Stack direction="row" spacing={0.5} alignItems="center" component="span">
+    <span>{children}</span>
+    <Tooltip arrow title={title}>
+      <InfoOutlinedIcon fontSize="small" sx={{ opacity: 0.65 }} />
+    </Tooltip>
+  </Stack>
+)
+
+const withTip = (title, node) => (
+  <Tooltip arrow title={title}>
+    <span>{node}</span>
+  </Tooltip>
+)
+
+// RBAC
 const ROLES = [
   { key: 'sysadmin',      label: 'System Admin (Stadt IT)' },
   { key: 'krisenstab',    label: 'Krisenstab' },
@@ -36,7 +48,6 @@ const ROLES = [
   { key: 'logistics',     label: 'Logistics Coordinator' },
   { key: 'viewer',        label: 'Viewer (Read-only)' },
 ]
-
 const PERMISSIONS = {
   sysadmin:   ['view','import','export','add','edit','delete','schedule','fifo','downloadTemplates','rbac'],
   krisenstab: ['view','export','schedule','fifo'],
@@ -45,12 +56,9 @@ const PERMISSIONS = {
   logistics:  ['view','export','schedule'],
   viewer:     ['view'],
 }
-
 const has = (role, perm) => PERMISSIONS[role]?.includes(perm)
 
-// ---------------------------------------
-// Mockdaten – Organisation & Lagerobjekte
-// ---------------------------------------
+// Data
 const myOrgName = 'Zivilschutz Stadt Zürich – Halle Nord'
 const NOW = new Date()
 const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x }
@@ -84,42 +92,35 @@ const INITIAL_ITEMS = [
   },
 ]
 
-// Vorlagen (vereinheitlichte Pflege)
-const TEMPLATES = [
-  { id:'tpl-bed',  name:'Vorlage: Bett (Unterkunft)', fields:['name','cat','qty','min','freqDays','transport','doc'] },
-  { id:'tpl-hyg',  name:'Vorlage: Hygiene-Set',       fields:['name','cat','qty','min','perishable','batch','expiry','doc'] },
-  { id:'tpl-lock', name:'Vorlage: Schrank (Möbel)',   fields:['name','cat','qty','min','freqDays','transport'] },
-]
-
-// Chips
+// Chips (mit Erklär-Tooltips)
 const readinessChip = (qty, min) => {
   const pct = Math.round((qty/Math.max(min,1))*100)
-  if (pct >= 100) return <StatusPill level="ok"   label="Erfüllt" />
-  if (pct >= 70)  return <StatusPill level="warn" label="Engpass" />
-  return <StatusPill level="krit" label="Kritisch" />
+  const text = pct >= 100 ? 'Erfüllt' : pct >= 70 ? 'Engpass' : 'Kritisch'
+  const tip = `Readiness/Deckung: ${pct}% (Menge vs. Mindestbestand) – ${text}.`
+  if (pct >= 100) return withTip(tip, <StatusPill level="ok"   label="Erfüllt" />)
+  if (pct >= 70)  return withTip(tip, <StatusPill level="warn" label="Engpass" />)
+  return withTip(tip, <StatusPill level="krit" label="Kritisch" />)
 }
 const perishableChip = (it) => {
-  if (!it.perishable) return <Chip size="small" label="—" />
+  if (!it.perishable) return withTip('Nicht verderblich.', <Chip size="small" label="—" />)
   const d = daysLeft(it.expiry)
-  if (d===null) return <Chip size="small" color="warning" label="MHD: n/a" />
-  if (d<=0)     return <Chip size="small" color="error"   label="MHD abgelaufen" />
-  if (d<=14)    return <Chip size="small" color="warning" label={`≤${d} T`} />
-  return <Chip size="small" color="success" label={`${d} T`} />
+  if (d===null) return withTip('MHD unbekannt.', <Chip size="small" color="warning" label="MHD: n/a" />)
+  if (d<=0)     return withTip('MHD überschritten – nicht mehr einsetzen.', <Chip size="small" color="error"   label="MHD abgelaufen" />)
+  if (d<=14)    return withTip('≤14 Resttage – hohe FIFO-Priorität.', <Chip size="small" color="warning" label={`≤${d} T`} />)
+  return withTip(`${d} Resttage bis MHD.`, <Chip size="small" color="success" label={`${d} T`} />)
 }
 
-// =============================================
-// Seite: Meine Organisation & Wartung (Voll)
-// =============================================
 export default function OrgMaintenance() {
   const [role, setRole] = useState('invmanager')
   const [items, setItems] = useState(INITIAL_ITEMS)
   const [q, setQ] = useState('')
   const [cat, setCat] = useState('Alle')
-  const cats = useMemo(() => ['Alle', ...Array.from(new Set(items.map(i=>i.cat)))], [items])
 
   const [dlgEdit, setDlgEdit] = useState({ open:false, draft:null, isNew:false })
   const [dlgMaint, setDlgMaint] = useState({ open:false, target:null })
   const [dlgAudit, setDlgAudit] = useState({ open:false })
+
+  const cats = useMemo(() => ['Alle', ...Array.from(new Set(items.map(i=>i.cat)))], [items])
 
   const totals = useMemo(() => {
     const qty = items.reduce((a,b)=>a + b.qty, 0)
@@ -198,10 +199,12 @@ export default function OrgMaintenance() {
         subtitle="Proaktive Einsatzbereitschaft • Datenpflege • Rotation"
         right={
           <Stack direction="row" spacing={1} alignItems="center">
+            {withTip('Rollen & Berechtigungen (clientseitiger Prototyp).', <ToolbarHint>Rollen & Berechtigungen</ToolbarHint>)}
             <SecurityOutlinedIcon sx={{ opacity:0.6 }} />
             <TextField
               size="small" select value={role} onChange={e=>setRole(e.target.value)}
               sx={{ minWidth: 260 }} aria-label="Rolle wählen"
+              label={<InfoLabel title="Bestimmt, welche Aktionen Sie ausführen dürfen.">Rolle</InfoLabel>}
             >
               {ROLES.map(r => <MenuItem key={r.key} value={r.key}>{r.label}</MenuItem>)}
             </TextField>
@@ -211,20 +214,36 @@ export default function OrgMaintenance() {
 
       <Container sx={{ py:3 }}>
         <Grid container spacing={2} sx={{ mb:1 }}>
-          <Grid item xs={12} sm={6} md={3}><KPI title="Gesamt verfügbar" value={totals.qty} /></Grid>
-          <Grid item xs={12} sm={6} md={3}><KPI title="Mindestbestand (Summe)" value={totals.min} /></Grid>
-          <Grid item xs={12} sm={6} md={3}><KPI title="Inspektionen ≤30T" value={totals.due} icon={<BuildOutlinedIcon/>} /></Grid>
-          <Grid item xs={12} sm={6} md={3}><KPI title="Perishables ≤30T" value={totals.perSoon} icon={<EventAvailableOutlinedIcon/>} /></Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            {withTip('Summe aller Stückzahlen über alle Artikel.', <KPI title="Gesamt verfügbar" value={totals.qty} />)}
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            {withTip('Summe der Mindestbestände – Zielwert zur Deckung.', <KPI title="Mindestbestand (Summe)" value={totals.min} />)}
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            {withTip('Anzahl Artikel mit fälligen Inspektionen in ≤ 30 Tagen.', <KPI title="Inspektionen ≤30T" value={totals.due} icon={<BuildOutlinedIcon/>} />)}
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            {withTip('Verderbliche Waren mit ≤ 30 Resttagen bis MHD.', <KPI title="Verderbliche Waren ≤30T" value={totals.perSoon} icon={<EventAvailableOutlinedIcon/>} />)}
+          </Grid>
         </Grid>
 
         <Card sx={{ mb:2 }}>
           <CardContent>
             <Stack direction={{ xs:'column', md:'row' }} spacing={2} alignItems={{ xs:'stretch', md:'center' }}>
-              <Donut value={totals.coveragePct} label="Deckung gesamt" />
+              {withTip(`Deckung gesamt = Gesamtmenge / Gesamt-Minimum (${totals.coveragePct}%).`, <Donut value={totals.coveragePct} label="Deckung gesamt" />)}
               <ActionBar>
-                <TextField size="small" fullWidth label="Suche (Artikel, Kategorie, Standort)" value={q} onChange={e=>setQ(e.target.value)} />
-                <TextField size="small" select label="Kategorie" value={cat} onChange={e=>setCat(e.target.value)} sx={{ minWidth:220 }}>
-                  {['Alle', ...Array.from(new Set(items.map(i=>i.cat)))].map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)}
+                <TextField
+                  size="small" fullWidth
+                  label={<InfoLabel title="Sucht in Artikelname, Kategorie und Standort.">Suche (Artikel/Kategorie/Standort)</InfoLabel>}
+                  value={q} onChange={e=>setQ(e.target.value)}
+                />
+                <TextField
+                  size="small" select sx={{ minWidth:220 }}
+                  label={<InfoLabel title="Filtert die Tabelle auf eine Kategorie.">Kategorie</InfoLabel>}
+                  value={cat} onChange={e=>setCat(e.target.value)}
+                >
+                  {cats.map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)}
                 </TextField>
                 <Tooltip title="Import (Excel/CSV)">
                   <span><Button variant="outlined" startIcon={<UploadFileOutlinedIcon/>} onClick={importCSV} disabled={!hasPerm('import')}>Import</Button></span>
@@ -243,12 +262,12 @@ export default function OrgMaintenance() {
         <Grid container spacing={2} sx={{ mb:2 }}>
           <Grid item xs={12} md={6}>
             <Section
-              title="Inspektionen ≤ 30 Tage"
+              title={<InfoLabel title="Prüf- und Wartungstermine, die innerhalb der nächsten 30 Tage anstehen.">Inspektionen ≤ 30 Tage</InfoLabel>}
               action={
                 <Tooltip title="Inspektionen planen">
                   <span>
                     <Button size="small" variant="contained" startIcon={<AssignmentTurnedInOutlinedIcon/>}
-                      disabled={!hasPerm('schedule')} onClick={()=>setDlgMaint({ open:true, target:items[0] })}>
+                      disabled={!hasPerm('schedule')} onClick={()=>setDlgMaint({ open:true, target:items[0] })} aria-label="Inspektionen planen">
                       Planen
                     </Button>
                   </span>
@@ -264,10 +283,10 @@ export default function OrgMaintenance() {
                 <Table size="small">
                   <TableHead>
                     <TableRow>
-                      <TableCell>Artikel</TableCell>
-                      <TableCell>Nächste Prüfung</TableCell>
-                      <TableCell>Intervall</TableCell>
-                      <TableCell>Aktion</TableCell>
+                      <TableCell><InfoLabel title="Artikelbezeichnung.">Artikel</InfoLabel></TableCell>
+                      <TableCell><InfoLabel title="Nächster geplanter Prüftermin.">Nächste Prüfung</InfoLabel></TableCell>
+                      <TableCell><InfoLabel title="Inspektionsintervall in Tagen.">Intervall</InfoLabel></TableCell>
+                      <TableCell><InfoLabel title="Aktion zur Terminplanung.">Aktion</InfoLabel></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -282,7 +301,7 @@ export default function OrgMaintenance() {
                           <TableCell>{it.freqDays} T</TableCell>
                           <TableCell>
                             <Tooltip title="Termin planen">
-                              <span><Button size="small" variant="outlined" onClick={()=>planMaint(it)} disabled={!hasPerm('schedule')}>Planen</Button></span>
+                              <span><Button size="small" variant="outlined" onClick={()=>planMaint(it)} disabled={!hasPerm('schedule')} aria-label="Termin planen">Planen</Button></span>
                             </Tooltip>
                           </TableCell>
                         </TableRow>
@@ -294,18 +313,18 @@ export default function OrgMaintenance() {
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <Section title="Perishables — FIFO">
+            <Section title={<InfoLabel title="Verderbliche Güter in FIFO-Reihenfolge (zuerst ausliefern, was zuerst abläuft).">Verderbliche Waren — FIFO</InfoLabel>}>
               {items.filter(it => it.perishable).length === 0 ? (
-                <Alert severity="info">Keine Perishables vorhanden.</Alert>
+                <Alert severity="info">Keine verderbliche Waren vorhanden.</Alert>
               ) : (
                 <Table size="small">
                   <TableHead>
                     <TableRow>
-                      <TableCell>Artikel</TableCell>
-                      <TableCell>Batch</TableCell>
-                      <TableCell>MHD</TableCell>
-                      <TableCell>Resttage</TableCell>
-                      <TableCell>Aktion</TableCell>
+                      <TableCell><InfoLabel title="Artikelbezeichnung.">Artikel</InfoLabel></TableCell>
+                      <TableCell><InfoLabel title="Chargen-/Batch-Nummer.">Batch</InfoLabel></TableCell>
+                      <TableCell><InfoLabel title="Mindesthaltbarkeitsdatum.">MHD</InfoLabel></TableCell>
+                      <TableCell><InfoLabel title="Resttage bis MHD (niedrig = hohe Priorität).">Resttage</InfoLabel></TableCell>
+                      <TableCell><InfoLabel title="Aktion zur FIFO-Priorisierung.">Aktion</InfoLabel></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -320,7 +339,7 @@ export default function OrgMaintenance() {
                           <TableCell>{daysLeft(it.expiry) ?? '—'}</TableCell>
                           <TableCell>
                             <Tooltip title="Diese Charge zuerst einsetzen (FIFO)">
-                              <span><Button size="small" variant="outlined" color="success" onClick={()=>fifoAction(it)} disabled={!hasPerm('fifo')}>Zuerst ausliefern</Button></span>
+                              <span><Button size="small" variant="outlined" color="success" onClick={()=>fifoAction(it)} disabled={!hasPerm('fifo')} aria-label="FIFO priorisieren">Zuerst ausliefern</Button></span>
                             </Tooltip>
                           </TableCell>
                         </TableRow>
@@ -333,12 +352,12 @@ export default function OrgMaintenance() {
         </Grid>
 
         <Section
-          title={`Bestände & Aktionen — ${myOrgName}`}
+          title={<InfoLabel title="Operative Übersicht Ihrer Bestände mit schnellen Aktionen.">{`Bestände & Aktionen — ${myOrgName}`}</InfoLabel>}
           action={
             <Stack direction="row" spacing={1}>
               <Tooltip title="Neuen Artikel hinzufügen">
                 <span>
-                  <Button variant="contained" startIcon={<AddOutlinedIcon/>} onClick={openNew} disabled={!hasPerm('add')}>
+                  <Button variant="contained" startIcon={<AddOutlinedIcon/>} onClick={openNew} disabled={!hasPerm('add')} aria-label="Neuer Artikel">
                     Neuer Artikel
                   </Button>
                 </span>
@@ -349,15 +368,15 @@ export default function OrgMaintenance() {
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>Artikel</TableCell>
-                <TableCell>Kategorie</TableCell>
-                <TableCell>Lagerstand</TableCell>
-                <TableCell>Min</TableCell>
-                <TableCell>Readiness</TableCell>
-                <TableCell>Transport</TableCell>
-                <TableCell>Perishable</TableCell>
-                <TableCell>Bereit (h)</TableCell>
-                <TableCell align="right">Aktionen</TableCell>
+                <TableCell><InfoLabel title="Artikelname und Standort.">Artikel</InfoLabel></TableCell>
+                <TableCell><InfoLabel title="Kategorie des Artikels.">Kategorie</InfoLabel></TableCell>
+                <TableCell><InfoLabel title="Frei verfügbare Menge / Gesamtbestand.">Lagerstand</InfoLabel></TableCell>
+                <TableCell><InfoLabel title="Minimal erforderliche Menge.">Min</InfoLabel></TableCell>
+                <TableCell><InfoLabel title="Deckungsstatus relativ zum Minimum.">Readiness</InfoLabel></TableCell>
+                <TableCell><InfoLabel title="Transportmittel und erforderliche Personen.">Transport</InfoLabel></TableCell>
+                <TableCell><InfoLabel title="Verderblichkeit / MHD-Status.">Verderbliche Waren</InfoLabel></TableCell>
+                <TableCell><InfoLabel title="Zeit bis einsatzbereit (Stunden).">Bereit (h)</InfoLabel></TableCell>
+                <TableCell align="right"><InfoLabel title="Bearbeiten, Termin planen, Transport, Löschen.">Aktionen</InfoLabel></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -365,30 +384,30 @@ export default function OrgMaintenance() {
                 <TableRow key={it.id} hover>
                   <TableCell>
                     <Stack spacing={0.25}>
-                      <Typography fontWeight={700}>{it.name}</Typography>
-                      <Typography variant="caption" color="text.secondary">{it.location}</Typography>
+                      {withTip('Artikelbezeichnung.', <Typography fontWeight={700}>{it.name}</Typography>)}
+                      {withTip('Lagerort / Regal / Palette.', <Typography variant="caption" color="text.secondary">{it.location}</Typography>)}
                     </Stack>
                   </TableCell>
-                  <TableCell>{it.cat}</TableCell>
-                  <TableCell>{`${it.qty - it.reserved} frei / ${it.qty} ges.`}</TableCell>
-                  <TableCell>{it.min}</TableCell>
+                  <TableCell>{withTip('Artikelkategorie.', <span>{it.cat}</span>)}</TableCell>
+                  <TableCell>{withTip('Frei verfügbar / Gesamtbestand.', <span>{`${it.qty - it.reserved} frei / ${it.qty} ges.`}</span>)}</TableCell>
+                  <TableCell>{withTip('Minimal erforderliche Menge.', <span>{it.min}</span>)}</TableCell>
                   <TableCell>{readinessChip(it.qty, it.min)}</TableCell>
-                  <TableCell>{`${it.transport?.veh || '—'}, ${it.transport?.ppl || '—'} Pers.`}</TableCell>
+                  <TableCell>{withTip('Transportanforderung.', <span>{`${it.transport?.veh || '—'}, ${it.transport?.ppl || '—'} Pers.`}</span>)}</TableCell>
                   <TableCell>{perishableChip(it)}</TableCell>
-                  <TableCell>~{it.deployH}</TableCell>
+                  <TableCell>{withTip('Bereitstellungszeit in Stunden.', <span>~{it.deployH}</span>)}</TableCell>
                   <TableCell align="right">
                     <Stack direction="row" spacing={1} justifyContent="flex-end">
                       <Tooltip title="Bearbeiten">
-                        <span><IconButton size="small" onClick={()=>openEdit(it)} disabled={!hasPerm('edit')}><EditOutlinedIcon fontSize="small"/></IconButton></span>
+                        <span><IconButton size="small" onClick={()=>openEdit(it)} disabled={!hasPerm('edit')} aria-label="Bearbeiten"><EditOutlinedIcon fontSize="small"/></IconButton></span>
                       </Tooltip>
                       <Tooltip title="Wartung planen">
-                        <span><IconButton size="small" onClick={()=>planMaint(it)} disabled={!hasPerm('schedule')}><AssignmentTurnedInOutlinedIcon fontSize="small"/></IconButton></span>
+                        <span><IconButton size="small" onClick={()=>planMaint(it)} disabled={!hasPerm('schedule')} aria-label="Wartung planen"><AssignmentTurnedInOutlinedIcon fontSize="small"/></IconButton></span>
                       </Tooltip>
                       <Tooltip title="Transportdetails">
-                        <IconButton size="small"><LocalShippingOutlinedIcon fontSize="small"/></IconButton>
+                        <IconButton size="small" aria-label="Transportdetails"><LocalShippingOutlinedIcon fontSize="small"/></IconButton>
                       </Tooltip>
                       <Tooltip title="Löschen">
-                        <span><IconButton size="small" color="error" onClick={()=>delItem(it.id)} disabled={!hasPerm('delete')}><DeleteOutlineOutlinedIcon fontSize="small"/></IconButton></span>
+                        <span><IconButton size="small" color="error" onClick={()=>delItem(it.id)} disabled={!hasPerm('delete')} aria-label="Löschen"><DeleteOutlineOutlinedIcon fontSize="small"/></IconButton></span>
                       </Tooltip>
                     </Stack>
                   </TableCell>
@@ -400,62 +419,56 @@ export default function OrgMaintenance() {
       </Container>
 
       {/* DIALOG: Artikel anlegen/bearbeiten */}
-      <Dialog open={dlgEdit.open} onClose={()=>setDlgEdit({ open:false, draft:null, isNew:false })} fullWidth maxWidth="md">
-        <DialogTitle>{dlgEdit.isNew ? 'Neuer Artikel' : 'Artikel bearbeiten'}</DialogTitle>
+      <Dialog open={dlgEdit.open} onClose={()=>setDlgEdit({ open:false, draft:null, isNew:false })} fullWidth maxWidth="md" aria-labelledby="dlg-edit-title">
+        <DialogTitle id="dlg-edit-title">{dlgEdit.isNew ? 'Neuer Artikel' : 'Artikel bearbeiten'}</DialogTitle>
         <DialogContent dividers>
           {dlgEdit.draft && (
             <Stack spacing={2}>
               <Stack direction={{ xs:'column', md:'row' }} spacing={2}>
-                <TextField label="Name" fullWidth value={dlgEdit.draft.name} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, name:e.target.value }}))}/>
-                <TextField label="Kategorie" fullWidth value={dlgEdit.draft.cat} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, cat:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Eindeutige Bezeichnung des Artikels.">Name</InfoLabel>} fullWidth value={dlgEdit.draft.name} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, name:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Übergeordnete Warengruppe.">Kategorie</InfoLabel>} fullWidth value={dlgEdit.draft.cat} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, cat:e.target.value }}))}/>
               </Stack>
               <Stack direction={{ xs:'column', md:'row' }} spacing={2}>
-                <TextField type="number" label="Menge gesamt" value={dlgEdit.draft.qty} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, qty: Number(e.target.value) }}))}/>
-                <TextField type="number" label="Reserviert" value={dlgEdit.draft.reserved} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, reserved: Number(e.target.value) }}))}/>
-                <TextField type="number" label="Mindestbestand" value={dlgEdit.draft.min} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, min: Number(e.target.value) }}))}/>
-                <TextField type="number" label="Bereit in (h)" value={dlgEdit.draft.deployH} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, deployH: Number(e.target.value) }}))}/>
-              </Stack>
-              <Divider />
-              <Stack direction={{ xs:'column', md:'row' }} spacing={2}>
-                <TextField label="Standort (Adresse/Zone/Fach)" fullWidth value={dlgEdit.draft.location} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, location:e.target.value }}))}/>
-                <TextField label="Stapelbar" fullWidth value={dlgEdit.draft.stack} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, stack:e.target.value }}))}/>
-              </Stack>
-              <Stack direction={{ xs:'column', md:'row' }} spacing={2}>
-                <TextField label="Größe (L/B/H)" value={dlgEdit.draft.size} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, size:e.target.value }}))}/>
-                <TextField label="Gewicht" value={dlgEdit.draft.weight} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, weight:e.target.value }}))}/>
-                <TextField label="Volumen" value={dlgEdit.draft.volume} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, volume:e.target.value }}))}/>
+                <TextField type="number" label={<InfoLabel title="Gesamte physische Menge im Bestand.">Menge gesamt</InfoLabel>} value={dlgEdit.draft.qty} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, qty: Number(e.target.value) }}))}/>
+                <TextField type="number" label={<InfoLabel title="Davon bereits verplant/reserviert.">Reserviert</InfoLabel>} value={dlgEdit.draft.reserved} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, reserved: Number(e.target.value) }}))}/>
+                <TextField type="number" label={<InfoLabel title="Sollbestand zur Deckung.">Mindestbestand</InfoLabel>} value={dlgEdit.draft.min} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, min: Number(e.target.value) }}))}/>
+                <TextField type="number" label={<InfoLabel title="Zeit bis einsatzbereit bei Abruf (Stunden).">Bereit in (h)</InfoLabel>} value={dlgEdit.draft.deployH} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, deployH: Number(e.target.value) }}))}/>
               </Stack>
               <Divider />
               <Stack direction={{ xs:'column', md:'row' }} spacing={2}>
-                <TextField label="Fahrzeug" value={dlgEdit.draft.transport?.veh} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, transport:{ ...s.draft.transport, veh:e.target.value }}}))}/>
-                <TextField type="number" label="Personen" value={dlgEdit.draft.transport?.ppl} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, transport:{ ...s.draft.transport, ppl:Number(e.target.value) }}}))}/>
-                <TextField label="Aufbauzeit" value={dlgEdit.draft.transport?.assembly} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, transport:{ ...s.draft.transport, assembly:e.target.value }}}))}/>
+                <TextField label={<InfoLabel title="Adresse/Zone/Regal/Fach.">Standort</InfoLabel>} fullWidth value={dlgEdit.draft.location} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, location:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Stapelbarkeit am Lagerort.">Stapelbar</InfoLabel>} fullWidth value={dlgEdit.draft.stack} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, stack:e.target.value }}))}/>
+              </Stack>
+              <Stack direction={{ xs:'column', md:'row' }} spacing={2}>
+                <TextField label={<InfoLabel title="Außenmaße des Artikels.">Größe (L/B/H)</InfoLabel>} value={dlgEdit.draft.size} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, size:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Gewicht (Einzelstück).">Gewicht</InfoLabel>} value={dlgEdit.draft.weight} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, weight:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Volumen (Einzelstück).">Volumen</InfoLabel>} value={dlgEdit.draft.volume} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, volume:e.target.value }}))}/>
               </Stack>
               <Divider />
               <Stack direction={{ xs:'column', md:'row' }} spacing={2}>
-                <TextField label="Lieferant" value={dlgEdit.draft.supplier} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, supplier:e.target.value }}))}/>
-                <TextField label="Kaufdatum" value={dlgEdit.draft.purchase || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, purchase:e.target.value }}))}/>
-                <TextField label="Garantie bis" value={dlgEdit.draft.warranty || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, warranty:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Typisches Fahrzeug für Transport.">Fahrzeug</InfoLabel>} value={dlgEdit.draft.transport?.veh} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, transport:{ ...s.draft.transport, veh:e.target.value }}}))}/>
+                <TextField type="number" label={<InfoLabel title="Benötigte Personen für Transport.">Personen</InfoLabel>} value={dlgEdit.draft.transport?.ppl} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, transport:{ ...s.draft.transport, ppl:Number(e.target.value) }}}))}/>
+                <TextField label={<InfoLabel title="Zeitbedarf für Aufbau/Montage.">Aufbauzeit</InfoLabel>} value={dlgEdit.draft.transport?.assembly} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, transport:{ ...s.draft.transport, assembly:e.target.value }}}))}/>
               </Stack>
               <Divider />
               <Stack direction={{ xs:'column', md:'row' }} spacing={2}>
-                <TextField type="number" label="Inspektionsintervall (Tage)" value={dlgEdit.draft.freqDays} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, freqDays:Number(e.target.value) }}))}/>
-                <TextField label="Letzte Prüfung (YYYY-MM-DD)" value={dlgEdit.draft.last || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, last:e.target.value }}))}/>
-                <TextField label="Nächste Prüfung (YYYY-MM-DD)" value={dlgEdit.draft.next || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, next:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Hersteller/Lieferant.">Lieferant</InfoLabel>} value={dlgEdit.draft.supplier} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, supplier:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Beschaffungsdatum (YYYY-MM-DD).">Kaufdatum</InfoLabel>} value={dlgEdit.draft.purchase || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, purchase:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Garantie bis (YYYY-MM-DD).">Garantie bis</InfoLabel>} value={dlgEdit.draft.warranty || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, warranty:e.target.value }}))}/>
               </Stack>
               <Divider />
               <Stack direction={{ xs:'column', md:'row' }} spacing={2}>
-                <TextField select label="Verderblich" value={dlgEdit.draft.perishable ? 'Ja':'Nein'} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, perishable: e.target.value==='Ja' }}))}>
+                <TextField select label={<InfoLabel title="Ist der Artikel verderblich? Steuert MHD/FIFO.">Verderblich</InfoLabel>} value={dlgEdit.draft.perishable ? 'Ja':'Nein'} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, perishable: e.target.value==='Ja' }}))}>
                   <MenuItem value="Ja">Ja</MenuItem>
                   <MenuItem value="Nein">Nein</MenuItem>
                 </TextField>
-                <TextField label="Batch" value={dlgEdit.draft.batch || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, batch:e.target.value }}))}/>
-                <TextField label="MHD (YYYY-MM-DD)" value={dlgEdit.draft.expiry || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, expiry:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Chargenkennzeichnung falls vorhanden.">Batch</InfoLabel>} value={dlgEdit.draft.batch || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, batch:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Mindesthaltbarkeitsdatum (YYYY-MM-DD).">MHD</InfoLabel>} value={dlgEdit.draft.expiry || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, expiry:e.target.value }}))}/>
               </Stack>
               <Divider />
               <Stack direction={{ xs:'column', md:'row' }} spacing={2}>
-                <TextField label="Dokument (PDF)" value={dlgEdit.draft.doc || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, doc:e.target.value }}))}/>
-                <TextField label="Status/Hinweis" value={dlgEdit.draft.statusNote || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, statusNote:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Verknüpftes PDF/Anleitung.">Dokument (PDF)</InfoLabel>} value={dlgEdit.draft.doc || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, doc:e.target.value }}))}/>
+                <TextField label={<InfoLabel title="Interner Hinweis/Statusnotiz.">Status/Hinweis</InfoLabel>} value={dlgEdit.draft.statusNote || ''} onChange={e=>setDlgEdit(s=>({ ...s, draft:{ ...s.draft, statusNote:e.target.value }}))}/>
               </Stack>
 
               {!dlgEdit.isNew && (
@@ -467,16 +480,18 @@ export default function OrgMaintenance() {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>setDlgEdit({ open:false, draft:null, isNew:false })}>Abbrechen</Button>
-          <Button variant="contained" onClick={saveEdit} startIcon={<AssignmentTurnedInOutlinedIcon/>} disabled={!hasPerm(dlgEdit.isNew ? 'add' : 'edit')}>
-            Speichern
-          </Button>
+          {withTip('Dialog schließen ohne zu speichern.', <Button onClick={()=>setDlgEdit({ open:false, draft:null, isNew:false })}>Abbrechen</Button>)}
+          {withTip('Änderungen speichern (Berechtigung erforderlich).',
+            <Button variant="contained" onClick={saveEdit} startIcon={<AssignmentTurnedInOutlinedIcon/>} disabled={!hasPerm(dlgEdit.isNew ? 'add' : 'edit')}>
+              Speichern
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
 
       {/* DIALOG: Wartung planen */}
-      <Dialog open={dlgMaint.open} onClose={()=>setDlgMaint({ open:false, target:null })} fullWidth maxWidth="sm">
-        <DialogTitle>Wartung planen</DialogTitle>
+      <Dialog open={dlgMaint.open} onClose={()=>setDlgMaint({ open:false, target:null })} fullWidth maxWidth="sm" aria-labelledby="dlg-maint-title">
+        <DialogTitle id="dlg-maint-title">Wartung planen</DialogTitle>
         <DialogContent dividers>
           {dlgMaint.target ? (
             <Stack spacing={2}>
@@ -484,14 +499,16 @@ export default function OrgMaintenance() {
               <Typography variant="body2" color="text.secondary">
                 Intervall aktuell: {dlgMaint.target.freqDays} Tage • Nächste Prüfung: {dlgMaint.target.next || '—'}
               </Typography>
-              <Alert severity="info" icon={<SwapVertOutlinedIcon/>}>
-                Empfehlung: gleichmäßige Verteilung der Termine → Überfälligkeiten vermeiden.
-              </Alert>
+              {withTip('Termine gleichmäßig verteilen, um Überfälligkeiten zu vermeiden.',
+                <Alert severity="info" icon={<SwapVertOutlinedIcon/>}>
+                  Empfehlung: gleichmäßige Verteilung der Termine → Überfälligkeiten vermeiden.
+                </Alert>
+              )}
               <Stack direction="row" spacing={1}>
-                <Button variant="outlined" onClick={()=>confirmMaint(30)}>+30 Tage</Button>
-                <Button variant="outlined" onClick={()=>confirmMaint(90)}>+90 Tage</Button>
-                <Button variant="outlined" onClick={()=>confirmMaint(180)}>+180 Tage</Button>
-                <Button variant="contained" onClick={()=>confirmMaint(dlgMaint.target.freqDays)}>Standardintervall</Button>
+                {withTip('Nächsten Termin um 30 Tage verschieben.', <Button variant="outlined" onClick={()=>confirmMaint(30)}>+30 Tage</Button>)}
+                {withTip('Nächsten Termin um 90 Tage verschieben.', <Button variant="outlined" onClick={()=>confirmMaint(90)}>+90 Tage</Button>)}
+                {withTip('Nächsten Termin um 180 Tage verschieben.', <Button variant="outlined" onClick={()=>confirmMaint(180)}>+180 Tage</Button>)}
+                {withTip('Standardintervall verwenden.', <Button variant="contained" onClick={()=>confirmMaint(dlgMaint.target.freqDays)}>Standardintervall</Button>)}
               </Stack>
             </Stack>
           ) : '—'}
@@ -502,8 +519,8 @@ export default function OrgMaintenance() {
       </Dialog>
 
       {/* DIALOG: Audit-Verlauf */}
-      <Dialog open={dlgAudit.open} onClose={()=>setDlgAudit({ open:false })} fullWidth maxWidth="sm">
-        <DialogTitle>Verlauf & Änderungen</DialogTitle>
+      <Dialog open={dlgAudit.open} onClose={()=>setDlgAudit({ open:false })} fullWidth maxWidth="sm" aria-labelledby="dlg-audit-title">
+        <DialogTitle id="dlg-audit-title">Verlauf & Änderungen</DialogTitle>
         <DialogContent dividers>
           <Stack spacing={1.5}>
             {AUDIT.map((line, i)=>(
