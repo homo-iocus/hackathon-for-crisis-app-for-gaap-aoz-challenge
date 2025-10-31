@@ -97,10 +97,6 @@ export default function StartMenu() {
           />
         </Grid>
       </Grid>
-
-      <Typography variant="body2" sx={{ mt: 3, color: "text.secondary" }}>
-        Hinweis: Die <b>Zentrale Übersicht</b> ist für alle sichtbar und oben in der Navigation erreichbar.
-      </Typography>
     </Box>
   );
 }
