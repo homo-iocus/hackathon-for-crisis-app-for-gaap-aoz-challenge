@@ -14,6 +14,9 @@ import Dashboard from './screens/dashboard.jsx'
 
 // Simple built-in theme (no separate file)
 import { createTheme } from '@mui/material/styles'
+import RequestList from "./components/request-list";
+import { EditableRequestPage } from "./screens/EditableRequestPage";
+import { RequestProvider } from "./context/RequestsContext";
 
 const theme = createTheme({
   palette: {
@@ -32,8 +35,10 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-
+      <RequestProvider>
       {/* Top Navigation Bar */}
+      <Router>
+
       <AppBar position="sticky" color="primary" enableColorOnDark>
         <Toolbar>
           <IconButton size="large" edge="start" color="inherit" sx={{ mr: 1 }}>
@@ -49,10 +54,17 @@ export default function App() {
       </AppBar>
 
       <Box component="main" sx={{ py: 3 }}>
-        <Container maxWidth="lg">
-          <Dashboard />
+      <Container sx={{ pt: 4, minHeight: "100vh", minWidth: "100vw" }}>
+          <Routes>
+            <Route path="/stab" element={<Dashboard/>}
+            <Route path="/requests" element={<RequestList />} />
+            <Route path="/request/:id" element={<EditableRequestPage />} />
+          </Routes>
         </Container>
       </Box>
+      </Router>
+      </RequestProvider>
+
     </ThemeProvider>
   )
 }
