@@ -97,7 +97,7 @@ export default function CentralStorage(){
       <AppBar position="static" color="default" elevation={0}>
         <Toolbar>
           <Typography variant="h6" sx={{ flex:1 }}>Zentrale Übersicht (Alle Organisationen)</Typography>
-          <Chip icon={<WarningAmberOutlinedIcon/>} color="warning" label="Single Source of Truth" sx={{ mr:1 }} />
+
           <Button variant="contained" onClick={()=>openPlan('accommodation')}>Schnell zuteilen</Button>
         </Toolbar>
       </AppBar>
