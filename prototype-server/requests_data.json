@@ -1,0 +1,38 @@
+[
+  {
+    "request_id": "REQ-2025-1031-001",
+    "timestamp": "2025-10-31 10:45:00",
+    "request_type": "inventory_request",
+    "requested_by": {
+      "organization_name": "Deutsches Rotes Kreuz",
+      "contact_person": "Anna M\u00fcller",
+      "email": "anna.mueller@drk.de",
+      "phone": "+49-30-1234567"
+    },
+    "delivery_location": {
+      "facility_name": "Notunterkunft Berlin-Mitte",
+      "address": "Leipziger Str. 45, 10117 Berlin, Germany"
+    },
+    "requested_items": [
+      {
+        "item_id": "BED-001",
+        "item_name": "Feldbett",
+        "category": "Schlafausr\u00fcstung",
+        "quantity_requested": 150,
+        "unit": "St\u00fcck",
+        "priority": "hoch"
+      },
+      {
+        "item_id": "BLK-010",
+        "item_name": "Decke",
+        "category": "Textilien",
+        "quantity_requested": 300,
+        "unit": "St\u00fcck",
+        "priority": "mittel"
+      }
+    ],
+    "requested_delivery_date": "2025-11-02 00:00:00",
+    "notes": "Bitte Lieferung bis Sonntagmittag.",
+    "status": "pending"
+  }
+]
