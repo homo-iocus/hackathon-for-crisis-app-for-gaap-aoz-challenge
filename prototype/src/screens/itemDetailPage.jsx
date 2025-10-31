@@ -12,7 +12,6 @@ import {
   Alert,
   Divider,
 } from "@mui/material";
-
 import { useRequests } from "../context/RequestsContext";
 
 const ITEM_LOOKUP = {
@@ -21,30 +20,155 @@ const ITEM_LOOKUP = {
     item_name: "Erste-Hilfe-Set",
     category: "Medizin",
     unit: "Stück",
+    total_available: 120,
+    in_use: 30,
+    reserved: 10,
+    damaged: 5,
+    last_inspection: "2025-07-10",
+    inspection_frequency: "6 Monate",
+    responsible_person: "Dr. Markus Weber",
+    size: "25 x 15 x 10 cm",
+    weight: "1.2 kg",
+    volume: "3.75 L",
+    stackable: "Ja",
+    storage_address: "Zentrallager München, Raum M1",
+    gps: "48.1351, 11.5820",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Erste-Hilfe-Set.jpg",
+    manual: "Erste_Hilfe_Set_Manual.pdf",
+    safety_sheet: "Safety_Data_Sheet.pdf",
+    transport_vehicle: "PKW",
+    manpower: "1 Person",
+    assembly_time: "<15 Minuten",
+    deploy_time: "<2h",
+    readiness: "Einsatzbereit",
+    supplier: "MedSupply GmbH",
+    purchase_date: "2023-09-15",
+    warranty: "2026-09-15",
+    notes: "Regelmäßig steril überprüfen.",
   },
   "MED-002": {
     item_id: "MED-002",
     item_name: "Verbandsmaterial",
     category: "Medizin",
     unit: "Stück",
+    total_available: 800,
+    in_use: 200,
+    reserved: 50,
+    damaged: 8,
+    last_inspection: "2025-05-01",
+    inspection_frequency: "6 Monate",
+    responsible_person: "Laura Schneider",
+    size: "20 x 10 x 5 cm",
+    weight: "0.5 kg",
+    volume: "1 L",
+    stackable: "Ja",
+    storage_address: "Lager Hamburg, Regal M5",
+    gps: "53.5511, 9.9937",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/6/65/Bandages.jpg",
+    manual: "Verbandsmaterial_Info.pdf",
+    safety_sheet: "Material_Safety.pdf",
+    transport_vehicle: "PKW",
+    manpower: "1 Person",
+    assembly_time: "Keine",
+    deploy_time: "<2h",
+    readiness: "Einsatzbereit",
+    supplier: "MediCare Supplies",
+    purchase_date: "2024-04-22",
+    warranty: "2027-04-22",
+    notes: "Steril lagern, nicht öffnen vor Gebrauch.",
   },
   "MED-003": {
     item_id: "MED-003",
     item_name: "Schmerzmittel",
     category: "Medizin",
     unit: "Packung",
+    total_available: 400,
+    in_use: 80,
+    reserved: 30,
+    damaged: 4,
+    last_inspection: "2025-08-10",
+    inspection_frequency: "Monatlich",
+    responsible_person: "Dr. Nina Köhler",
+    size: "10 x 5 x 3 cm",
+    weight: "200 g",
+    volume: "0.15 L",
+    stackable: "Ja",
+    storage_address: "Apothekenlager Zürich, Regal A3",
+    gps: "50.1109, 8.6821",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Pills.jpg",
+    manual: "Painkiller_Info.pdf",
+    safety_sheet: "Drug_Safety_Sheet.pdf",
+    transport_vehicle: "PKW",
+    manpower: "1 Person",
+    assembly_time: "Keine",
+    deploy_time: "<2h",
+    readiness: "Einsatzbereit",
+    supplier: "PharmaDirect GmbH",
+    purchase_date: "2023-10-10",
+    warranty: "2026-10-10",
+    notes: "Nur für medizinisches Personal freigegeben.",
   },
   "MED-004": {
     item_id: "MED-004",
     item_name: "Beatmungsmaske",
     category: "Medizin",
     unit: "Stück",
+    total_available: 150,
+    in_use: 60,
+    reserved: 10,
+    damaged: 5,
+    last_inspection: "2025-07-01",
+    inspection_frequency: "Jährlich",
+    responsible_person: "Jonas Weber",
+    size: "25 x 20 x 10 cm",
+    weight: "0.4 kg",
+    volume: "0.5 L",
+    stackable: "Nein",
+    storage_address: "Lager Berlin, Medizinabteilung B2",
+    gps: "52.5200, 13.4050",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Medical_mask.jpg",
+    manual: "Beatmungsmaske_Manual.pdf",
+    safety_sheet: "AirSafety.pdf",
+    transport_vehicle: "PKW",
+    manpower: "1 Person",
+    assembly_time: "<10 Minuten",
+    deploy_time: "<2h",
+    readiness: "Einsatzbereit",
+    supplier: "SafeBreath Systems",
+    purchase_date: "2023-12-01",
+    warranty: "2026-12-01",
+    notes: "Regelmäßig auf Dichtigkeit prüfen.",
   },
   "MED-005": {
     item_id: "MED-005",
     item_name: "Blutdruckmessgerät",
     category: "Medizin",
     unit: "Stück",
+    total_available: 100,
+    in_use: 40,
+    reserved: 20,
+    damaged: 2,
+    last_inspection: "2025-06-05",
+    inspection_frequency: "Jährlich",
+    responsible_person: "Dr. Thomas Krüger",
+    size: "15 x 10 x 8 cm",
+    weight: "0.8 kg",
+    volume: "1.2 L",
+    stackable: "Nein",
+    storage_address: "Lager München, Regal C1",
+    gps: "48.1351, 11.5820",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Blood_pressure_monitor.jpg",
+    manual: "Blutdruckmessgeraet_Manual.pdf",
+    safety_sheet: "Safety_Info.pdf",
+    transport_vehicle: "PKW",
+    manpower: "1 Person",
+    assembly_time: "Keine",
+    deploy_time: "<3h",
+    readiness: "Einsatzbereit",
+    supplier: "MediTech AG",
+    purchase_date: "2022-08-08",
+    warranty: "2026-08-08",
+    notes: "Kalibrierung alle 12 Monate erforderlich.",
   },
 
   "FOOD-001": {
@@ -52,61 +176,311 @@ const ITEM_LOOKUP = {
     item_name: "Wasserflaschen (1L)",
     category: "Verpflegung",
     unit: "Flaschen",
+    total_available: 5000,
+    in_use: 200,
+    reserved: 300,
+    damaged: 20,
+    last_inspection: "2025-08-15",
+    inspection_frequency: "Monatlich",
+    responsible_person: "Julia Fischer",
+    size: "10 x 10 x 30 cm",
+    weight: "1 kg",
+    volume: "1 L",
+    stackable: "Ja (Kistenweise)",
+    storage_address: "Lager Berlin, Zone C3",
+    gps: "52.5200, 13.4050",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Water_bottles.jpg",
+    manual: "Wasserflaschen_Info.pdf",
+    safety_sheet: "Nicht erforderlich",
+    transport_vehicle: "LKW",
+    manpower: "2 Personen",
+    assembly_time: "Keine",
+    deploy_time: "<4h",
+    readiness: "Einsatzbereit",
+    supplier: "AquaSource AG",
+    purchase_date: "2024-02-01",
+    warranty: "2028-02-01",
+    notes: "Vor Hitze schützen, Lagerung <25°C.",
   },
   "FOOD-002": {
     item_id: "FOOD-002",
     item_name: "MRE-Paket",
     category: "Verpflegung",
     unit: "Pakete",
+    total_available: 1000,
+    in_use: 50,
+    reserved: 200,
+    damaged: 15,
+    last_inspection: "2025-06-01",
+    inspection_frequency: "Halbjährlich",
+    responsible_person: "Maximilian Hoffmann",
+    size: "25 x 15 x 10 cm",
+    weight: "2.5 kg",
+    volume: "3 L",
+    stackable: "Ja",
+    storage_address: "Lager Leipzig, Zone F1",
+    gps: "51.3397, 12.3731",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/5/54/MRE_Menu_23.jpg",
+    manual: "MRE_Info.pdf",
+    safety_sheet: "Food_Safety.pdf",
+    transport_vehicle: "LKW",
+    manpower: "2 Personen",
+    assembly_time: "Keine",
+    deploy_time: "1 Tag",
+    readiness: "Einsatzbereit",
+    supplier: "NutriAid GmbH",
+    purchase_date: "2024-01-10",
+    warranty: "2029-01-10",
+    notes: "Kühl und trocken lagern.",
   },
   "FOOD-003": {
     item_id: "FOOD-003",
     item_name: "Konservendosen",
     category: "Verpflegung",
     unit: "Dosen",
+    total_available: 2000,
+    in_use: 400,
+    reserved: 300,
+    damaged: 25,
+    last_inspection: "2025-09-05",
+    inspection_frequency: "Monatlich",
+    responsible_person: "Elena Meyer",
+    size: "10 x 10 x 15 cm",
+    weight: "0.5 kg",
+    volume: "0.5 L",
+    stackable: "Ja",
+    storage_address: "Lager Hannover, Raum G3",
+    gps: "52.3759, 9.7320",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Canned_food.jpg",
+    manual: "Konserven_Info.pdf",
+    safety_sheet: "Food_Storage.pdf",
+    transport_vehicle: "LKW",
+    manpower: "3 Personen",
+    assembly_time: "Keine",
+    deploy_time: "1 Tag",
+    readiness: "Einsatzbereit",
+    supplier: "FoodTech GmbH",
+    purchase_date: "2024-04-05",
+    warranty: "2028-04-05",
+    notes: "Vor Rost schützen.",
   },
   "FOOD-004": {
     item_id: "FOOD-004",
     item_name: "Reis & Nudeln",
     category: "Verpflegung",
     unit: "Kilogramm",
+    total_available: 4000,
+    in_use: 300,
+    reserved: 200,
+    damaged: 30,
+    last_inspection: "2025-07-25",
+    inspection_frequency: "Halbjährlich",
+    responsible_person: "David König",
+    size: "30 x 20 x 10 cm",
+    weight: "1 kg",
+    volume: "1.5 L",
+    stackable: "Ja",
+    storage_address: "Lager Stuttgart, Regal R5",
+    gps: "48.7758, 9.1829",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/1/1b/Rice_and_pasta.jpg",
+    manual: "Reis_Nudeln_Info.pdf",
+    safety_sheet: "Nicht erforderlich",
+    transport_vehicle: "LKW",
+    manpower: "2 Personen",
+    assembly_time: "Keine",
+    deploy_time: "<1 Tag",
+    readiness: "Einsatzbereit",
+    supplier: "GrainCorp AG",
+    purchase_date: "2024-03-05",
+    warranty: "2028-03-05",
+    notes: "Trocken lagern.",
   },
   "FOOD-005": {
     item_id: "FOOD-005",
     item_name: "Brot & Cracker",
     category: "Verpflegung",
     unit: "Pakete",
+    total_available: 1500,
+    in_use: 200,
+    reserved: 100,
+    damaged: 12,
+    last_inspection: "2025-05-20",
+    inspection_frequency: "Monatlich",
+    responsible_person: "Hannah Vogt",
+    size: "30 x 15 x 8 cm",
+    weight: "0.8 kg",
+    volume: "0.9 L",
+    stackable: "Ja",
+    storage_address: "Lager Bremen, Regal B4",
+    gps: "53.0793, 8.8017",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Bread_and_crackers.jpg",
+    manual: "Brot_Cracker_Info.pdf",
+    safety_sheet: "Nicht erforderlich",
+    transport_vehicle: "LKW",
+    manpower: "2 Personen",
+    assembly_time: "Keine",
+    deploy_time: "<1 Tag",
+    readiness: "Einsatzbereit",
+    supplier: "BakeSafe GmbH",
+    purchase_date: "2024-05-15",
+    warranty: "2027-05-15",
+    notes: "Frischware regelmäßig prüfen.",
   },
 
   "HYG-001": {
     item_id: "HYG-001",
-    item_name: "Seife",
+    item_name: "Seife (antibakteriell)",
     category: "Hygiene",
     unit: "Stück",
+    total_available: 800,
+    in_use: 150,
+    reserved: 60,
+    damaged: 10,
+    last_inspection: "2025-09-05",
+    inspection_frequency: "Monatlich",
+    responsible_person: "Sabine Meier",
+    size: "8 x 6 x 3 cm",
+    weight: "150 g",
+    volume: "0.15 L",
+    stackable: "Ja",
+    storage_address: "Lager Zürich, Regalfach H2",
+    gps: "50.1109, 8.6821",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Bar_of_Soap.jpg",
+    manual: "Seife_Info.pdf",
+    safety_sheet: "Hygiene_Safety.pdf",
+    transport_vehicle: "PKW",
+    manpower: "1 Person",
+    assembly_time: "Keine",
+    deploy_time: "<4h",
+    readiness: "Einsatzbereit",
+    supplier: "CleanPro AG",
+    purchase_date: "2024-03-01",
+    warranty: "2026-03-01",
+    notes: "Vor Feuchtigkeit schützen.",
   },
   "HYG-002": {
     item_id: "HYG-002",
     item_name: "Desinfektionsmittel (500ml)",
     category: "Hygiene",
     unit: "Flaschen",
+    total_available: 600,
+    in_use: 100,
+    reserved: 40,
+    damaged: 5,
+    last_inspection: "2025-08-01",
+    inspection_frequency: "Monatlich",
+    responsible_person: "Lisa Brandt",
+    size: "6 x 6 x 20 cm",
+    weight: "0.6 kg",
+    volume: "0.5 L",
+    stackable: "Ja",
+    storage_address: "Lager Stuttgart, Regal D4",
+    gps: "48.7758, 9.1829",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Hand_sanitizer.jpg",
+    manual: "Desinfektion_Info.pdf",
+    safety_sheet: "Safety_Chemical.pdf",
+    transport_vehicle: "PKW",
+    manpower: "1 Person",
+    assembly_time: "Keine",
+    deploy_time: "<3h",
+    readiness: "Einsatzbereit",
+    supplier: "SanitizePlus GmbH",
+    purchase_date: "2023-09-20",
+    warranty: "2026-09-20",
+    notes: "Nicht über 30°C lagern.",
   },
   "HYG-003": {
     item_id: "HYG-003",
     item_name: "Toilettenpapier",
     category: "Hygiene",
     unit: "Rollen",
+    total_available: 2000,
+    in_use: 300,
+    reserved: 100,
+    damaged: 8,
+    last_inspection: "2025-07-10",
+    inspection_frequency: "Monatlich",
+    responsible_person: "Jonas Becker",
+    size: "10 x 10 x 12 cm",
+    weight: "100 g",
+    volume: "0.1 L",
+    stackable: "Ja (Pakete)",
+    storage_address: "Lager München, Zone TP",
+    gps: "48.1351, 11.5820",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Toilet_paper.jpg",
+    manual: "Toilettenpapier_Info.pdf",
+    safety_sheet: "Nicht erforderlich",
+    transport_vehicle: "LKW",
+    manpower: "2 Personen",
+    assembly_time: "Keine",
+    deploy_time: "<1 Tag",
+    readiness: "Einsatzbereit",
+    supplier: "PaperGoods AG",
+    purchase_date: "2024-02-05",
+    warranty: "2027-02-05",
+    notes: "Trocken lagern, Verpackung geschlossen halten.",
   },
   "HYG-004": {
     item_id: "HYG-004",
     item_name: "Zahnpasta & Bürste",
     category: "Hygiene",
     unit: "Sets",
+    total_available: 1000,
+    in_use: 150,
+    reserved: 70,
+    damaged: 5,
+    last_inspection: "2025-08-15",
+    inspection_frequency: "Halbjährlich",
+    responsible_person: "Clara Hofmann",
+    size: "20 x 5 x 4 cm",
+    weight: "200 g",
+    volume: "0.2 L",
+    stackable: "Ja",
+    storage_address: "Lager Berlin, Regal Z1",
+    gps: "52.5200, 13.4050",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Toothbrush_and_toothpaste.jpg",
+    manual: "Zahnpflege_Info.pdf",
+    safety_sheet: "Nicht erforderlich",
+    transport_vehicle: "PKW",
+    manpower: "1 Person",
+    assembly_time: "Keine",
+    deploy_time: "<4h",
+    readiness: "Einsatzbereit",
+    supplier: "DentalCare Solutions",
+    purchase_date: "2024-04-20",
+    warranty: "2027-04-20",
+    notes: "In trockener Umgebung lagern.",
   },
   "HYG-005": {
     item_id: "HYG-005",
     item_name: "Damenhygieneprodukte",
     category: "Hygiene",
-    unit: "Packungen",
+    unit: "Pakete",
+    total_available: 1200,
+    in_use: 300,
+    reserved: 100,
+    damaged: 10,
+    last_inspection: "2025-06-01",
+    inspection_frequency: "Halbjährlich",
+    responsible_person: "Verena Keller",
+    size: "25 x 20 x 10 cm",
+    weight: "0.5 kg",
+    volume: "1 L",
+    stackable: "Ja",
+    storage_address: "Lager Hannover, Raum F3",
+    gps: "52.3759, 9.7320",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Sanitary_products.jpg",
+    manual: "Damenhygiene_Info.pdf",
+    safety_sheet: "Nicht erforderlich",
+    transport_vehicle: "PKW",
+    manpower: "1 Person",
+    assembly_time: "Keine",
+    deploy_time: "<6h",
+    readiness: "Einsatzbereit",
+    supplier: "CareLine GmbH",
+    purchase_date: "2023-11-10",
+    warranty: "2026-11-10",
+    notes: "Kühl und trocken lagern.",
   },
 
   "BED-001": {
@@ -114,37 +488,155 @@ const ITEM_LOOKUP = {
     item_name: "Feldbett",
     category: "Unterkunft",
     unit: "Stück",
+    total_available: 200,
+    in_use: 80,
+    reserved: 40,
+    damaged: 10,
+    last_inspection: "2025-07-05",
+    inspection_frequency: "Jährlich",
+    responsible_person: "Stefan Richter",
+    size: "200 x 70 x 45 cm",
+    weight: "8 kg",
+    volume: "0.63 m³",
+    stackable: "Ja (zusammengeklappt)",
+    storage_address: "Lager Hamburg, Zone A2",
+    gps: "53.5511, 9.9937",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Camp_bed.jpg",
+    manual: "Feldbett_Manual.pdf",
+    safety_sheet: "Nicht erforderlich",
+    transport_vehicle: "LKW",
+    manpower: "2 Personen",
+    assembly_time: "10 Minuten",
+    deploy_time: "<1 Tag",
+    readiness: "Einsatzbereit",
+    supplier: "SleepWell GmbH",
+    purchase_date: "2023-05-15",
+    warranty: "2027-05-15",
+    notes: "Gelenke regelmäßig ölen.",
   },
   "BLK-010": {
     item_id: "BLK-010",
     item_name: "Decke",
     category: "Unterkunft",
     unit: "Stück",
+    total_available: 500,
+    in_use: 100,
+    reserved: 50,
+    damaged: 5,
+    last_inspection: "2025-08-01",
+    inspection_frequency: "Jährlich",
+    responsible_person: "Monika Lenz",
+    size: "200 x 150 cm",
+    weight: "1.5 kg",
+    volume: "0.02 m³",
+    stackable: "Ja",
+    storage_address: "Lager Köln, Regal B1",
+    gps: "50.9375, 6.9603",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Blanket.jpg",
+    manual: "Decke_Info.pdf",
+    safety_sheet: "Nicht erforderlich",
+    transport_vehicle: "LKW",
+    manpower: "2 Personen",
+    assembly_time: "Keine",
+    deploy_time: "<8h",
+    readiness: "Einsatzbereit",
+    supplier: "WarmTex GmbH",
+    purchase_date: "2023-11-11",
+    warranty: "2028-11-11",
+    notes: "Nach jedem Einsatz reinigen.",
   },
   "BED-002": {
     item_id: "BED-002",
     item_name: "Isomatte",
     category: "Unterkunft",
     unit: "Stück",
+    total_available: 300,
+    in_use: 50,
+    reserved: 20,
+    damaged: 5,
+    last_inspection: "2025-09-01",
+    inspection_frequency: "Jährlich",
+    responsible_person: "Katrin Neumann",
+    size: "190 x 60 x 3 cm",
+    weight: "1.2 kg",
+    volume: "0.03 m³",
+    stackable: "Ja (gerollt)",
+    storage_address: "Lager Zürich, Raum B5",
+    gps: "50.1109, 8.6821",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/b/bc/Sleeping_pad.jpg",
+    manual: "Isomatte_Info.pdf",
+    safety_sheet: "Nicht erforderlich",
+    transport_vehicle: "PKW",
+    manpower: "1 Person",
+    assembly_time: "Keine",
+    deploy_time: "<6h",
+    readiness: "Einsatzbereit",
+    supplier: "OutdoorComfort AG",
+    purchase_date: "2023-06-30",
+    warranty: "2027-06-30",
+    notes: "Nach Gebrauch trocken aufrollen.",
   },
   "BED-003": {
     item_id: "BED-003",
     item_name: "Kopfkissen",
     category: "Unterkunft",
     unit: "Stück",
+    total_available: 400,
+    in_use: 100,
+    reserved: 60,
+    damaged: 4,
+    last_inspection: "2025-07-12",
+    inspection_frequency: "Jährlich",
+    responsible_person: "Laura Becker",
+    size: "60 x 40 cm",
+    weight: "800 g",
+    volume: "0.04 m³",
+    stackable: "Ja",
+    storage_address: "Lager Berlin, Regal K2",
+    gps: "52.5200, 13.4050",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/9/92/Pillow.jpg",
+    manual: "Kopfkissen_Info.pdf",
+    safety_sheet: "Nicht erforderlich",
+    transport_vehicle: "PKW",
+    manpower: "1 Person",
+    assembly_time: "Keine",
+    deploy_time: "<6h",
+    readiness: "Einsatzbereit",
+    supplier: "SoftRest GmbH",
+    purchase_date: "2024-01-12",
+    warranty: "2027-01-12",
+    notes: "Regelmäßig lüften und waschen.",
   },
   "BED-004": {
     item_id: "BED-004",
-    item_name: "Zelt",
+    item_name: "Zelt (6 Personen)",
     category: "Unterkunft",
     unit: "Stück",
-  },
-
-  "WTR-020": {
-    item_id: "WTR-020",
-    item_name: "Trinkwasserkanister (10L)",
-    category: "Versorgung",
-    unit: "Kanister",
+    total_available: 80,
+    in_use: 25,
+    reserved: 10,
+    damaged: 3,
+    last_inspection: "2025-06-20",
+    inspection_frequency: "Jährlich",
+    responsible_person: "Thomas Berger",
+    size: "400 x 300 x 220 cm",
+    weight: "15 kg",
+    volume: "2.6 m³",
+    stackable: "Nein",
+    storage_address: "Lager Köln, Raum A7",
+    gps: "50.9375, 6.9603",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Camping_tent_example.jpg",
+    manual: "Zelt_Aufbauanleitung.pdf",
+    safety_sheet: "Nicht erforderlich",
+    transport_vehicle: "LKW",
+    manpower: "3 Personen",
+    assembly_time: "45 Minuten",
+    deploy_time: "1 Tag",
+    readiness: "Bereit zur Ausgabe",
+    supplier: "CampTech Solutions",
+    purchase_date: "2022-05-05",
+    warranty: "2027-05-05",
+    notes: "Regelmäßig auf Dichtigkeit prüfen.",
   },
 };
 
@@ -157,7 +649,6 @@ const PRIORITIES = [
 export default function ItemDetailPage() {
   const { itemId } = useParams();
   const navigate = useNavigate();
-
   const { addRequest } = useRequests();
 
   const item = ITEM_LOOKUP[itemId] || {
@@ -241,37 +732,111 @@ export default function ItemDetailPage() {
     const storeKey = "aoz_requests";
     const existing = JSON.parse(localStorage.getItem(storeKey) || "[]");
     localStorage.setItem(storeKey, JSON.stringify([newRequest, ...existing]));
-
     setSent(true);
   };
 
   return (
     <Box sx={{ p: { xs: 2, md: 4 } }}>
       <Grid container spacing={3}>
+        {/* LEFT SIDE - ITEM DETAILS */}
         <Grid item xs={12} md={5}>
           <Paper sx={{ p: 3, borderRadius: 3 }}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
               Artikel
             </Typography>
-            <Stack spacing={1.2} sx={{ mb: 2 }}>
+
+            {/* IDENTIFICATION */}
+            <Stack spacing={1.2}>
               <Row label="Bezeichnung" value={item.item_name} />
               <Row label="Kategorie" value={item.category} />
               <Row label="Einheit" value={item.unit} />
             </Stack>
             <Divider sx={{ my: 2 }} />
-            <Typography variant="body2" color="text.secondary">
-              Prüfen Sie die Angaben und füllen Sie rechts die
-              Anforderungsdetails aus.
-            </Typography>
+
+            {/* QUANTITIES */}
+            <Stack spacing={1.2}>
+              <Row label="Verfügbar" value={item.total_available || "–"} />
+              <Row label="In Verwendung" value={item.in_use || "–"} />
+              <Row label="Reserviert" value={item.reserved || "–"} />
+              <Row label="Beschädigt" value={item.damaged || "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* CONDITION */}
+            <Stack spacing={1.2}>
+              <Row label="Letzte Prüfung" value={item.last_inspection || "–"} />
+              <Row label="Prüfintervall" value={item.inspection_frequency || "–"} />
+              <Row label="Verantwortlich" value={item.responsible_person || "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* PHYSICAL ATTRIBUTES */}
+            <Stack spacing={1.2}>
+              <Row label="Größe (L/B/H)" value={item.size || "–"} />
+              <Row label="Gewicht" value={item.weight || "–"} />
+              <Row label="Volumen" value={item.volume || "–"} />
+              <Row label="Stapelfähig" value={item.stackable || "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* LOCATION */}
+            <Stack spacing={1.2}>
+              <Row label="Lagerort" value={item.storage_address || "–"} />
+              <Row label="GPS" value={item.gps || "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* PHOTOS / DOCS */}
+            <Stack spacing={1.2}>
+              <Typography variant="subtitle2">Fotos & Dokumente</Typography>
+              {item.photo && (
+                <img
+                  src={item.photo}
+                  alt={item.item_name}
+                  style={{ width: "100%", borderRadius: 8 }}
+                />
+              )}
+              <Row label="Handbuch" value={item.manual || "–"} />
+              <Row label="Sicherheitsdatenblatt" value={item.safety_sheet || "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* TRANSPORT */}
+            <Stack spacing={1.2}>
+              <Row label="Fahrzeugtyp" value={item.transport_vehicle || "–"} />
+              <Row label="Personalbedarf" value={item.manpower || "–"} />
+              <Row label="Aufbauzeit" value={item.assembly_time || "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* AVAILABILITY */}
+            <Stack spacing={1.2}>
+              <Row label="Bereitstellungszeit" value={item.deploy_time || "–"} />
+              <Row label="Status" value={item.readiness || "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* SUPPLIER INFO */}
+            <Stack spacing={1.2}>
+              <Row label="Lieferant" value={item.supplier || "–"} />
+              <Row label="Kaufdatum" value={item.purchase_date || "–"} />
+              <Row label="Garantie / Ablauf" value={item.warranty || "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* NOTES */}
+            <Row label="Notizen" value={item.notes || "–"} />
           </Paper>
         </Grid>
 
+        {/* RIGHT SIDE - REQUEST FORM */}
         <Grid item xs={12} md={7}>
           <Paper sx={{ p: 3, borderRadius: 3 }}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
               Artikel anfordern
             </Typography>
 
+            {/* --- FORM SECTIONS --- */}
             <Section title="Anfordernde Organisation">
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -444,7 +1009,7 @@ function Section({ title, children }) {
 function Row({ label, value }) {
   return (
     <Stack direction="row" spacing={1}>
-      <Typography sx={{ minWidth: 140, color: "text.secondary" }}>
+      <Typography sx={{ minWidth: 150, color: "text.secondary" }}>
         {label}:
       </Typography>
       <Typography>{value}</Typography>
