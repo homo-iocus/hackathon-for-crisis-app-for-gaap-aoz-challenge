@@ -9,6 +9,58 @@ import {
 } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 
+import MedicalServicesRoundedIcon from "@mui/icons-material/MedicalServicesRounded";
+import LocalPharmacyIcon from "@mui/icons-material/LocalPharmacy";
+import MasksIcon from "@mui/icons-material/Masks";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import BloodtypeIcon from "@mui/icons-material/Bloodtype";
+
+import LocalDrinkIcon from "@mui/icons-material/LocalDrink";
+import LunchDiningIcon from "@mui/icons-material/LunchDining";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
+import RiceBowlIcon from "@mui/icons-material/RiceBowl";
+import BakeryDiningIcon from "@mui/icons-material/BakeryDining";
+
+import SoapIcon from "@mui/icons-material/Soap";
+import SanitizerIcon from "@mui/icons-material/Sanitizer";
+import ToiletIcon from "@mui/icons-material/Wc";
+import ToothIcon from "@mui/icons-material/EmojiEmotions";
+import FemaleIcon from "@mui/icons-material/Female";
+
+import BedIcon from "@mui/icons-material/Bed";
+import LayersIcon from "@mui/icons-material/Layers";
+import NightShelterIcon from "@mui/icons-material/NightShelter";
+import HotelIcon from "@mui/icons-material/Hotel";
+import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+
+const ITEM_ICONS = {
+  "MED-001": <MedicalServicesRoundedIcon sx={{ fontSize: 36, color: "primary.main" }} />,
+  "MED-002": <LocalPharmacyIcon sx={{ fontSize: 36, color: "primary.main" }} />,
+  "MED-003": <FavoriteIcon sx={{ fontSize: 36, color: "primary.main" }} />,
+  "MED-004": <MasksIcon sx={{ fontSize: 36, color: "primary.main" }} />,
+  "MED-005": <BloodtypeIcon sx={{ fontSize: 36, color: "primary.main" }} />,
+
+  "FOOD-001": <LocalDrinkIcon sx={{ fontSize: 36, color: "secondary.main" }} />,
+  "FOOD-002": <LunchDiningIcon sx={{ fontSize: 36, color: "secondary.main" }} />,
+  "FOOD-003": <Inventory2Icon sx={{ fontSize: 36, color: "secondary.main" }} />,
+  "FOOD-004": <RiceBowlIcon sx={{ fontSize: 36, color: "secondary.main" }} />,
+  "FOOD-005": <BakeryDiningIcon sx={{ fontSize: 36, color: "secondary.main" }} />,
+
+  "HYG-001": <SoapIcon sx={{ fontSize: 36, color: "warning.main" }} />,
+  "HYG-002": <SanitizerIcon sx={{ fontSize: 36, color: "warning.main" }} />,
+  "HYG-003": <ToiletIcon sx={{ fontSize: 36, color: "warning.main" }} />,
+  "HYG-004": <ToothIcon sx={{ fontSize: 36, color: "warning.main" }} />,
+  "HYG-005": <FemaleIcon sx={{ fontSize: 36, color: "warning.main" }} />,
+
+  "BED-001": <BedIcon sx={{ fontSize: 36, color: "success.main" }} />,
+  "BLK-010": <BeachAccessIcon sx={{ fontSize: 36, color: "success.main" }} />,
+  "BED-002": <LayersIcon sx={{ fontSize: 36, color: "success.main" }} />,
+  "BED-003": <HotelIcon sx={{ fontSize: 36, color: "success.main" }} />,
+  "BED-004": <NightShelterIcon sx={{ fontSize: 36, color: "success.main" }} />,
+};
+
 const ITEMS = {
   medical: [
     { id: "MED-001", name: "Erste-Hilfe-Set", description: "Standard Erste-Hilfe-Set für Notfälle" },
@@ -45,47 +97,71 @@ export default function CategoryPage() {
   const navigate = useNavigate();
   const items = ITEMS[categoryId] || [];
 
+  const categoryTitle = categoryId
+    ? categoryId.charAt(0).toUpperCase() + categoryId.slice(1)
+    : "Unbekannt";
+
   return (
-    <Box sx={{ p: { xs: 2, md: 4 } }}>
+    <Box sx={{ p: { xs: 2, md: 4 }, bgcolor: "background.default", minHeight: "100vh" }}>
       <Stack
-        direction="row"
+        direction={{ xs: "column", sm: "row" }}
         justifyContent="space-between"
-        alignItems="center"
-        sx={{ mb: 3 }}
+        alignItems={{ xs: "flex-start", sm: "center" }}
+        sx={{ mb: 4 }}
+        spacing={2}
       >
-        <Typography variant="h5" sx={{ fontWeight: 700 }}>
-          Kategorie: {categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}
-        </Typography>
+        <Stack direction="row" alignItems="center" spacing={1.5}>
+          <Typography variant="h5" sx={{ fontWeight: 700 }}>
+            Kategorie: {categoryTitle}
+          </Typography>
+        </Stack>
 
         <Button
           variant="outlined"
           color="primary"
           onClick={() => navigate("/stab")}
+          sx={{ borderRadius: 2 }}
         >
           ← Zurück zum Dashboard
         </Button>
       </Stack>
 
       {items.length > 0 ? (
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           {items.map((item) => (
             <Grid key={item.id} item xs={12} sm={6} md={4} lg={3}>
               <Paper
-                variant="outlined"
+                elevation={2}
                 sx={{
-                  p: 2.5,
+                  p: 3,
                   borderRadius: 3,
-                  cursor: "pointer",
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  transition: "all 0.15s ease",
-                  "&:hover": { bgcolor: "action.hover" },
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  "&:hover": {
+                    bgcolor: "action.hover",
+                    transform: "translateY(-3px)",
+                  },
                 }}
                 onClick={() => navigate(`/item/${item.id}`)}
               >
-                <Stack spacing={1}>
+                <Stack spacing={1.5} alignItems="flex-start">
+                  <Box
+                    sx={{
+                      width: 50,
+                      height: 50,
+                      borderRadius: 2,
+                      display: "grid",
+                      placeItems: "center",
+                      bgcolor: "action.hover",
+                    }}
+                  >
+                    {ITEM_ICONS[item.id] || <LocalHospitalIcon sx={{ fontSize: 36, color: "grey.500" }} />}
+                  </Box>
+
                   <Typography fontWeight={700}>{item.name}</Typography>
                   <Typography variant="body2" color="text.secondary">
                     {item.description}
