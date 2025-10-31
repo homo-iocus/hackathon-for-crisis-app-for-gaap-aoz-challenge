@@ -96,7 +96,7 @@ const INITIAL_ITEMS = [
 const readinessChip = (qty, min) => {
   const pct = Math.round((qty/Math.max(min,1))*100)
   const text = pct >= 100 ? 'Erfüllt' : pct >= 70 ? 'Engpass' : 'Kritisch'
-  const tip = `Readiness/Deckung: ${pct}% (Menge vs. Mindestbestand) – ${text}.`
+  const tip = `Deckung: ${pct}% (Menge vs. Mindestbestand) – ${text}.`
   if (pct >= 100) return withTip(tip, <StatusPill level="ok"   label="Erfüllt" />)
   if (pct >= 70)  return withTip(tip, <StatusPill level="warn" label="Engpass" />)
   return withTip(tip, <StatusPill level="krit" label="Kritisch" />)
@@ -372,7 +372,7 @@ export default function OrgMaintenance() {
                 <TableCell><InfoLabel title="Kategorie des Artikels.">Kategorie</InfoLabel></TableCell>
                 <TableCell><InfoLabel title="Frei verfügbare Menge / Gesamtbestand.">Lagerstand</InfoLabel></TableCell>
                 <TableCell><InfoLabel title="Minimal erforderliche Menge.">Min</InfoLabel></TableCell>
-                <TableCell><InfoLabel title="Deckungsstatus relativ zum Minimum.">Readiness</InfoLabel></TableCell>
+                <TableCell><InfoLabel title="Deckungsstatus relativ zum Minimum.">Deckung</InfoLabel></TableCell>
                 <TableCell><InfoLabel title="Transportmittel und erforderliche Personen.">Transport</InfoLabel></TableCell>
                 <TableCell><InfoLabel title="Verderblichkeit / MHD-Status.">Verderbliche Waren</InfoLabel></TableCell>
                 <TableCell><InfoLabel title="Zeit bis einsatzbereit (Stunden).">Bereit (h)</InfoLabel></TableCell>
