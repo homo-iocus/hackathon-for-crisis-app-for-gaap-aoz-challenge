@@ -56,7 +56,7 @@ const RequestList = () => {
 
               <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                 {req.requested_items.length} Artikel ·{" "}
-                {new Date(req.requested_delivery_date).toLocaleDateString()}
+                {new Date(req.requested_delivery_date).toLocaleDateString("de")}
               </Typography>
 
               <Button
