@@ -1102,27 +1102,76 @@ export default function ItemDetailPage() {
             </Section>
 
             <Section title="Lieferort">
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    fullWidth
-                    required
-                    label="Einrichtung"
-                    value={form.facility_name}
-                    onChange={handleChange("facility_name")}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    fullWidth
-                    required
-                    label="Adresse"
-                    value={form.address}
-                    onChange={handleChange("address")}
-                  />
-                </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  required
+                  label="Einrichtung"
+                  value={form.facility_name}
+                  onChange={handleChange("facility_name")}
+                />
               </Grid>
-            </Section>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  required
+                  label="Adresse"
+                  value={form.address}
+                  onChange={handleChange("address")}
+                />
+              </Grid>
+
+              <Grid
+  item
+  xs={12}
+  sm={4}
+  sx={{
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+  }}
+>
+  <TextField
+    select
+    fullWidth
+    label="Lieferung in Tiefgarage"
+    value={form.delivery_in_tiefgarage || "nein"}
+    onChange={(e) =>
+      setForm((f) => ({ ...f, delivery_in_tiefgarage: e.target.value }))
+    }
+    InputLabelProps={{
+      shrink: true,
+      style: { whiteSpace: "normal", overflow: "visible" }, 
+    }}
+    sx={{
+      minWidth: 195, 
+      "& .MuiInputLabel-root": {
+        whiteSpace: "normal",
+        width: "100%",
+      },
+    }}
+  >
+    <MenuItem value="ja">Ja</MenuItem>
+    <MenuItem value="nein">Nein</MenuItem>
+  </TextField>
+</Grid>
+
+
+
+              {form.delivery_in_tiefgarage === "ja" && item.access?.max_vehicle_height_m && (
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Max. Fahrzeughöhe (m)"
+                    value={`${item.access.max_vehicle_height_m} m`}
+                    InputProps={{ readOnly: true }}
+                  />
+                </Grid>
+              )}
+            </Grid>
+          </Section>
+
 
             <Section title="Artikel & Menge">
               <Grid container spacing={2}>
