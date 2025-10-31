@@ -1,5 +1,5 @@
 - U1: As an admin I want to open a crisis and assign people to their roles and invite them to the platform.
-- U2: As a member of the crisis management I want to have an overview (dashboard) of all actions I can do based on priorities so that they can act quickly.
+- U2: As a member of the crisis management I want to have an overview (dashboard) of all actions I can do based on priorities so that they can act quickly. (Daniel)
 - U3: As a member of the crisis management I want to quickly search for goods that need to be requested.
 - U4: As a member of the crisis management I want to see the details about a good.
 - U5: As a member of the crisis management I want to make requests goods in order to allocate them as fast as possible.
