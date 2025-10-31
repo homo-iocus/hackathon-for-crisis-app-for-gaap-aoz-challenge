@@ -16,8 +16,12 @@ export const RequestProvider = ({ children }) => {
     );
   };
 
+  const addRequest = (requestToAdd) => {
+    setRequests((prev) => [...prev, requestToAdd]);
+  };
+
   return (
-    <RequestContext.Provider value={{ requests, updateRequest }}>
+    <RequestContext.Provider value={{ requests, updateRequest, addRequest }}>
       {children}
     </RequestContext.Provider>
   );

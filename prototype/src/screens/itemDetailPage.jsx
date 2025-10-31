@@ -13,32 +13,139 @@ import {
   Divider,
 } from "@mui/material";
 
+import { useRequests } from "../context/RequestsContext";
+
 const ITEM_LOOKUP = {
-  "MED-001": { item_id: "MED-001", item_name: "Erste-Hilfe-Set", category: "Medizin", unit: "Stück" },
-  "MED-002": { item_id: "MED-002", item_name: "Verbandsmaterial", category: "Medizin", unit: "Stück" },
-  "MED-003": { item_id: "MED-003", item_name: "Schmerzmittel", category: "Medizin", unit: "Packung" },
-  "MED-004": { item_id: "MED-004", item_name: "Beatmungsmaske", category: "Medizin", unit: "Stück" },
-  "MED-005": { item_id: "MED-005", item_name: "Blutdruckmessgerät", category: "Medizin", unit: "Stück" },
+  "MED-001": {
+    item_id: "MED-001",
+    item_name: "Erste-Hilfe-Set",
+    category: "Medizin",
+    unit: "Stück",
+  },
+  "MED-002": {
+    item_id: "MED-002",
+    item_name: "Verbandsmaterial",
+    category: "Medizin",
+    unit: "Stück",
+  },
+  "MED-003": {
+    item_id: "MED-003",
+    item_name: "Schmerzmittel",
+    category: "Medizin",
+    unit: "Packung",
+  },
+  "MED-004": {
+    item_id: "MED-004",
+    item_name: "Beatmungsmaske",
+    category: "Medizin",
+    unit: "Stück",
+  },
+  "MED-005": {
+    item_id: "MED-005",
+    item_name: "Blutdruckmessgerät",
+    category: "Medizin",
+    unit: "Stück",
+  },
 
-  "FOOD-001": { item_id: "FOOD-001", item_name: "Wasserflaschen (1L)", category: "Verpflegung", unit: "Flaschen" },
-  "FOOD-002": { item_id: "FOOD-002", item_name: "MRE-Paket", category: "Verpflegung", unit: "Pakete" },
-  "FOOD-003": { item_id: "FOOD-003", item_name: "Konservendosen", category: "Verpflegung", unit: "Dosen" },
-  "FOOD-004": { item_id: "FOOD-004", item_name: "Reis & Nudeln", category: "Verpflegung", unit: "Kilogramm" },
-  "FOOD-005": { item_id: "FOOD-005", item_name: "Brot & Cracker", category: "Verpflegung", unit: "Pakete" },
+  "FOOD-001": {
+    item_id: "FOOD-001",
+    item_name: "Wasserflaschen (1L)",
+    category: "Verpflegung",
+    unit: "Flaschen",
+  },
+  "FOOD-002": {
+    item_id: "FOOD-002",
+    item_name: "MRE-Paket",
+    category: "Verpflegung",
+    unit: "Pakete",
+  },
+  "FOOD-003": {
+    item_id: "FOOD-003",
+    item_name: "Konservendosen",
+    category: "Verpflegung",
+    unit: "Dosen",
+  },
+  "FOOD-004": {
+    item_id: "FOOD-004",
+    item_name: "Reis & Nudeln",
+    category: "Verpflegung",
+    unit: "Kilogramm",
+  },
+  "FOOD-005": {
+    item_id: "FOOD-005",
+    item_name: "Brot & Cracker",
+    category: "Verpflegung",
+    unit: "Pakete",
+  },
 
-  "HYG-001": { item_id: "HYG-001", item_name: "Seife", category: "Hygiene", unit: "Stück" },
-  "HYG-002": { item_id: "HYG-002", item_name: "Desinfektionsmittel (500ml)", category: "Hygiene", unit: "Flaschen" },
-  "HYG-003": { item_id: "HYG-003", item_name: "Toilettenpapier", category: "Hygiene", unit: "Rollen" },
-  "HYG-004": { item_id: "HYG-004", item_name: "Zahnpasta & Bürste", category: "Hygiene", unit: "Sets" },
-  "HYG-005": { item_id: "HYG-005", item_name: "Damenhygieneprodukte", category: "Hygiene", unit: "Packungen" },
+  "HYG-001": {
+    item_id: "HYG-001",
+    item_name: "Seife",
+    category: "Hygiene",
+    unit: "Stück",
+  },
+  "HYG-002": {
+    item_id: "HYG-002",
+    item_name: "Desinfektionsmittel (500ml)",
+    category: "Hygiene",
+    unit: "Flaschen",
+  },
+  "HYG-003": {
+    item_id: "HYG-003",
+    item_name: "Toilettenpapier",
+    category: "Hygiene",
+    unit: "Rollen",
+  },
+  "HYG-004": {
+    item_id: "HYG-004",
+    item_name: "Zahnpasta & Bürste",
+    category: "Hygiene",
+    unit: "Sets",
+  },
+  "HYG-005": {
+    item_id: "HYG-005",
+    item_name: "Damenhygieneprodukte",
+    category: "Hygiene",
+    unit: "Packungen",
+  },
 
-  "BED-001": { item_id: "BED-001", item_name: "Feldbett", category: "Unterkunft", unit: "Stück" },
-  "BLK-010": { item_id: "BLK-010", item_name: "Decke", category: "Unterkunft", unit: "Stück" },
-  "BED-002": { item_id: "BED-002", item_name: "Isomatte", category: "Unterkunft", unit: "Stück" },
-  "BED-003": { item_id: "BED-003", item_name: "Kopfkissen", category: "Unterkunft", unit: "Stück" },
-  "BED-004": { item_id: "BED-004", item_name: "Zelt", category: "Unterkunft", unit: "Stück" },
+  "BED-001": {
+    item_id: "BED-001",
+    item_name: "Feldbett",
+    category: "Unterkunft",
+    unit: "Stück",
+  },
+  "BLK-010": {
+    item_id: "BLK-010",
+    item_name: "Decke",
+    category: "Unterkunft",
+    unit: "Stück",
+  },
+  "BED-002": {
+    item_id: "BED-002",
+    item_name: "Isomatte",
+    category: "Unterkunft",
+    unit: "Stück",
+  },
+  "BED-003": {
+    item_id: "BED-003",
+    item_name: "Kopfkissen",
+    category: "Unterkunft",
+    unit: "Stück",
+  },
+  "BED-004": {
+    item_id: "BED-004",
+    item_name: "Zelt",
+    category: "Unterkunft",
+    unit: "Stück",
+  },
 
-  "WTR-020": { item_id: "WTR-020", item_name: "Trinkwasserkanister (10L)", category: "Versorgung", unit: "Kanister" },
+  "WTR-020": {
+    item_id: "WTR-020",
+    item_name: "Trinkwasserkanister (10L)",
+    category: "Versorgung",
+    unit: "Kanister",
+  },
 };
 
 const PRIORITIES = [
@@ -50,6 +157,8 @@ const PRIORITIES = [
 export default function ItemDetailPage() {
   const { itemId } = useParams();
   const navigate = useNavigate();
+
+  const { addRequest } = useRequests();
 
   const item = ITEM_LOOKUP[itemId] || {
     item_id: itemId,
@@ -63,8 +172,8 @@ export default function ItemDetailPage() {
     contact_person: "Anna Müller",
     email: "anna.mueller@drk.de",
     phone: "+49-30-1234567",
-    facility_name: "", 
-    address: "", 
+    facility_name: "",
+    address: "",
     quantity_requested: 1,
     unit: item.unit,
     priority: "mittel",
@@ -79,11 +188,13 @@ export default function ItemDetailPage() {
     setForm((f) => ({ ...f, [key]: e.target.value }));
 
   const validate = () => {
-    if (!form.organization_name?.trim()) return "Organisation ist erforderlich.";
+    if (!form.organization_name?.trim())
+      return "Organisation ist erforderlich.";
     if (!form.facility_name?.trim()) return "Einrichtung ist erforderlich.";
     if (!form.address?.trim()) return "Adresse ist erforderlich.";
     if (!form.email?.includes("@")) return "Bitte eine gültige E-Mail angeben.";
-    if (Number(form.quantity_requested) <= 0) return "Menge muss größer als 0 sein.";
+    if (Number(form.quantity_requested) <= 0)
+      return "Menge muss größer als 0 sein.";
     return "";
   };
 
@@ -112,7 +223,7 @@ export default function ItemDetailPage() {
       },
       requested_items: [
         {
-          item_id: item.item_id, 
+          item_id: item.item_id,
           item_name: item.item_name,
           category: item.category,
           quantity_requested: Number(form.quantity_requested),
@@ -126,6 +237,7 @@ export default function ItemDetailPage() {
     };
 
     console.log("📦 Sende Anfrage:", newRequest);
+    addRequest(newRequest);
     const storeKey = "aoz_requests";
     const existing = JSON.parse(localStorage.getItem(storeKey) || "[]");
     localStorage.setItem(storeKey, JSON.stringify([newRequest, ...existing]));
@@ -148,7 +260,8 @@ export default function ItemDetailPage() {
             </Stack>
             <Divider sx={{ my: 2 }} />
             <Typography variant="body2" color="text.secondary">
-              Prüfen Sie die Angaben und füllen Sie rechts die Anforderungsdetails aus.
+              Prüfen Sie die Angaben und füllen Sie rechts die
+              Anforderungsdetails aus.
             </Typography>
           </Paper>
         </Grid>
@@ -331,7 +444,9 @@ function Section({ title, children }) {
 function Row({ label, value }) {
   return (
     <Stack direction="row" spacing={1}>
-      <Typography sx={{ minWidth: 140, color: "text.secondary" }}>{label}:</Typography>
+      <Typography sx={{ minWidth: 140, color: "text.secondary" }}>
+        {label}:
+      </Typography>
       <Typography>{value}</Typography>
     </Stack>
   );
