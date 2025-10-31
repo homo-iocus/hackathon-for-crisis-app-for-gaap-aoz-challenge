@@ -20,8 +20,8 @@ import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined'
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
-// Shared kit
 import { PageHeader, Section, KPI, StatusPill, Donut, ToolbarHint, ActionBar } from '../ui/Kit.jsx'
+import { UnifiedDetails, getItemMeta, fmtDate } from '../ui/ItemMeta.jsx'
 
 // ==== Kleine Hilfs-Komponenten für konsistente Tooltips ====
 const InfoLabel = ({ children, title }) => (
@@ -32,12 +32,7 @@ const InfoLabel = ({ children, title }) => (
     </Tooltip>
   </Stack>
 )
-
-const withTip = (title, node) => (
-  <Tooltip arrow title={title}>
-    <span>{node}</span>
-  </Tooltip>
-)
+const withTip = (title, node) => (<Tooltip arrow title={title}><span>{node}</span></Tooltip>)
 
 // RBAC
 const ROLES = [
@@ -92,7 +87,7 @@ const INITIAL_ITEMS = [
   },
 ]
 
-// Chips (mit Erklär-Tooltips)
+// Chips
 const readinessChip = (qty, min) => {
   const pct = Math.round((qty/Math.max(min,1))*100)
   const text = pct >= 100 ? 'Erfüllt' : pct >= 70 ? 'Engpass' : 'Kritisch'
@@ -127,7 +122,7 @@ export default function OrgMaintenance() {
     const min = items.reduce((a,b)=>a + b.min, 0)
     const due = items.filter(it => {
       const next = it.next ? new Date(it.next) : addDays(new Date(it.last), it.freqDays)
-      return next <= addDays(NOW, 30)
+      return next <= addDays(new Date(), 30)
     }).length
     const perSoon = items.filter(it => it.perishable && it.expiry && daysLeft(it.expiry) <= 30).length
     const coveragePct = Math.min(100, Math.round((qty / Math.max(min,1))*100))
@@ -200,18 +195,10 @@ export default function OrgMaintenance() {
 
       <Container sx={{ py:3 }}>
         <Grid container spacing={2} sx={{ mb:1 }}>
-          <Grid item xs={12} sm={6} md={3}>
-            {withTip('Summe aller Stückzahlen über alle Artikel.', <KPI title="Gesamt verfügbar" value={totals.qty} />)}
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            {withTip('Summe der Mindestbestände – Zielwert zur Deckung.', <KPI title="Mindestbestand (Summe)" value={totals.min} />)}
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            {withTip('Anzahl Artikel mit fälligen Inspektionen in ≤ 30 Tagen.', <KPI title="Inspektionen ≤30T" value={totals.due} icon={<BuildOutlinedIcon/>} />)}
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            {withTip('Verderbliche Waren mit ≤ 30 Resttagen bis MHD.', <KPI title="Verderbliche Waren ≤30T" value={totals.perSoon} icon={<EventAvailableOutlinedIcon/>} />)}
-          </Grid>
+          <Grid item xs={12} sm={6} md={3}>{withTip('Summe aller Stückzahlen über alle Artikel.', <KPI title="Gesamt verfügbar" value={totals.qty} />)}</Grid>
+          <Grid item xs={12} sm={6} md={3}>{withTip('Summe der Mindestbestände – Zielwert zur Deckung.', <KPI title="Mindestbestand (Summe)" value={totals.min} />)}</Grid>
+          <Grid item xs={12} sm={6} md={3}>{withTip('Anzahl Artikel mit fälligen Inspektionen in ≤ 30 Tagen.', <KPI title="Inspektionen ≤30T" value={totals.due} icon={<BuildOutlinedIcon/>} />)}</Grid>
+          <Grid item xs={12} sm={6} md={3}>{withTip('Verderbliche Waren mit ≤ 30 Resttagen bis MHD.', <KPI title="Verderbliche Waren ≤30T" value={totals.perSoon} icon={<EventAvailableOutlinedIcon/>} />)}</Grid>
         </Grid>
 
         <Card sx={{ mb:2 }}>
@@ -231,15 +218,9 @@ export default function OrgMaintenance() {
                 >
                   {cats.map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)}
                 </TextField>
-                <Tooltip title="Import (Excel/CSV)">
-                  <span><Button variant="outlined" startIcon={<UploadFileOutlinedIcon/>} onClick={importCSV} disabled={!hasPerm('import')}>Import</Button></span>
-                </Tooltip>
-                <Tooltip title="Vorlagen (CSV) herunterladen">
-                  <span><Button variant="outlined" startIcon={<DownloadOutlinedIcon/>} onClick={downloadTemplate} disabled={!hasPerm('downloadTemplates')}>Vorlagen</Button></span>
-                </Tooltip>
-                <Tooltip title="PDF-Export">
-                  <span><Button variant="contained" color="primary" startIcon={<PictureAsPdfOutlinedIcon/>} onClick={exportPDF} disabled={!hasPerm('export')}>Export</Button></span>
-                </Tooltip>
+                <Tooltip title="Import (Excel/CSV)"><span><Button variant="outlined" startIcon={<UploadFileOutlinedIcon/>} onClick={importCSV} disabled={!hasPerm('import')}>Import</Button></span></Tooltip>
+                <Tooltip title="Vorlagen (CSV) herunterladen"><span><Button variant="outlined" startIcon={<DownloadOutlinedIcon/>} onClick={downloadTemplate} disabled={!hasPerm('downloadTemplates')}>Vorlagen</Button></span></Tooltip>
+                <Tooltip title="PDF-Export"><span><Button variant="contained" color="primary" startIcon={<PictureAsPdfOutlinedIcon/>} onClick={exportPDF} disabled={!hasPerm('export')}>Export</Button></span></Tooltip>
               </ActionBar>
             </Stack>
           </CardContent>
@@ -262,7 +243,7 @@ export default function OrgMaintenance() {
             >
               {items.filter(it => {
                 const next = it.next ? new Date(it.next) : addDays(new Date(it.last), it.freqDays)
-                return next <= addDays(NOW,30)
+                return next <= addDays(new Date(),30)
               }).length === 0 ? (
                 <Alert severity="success">Keine Inspektionen in den nächsten 30 Tagen.</Alert>
               ) : (
@@ -278,12 +259,12 @@ export default function OrgMaintenance() {
                   <TableBody>
                     {items
                       .map(it => ({ it, next: it.next || addDays(new Date(it.last), it.freqDays).toISOString().slice(0,10) }))
-                      .filter(x => new Date(x.next) <= addDays(NOW,30))
+                      .filter(x => new Date(x.next) <= addDays(new Date(),30))
                       .sort((a,b)=> new Date(a.next) - new Date(b.next))
                       .map(({it, next}) => (
                         <TableRow key={it.id}>
                           <TableCell>{it.name}</TableCell>
-                          <TableCell>{next}</TableCell>
+                          <TableCell>{fmtDate(next)}</TableCell>
                           <TableCell>{it.freqDays} T</TableCell>
                           <TableCell>
                             <Tooltip title="Termin planen">
@@ -321,7 +302,7 @@ export default function OrgMaintenance() {
                         <TableRow key={it.id}>
                           <TableCell>{it.name}</TableCell>
                           <TableCell>{it.batch || '—'}</TableCell>
-                          <TableCell>{it.expiry || '—'}</TableCell>
+                          <TableCell>{it.expiry ? fmtDate(it.expiry) : '—'}</TableCell>
                           <TableCell>{daysLeft(it.expiry) ?? '—'}</TableCell>
                           <TableCell>
                             <Tooltip title="Diese Charge zuerst einsetzen (FIFO)">
@@ -354,14 +335,14 @@ export default function OrgMaintenance() {
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell><InfoLabel title="Artikelname und Standort.">Artikel</InfoLabel></TableCell>
+                <TableCell><InfoLabel title="Artikelname, Standort & Detail-Icon.">Artikel</InfoLabel></TableCell>
                 <TableCell><InfoLabel title="Kategorie des Artikels.">Kategorie</InfoLabel></TableCell>
                 <TableCell><InfoLabel title="Frei verfügbare Menge / Gesamtbestand.">Lagerstand</InfoLabel></TableCell>
                 <TableCell><InfoLabel title="Minimal erforderliche Menge.">Min</InfoLabel></TableCell>
                 <TableCell><InfoLabel title="Deckungsstatus relativ zum Minimum.">Deckung</InfoLabel></TableCell>
                 <TableCell><InfoLabel title="Transportmittel und erforderliche Personen.">Transport</InfoLabel></TableCell>
                 <TableCell><InfoLabel title="Verderblichkeit / MHD-Status.">Verderbliche Waren</InfoLabel></TableCell>
-                <TableCell><InfoLabel title="Zeit bis einsatzbereit (Stunden).">Bereit (h)</InfoLabel></TableCell>
+                <TableCell><InfoLabel title="Zeit bis einsatzbereit (Stunden).">Bereit (Std.)</InfoLabel></TableCell>
                 <TableCell align="right"><InfoLabel title="Bearbeiten, Termin planen, Transport, Löschen.">Aktionen</InfoLabel></TableCell>
               </TableRow>
             </TableHead>
@@ -369,10 +350,13 @@ export default function OrgMaintenance() {
               {filtered.map(it => (
                 <TableRow key={it.id} hover>
                   <TableCell>
-                    <Stack spacing={0.25}>
+                    <Stack spacing={0.25} direction="row" alignItems="center">
                       {withTip('Artikelbezeichnung.', <Typography fontWeight={700}>{it.name}</Typography>)}
-                      {withTip('Lagerort / Regal / Palette.', <Typography variant="caption" color="text.secondary">{it.location}</Typography>)}
+                      <Tooltip arrow placement="right" title={<UnifiedDetails meta={getItemMeta(it.name)} />}>
+                        <IconButton size="small" aria-label="Details"><InfoOutlinedIcon fontSize="small" /></IconButton>
+                      </Tooltip>
                     </Stack>
+                    {withTip('Lagerort / Regal / Palette.', <Typography variant="caption" color="text.secondary">{it.location}</Typography>)}
                   </TableCell>
                   <TableCell>{withTip('Artikelkategorie.', <span>{it.cat}</span>)}</TableCell>
                   <TableCell>{withTip('Frei verfügbar / Gesamtbestand.', <span>{`${it.qty - it.reserved} frei / ${it.qty} ges.`}</span>)}</TableCell>
@@ -483,7 +467,7 @@ export default function OrgMaintenance() {
             <Stack spacing={2}>
               <Typography><b>Artikel:</b> {dlgMaint.target.name}</Typography>
               <Typography variant="body2" color="text.secondary">
-                Intervall aktuell: {dlgMaint.target.freqDays} Tage • Nächste Prüfung: {dlgMaint.target.next || '—'}
+                Intervall aktuell: {dlgMaint.target.freqDays} Tage • Nächste Prüfung: {dlgMaint.target.next ? fmtDate(dlgMaint.target.next) : '—'}
               </Typography>
               {withTip('Termine gleichmäßig verteilen, um Überfälligkeiten zu vermeiden.',
                 <Alert severity="info" icon={<SwapVertOutlinedIcon/>}>
