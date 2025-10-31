@@ -107,7 +107,7 @@ const RequestDetail = ({ request }) => {
           <Stack direction="row" spacing={1} alignItems="center">
             <AccessTimeIcon fontSize="small" />
             <Typography variant="body2" color="text.secondary">
-              {new Date(request.timestamp).toLocaleString()}
+              {new Date(request.timestamp).toLocaleString("de")}
             </Typography>
           </Stack>
           {editing && (
@@ -217,7 +217,7 @@ const RequestDetail = ({ request }) => {
         <Box>
           <Typography variant="body1">
             <strong>Gewünschtes Lieferdatum:</strong>{" "}
-            {new Date(request.requested_delivery_date).toLocaleDateString()}
+            {new Date(request.requested_delivery_date).toLocaleDateString("de")}
           </Typography>
           <Typography variant="body1" sx={{ mt: 1 }}>
             <strong>Bemerkungen:</strong> {request.notes}
