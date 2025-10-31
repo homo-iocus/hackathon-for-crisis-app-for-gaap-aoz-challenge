@@ -1,9 +1,9 @@
 - U1: As an admin I want to open a crisis and assign people to their roles and invite them to the platform.
-- U2: As a member of the crisis management I want to have an overview (dashboard) of all actions I can do based on priorities so that they can act quickly. (Daniel)
-- U3: As a member of the crisis management I want to quickly search for goods that need to be requested.
-- U4: As a member of the crisis management I want to see the details about a good.
-- U5: As a member of the crisis management I want to make requests goods in order to allocate them as fast as possible.
-- U6: As a member of the crisis management I want to see all requests and their status in a place to avoid coordination problems.
+- U2: As a member of the crisis management I want to have an overview (dashboard) of all actions I can do based on priorities so that they can act quickly. (Daniel) DONE
+- U3: As a member of the crisis management I want to quickly search for goods that need to be requested. (Daniel) DONE
+- U4: As a member of the crisis management I want to see the details about a good. (Daniel) DONE
+- U5: As a member of the crisis management I want to make requests goods in order to allocate them as fast as possible. (Daniel) DONE
+- U6: As a member of the crisis management I want to see all requests and their status in a place to avoid coordination problems. (Daniel) DONE
 - U7: As a storage manager I want to execute an order and update its status so that everyone is informed on whats the status.
 - U8: As an Authorizer Entity I want to authorize requests from the crisis management so that they can further be processed by the storage manager.
 - U9: As a member of the crisis management I want to put together individual request based on different stocks so that I can fulfill certain needs.
