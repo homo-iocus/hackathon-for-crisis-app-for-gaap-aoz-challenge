@@ -1,15 +1,7 @@
 import * as React from 'react'
-import {
-  Box,
-  Grid,
-  Typography,
-  Stack,
-  Button,
-  Paper,
-  Tooltip,
-} from '@mui/material'
+import { Box, Grid, Typography, Stack, Button, Paper, Tooltip } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
 import MedicalServicesRoundedIcon from '@mui/icons-material/MedicalServicesRounded'
 import RestaurantRoundedIcon from '@mui/icons-material/RestaurantRounded'
 import SanitizerIcon from '@mui/icons-material/Sanitizer'
@@ -21,7 +13,6 @@ const AREAS = [
     title: 'Erstversorgung (medizinisch)',
     icon: <MedicalServicesRoundedIcon fontSize="medium" />,
     color: 'primary',
-    href: '#bereich/medical',
     hint: 'Verbandmaterial, Erste-Hilfe, einfache Medikation',
   },
   {
@@ -29,7 +20,6 @@ const AREAS = [
     title: 'Verpflegung',
     icon: <RestaurantRoundedIcon fontSize="medium" />,
     color: 'secondary',
-    href: '#bereich/food',
     hint: 'Lebensmittel, warme/kalte Mahlzeiten, Wasser',
   },
   {
@@ -37,7 +27,6 @@ const AREAS = [
     title: 'Hygiene-Artikel',
     icon: <SanitizerIcon fontSize="medium" />,
     color: 'warning',
-    href: '#bereich/hygiene',
     hint: 'Seife, Desinfektion, Windeln, Damenhygiene',
   },
   {
@@ -45,16 +34,15 @@ const AREAS = [
     title: 'Unterkunft',
     icon: <HotelRoundedIcon fontSize="medium" />,
     color: 'success',
-    href: '#bereich/accommodation',
     hint: 'Betten, Matratzen, Decken, Kissen',
   },
 ]
 
-function AreaCard({ area }) {
+function AreaCard({ area, onClick }) {
   return (
     <Paper
       variant="outlined"
-      onClick={() => (window.location.hash = area.href)}
+      onClick={onClick}
       sx={{
         p: 2.5,
         borderRadius: 3,
@@ -91,16 +79,14 @@ function AreaCard({ area }) {
 }
 
 export default function Dashboard() {
-  const handleOpen = (href) => { window.location.hash = href }
+  const navigate = useNavigate()
 
   return (
     <Box
       sx={{
-        width: '100%',           
+        width: '100%',
         minHeight: '100vh',
         bgcolor: 'background.default',
-        boxSizing: 'border-box',
-        overflowX: 'hidden',      
         px: { xs: 2, md: 4 },
         py: { xs: 3, md: 4 },
       }}
@@ -114,15 +100,6 @@ export default function Dashboard() {
         <Typography variant="h5" sx={{ fontWeight: 700 }}>
           Übersicht
         </Typography>
-        <Tooltip title="Direkt zur Freigabe neuer Anfragen springen">
-          <Button
-            variant="contained"
-            startIcon={<RocketLaunchIcon />}
-            onClick={() => handleOpen('#authorize')}
-          >
-            Schnellstart: Autorisieren
-          </Button>
-        </Tooltip>
       </Stack>
 
       <Typography
@@ -135,7 +112,7 @@ export default function Dashboard() {
       <Grid container spacing={2}>
         {AREAS.map((a) => (
           <Grid key={a.id} item xs={12} sm={6} md={4} lg={3}>
-            <AreaCard area={a} />
+            <AreaCard area={a} onClick={() => navigate(`/category/${a.id}`)} />
           </Grid>
         ))}
       </Grid>
