@@ -44,7 +44,7 @@ const ITEM_LOOKUP = {
     supplier: "MedSupply GmbH",
     purchase_date: "2023-09-15",
     warranty: "2026-09-15",
-    notes: "Regelmäßig steril überprüfen.",
+    notes: "Regelmässig steril überprüfen.",
     
     packaging_type: "Karton (Kiste)",
     units_per_package: 10,
@@ -1059,139 +1059,9 @@ export default function ItemDetailPage() {
   };
 
   return (
-    <Box sx={{ p: { xs: 2, md: 4 } }}>
+    <Box sx={{ p: { xs: 2, md: 8 } }}>
       <Grid container spacing={3}>
         {/* LEFT SIDE - ITEM DETAILS */}
-        <Grid item xs={12} md={5}>
-          <Paper sx={{ p: 3, borderRadius: 3 }}>
-            <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
-              Artikel
-            </Typography>
-
-            {/* IDENTIFICATION */}
-            <Stack spacing={1.2}>
-              <Row label="Bezeichnung" value={item.item_name} />
-              <Row label="Kategorie" value={item.category} />
-              <Row label="Einheit" value={item.unit} />
-            </Stack>
-            <Divider sx={{ my: 2 }} />
-
-            {/* QUANTITIES */}
-            <Stack spacing={1.2}>
-              <Row label="Verfügbar" value={item.total_available ?? "–"} />
-              <Row label="In Verwendung" value={item.in_use ?? "–"} />
-              <Row label="Reserviert" value={item.reserved ?? "–"} />
-              <Row label="Beschädigt" value={item.damaged ?? "–"} />
-            </Stack>
-            <Divider sx={{ my: 2 }} />
-
-            {/* CONDITION */}
-            <Stack spacing={1.2}>
-              <Row label="Letzte Prüfung" value={item.last_inspection ?? "–"} />
-              <Row label="Prüfintervall" value={item.inspection_frequency ?? "–"} />
-              <Row label="Verantwortlich" value={item.responsible_person ?? "–"} />
-            </Stack>
-            <Divider sx={{ my: 2 }} />
-
-            {/* PHYSICAL ATTRIBUTES */}
-            <Stack spacing={1.2}>
-              <Row label="Größe (L/B/H)" value={item.size ?? "–"} />
-              <Row label="Gewicht" value={item.weight ?? "–"} />
-              <Row label="Volumen" value={item.volume ?? "–"} />
-              <Row label="Stapelfähig" value={item.stackable ?? "–"} />
-            </Stack>
-            <Divider sx={{ my: 2 }} />
-
-            {/* NEW: PACKAGING */}
-            <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-              Verpackung
-            </Typography>
-            <Stack spacing={1.2}>
-              <Row label="Art" value={item.packaging_type ?? "–"} />
-              <Row label="Einheiten pro Verpackung" value={item.units_per_package ?? "–"} />
-              <Row label="Paketmaße" value={item.package_size ?? "–"} />
-              <Row label="Paketgewicht" value={item.package_weight ?? "–"} />
-              <Row label="Paketvolumen" value={item.package_volume ?? "–"} />
-            </Stack>
-            <Divider sx={{ my: 2 }} />
-
-            {/* LOCATION */}
-            <Stack spacing={1.2}>
-              <Row label="Lagerort" value={item.storage_address ?? "–"} />
-              <Row label="GPS" value={item.gps ?? "–"} />
-            </Stack>
-            <Divider sx={{ my: 2 }} />
-
-            {/* NEW: ACCESS & SECURITY */}
-            <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-              Zugang & Sicherheit (Lagerort)
-            </Typography>
-            <Stack spacing={1.2}>
-              <Row label="Zugang jederzeit" value={item.access?.anytime ? "Ja" : "Nein"} />
-              <Row label="Lagerort-Typ" value={item.access?.location_type ?? "–"} />
-              <Row
-                label="Max. Fahrzeughöhe"
-                value={
-                  item.access?.max_vehicle_height_m
-                    ? `${item.access.max_vehicle_height_m} m`
-                    : "–"
-                }
-              />
-              <Row label="Öffnungszeiten" value={item.access?.access_hours ?? "–"} />
-              <Row label="Sicherheit/Schlüssel" value={item.access?.security_notes ?? "–"} />
-              <Row label="Kontakt (Telefon)" value={item.access?.contact_phone ?? "–"} />
-            </Stack>
-            <Divider sx={{ my: 2 }} />
-
-            {/* PHOTOS / DOCS */}
-            <Stack spacing={1.2}>
-              <Typography variant="subtitle2">Fotos & Dokumente</Typography>
-              {item.photo && (
-                <img
-                  src={item.photo}
-                  alt={item.item_name}
-                  style={{ width: "100%", borderRadius: 8 }}
-                />
-              )}
-              <Row label="Handbuch" value={item.manual ?? "–"} />
-              <Row label="Sicherheitsdatenblatt" value={item.safety_sheet ?? "–"} />
-            </Stack>
-            <Divider sx={{ my: 2 }} />
-
-            {/* TRANSPORT */}
-            <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-              Transport / Fahrzeug
-            </Typography>
-            <Stack spacing={1.2}>
-              <Row label="Fahrzeugtyp (Standard)" value={item.transport_vehicle ?? "–"} />
-              <Row label="Mindestfahrzeug" value={item.min_vehicle ?? "–"} />
-              <Row label="Oversize / Übergröße" value={item.oversize ? "Ja" : "Nein"} />
-              <Row label="Personalbedarf" value={item.manpower ?? "–"} />
-              <Row label="Aufbauzeit" value={item.assembly_time ?? "–"} />
-            </Stack>
-            <Divider sx={{ my: 2 }} />
-
-            {/* AVAILABILITY */}
-            <Stack spacing={1.2}>
-              <Row label="Bereitstellungszeit" value={item.deploy_time ?? "–"} />
-              <Row label="Status" value={item.readiness ?? "–"} />
-            </Stack>
-            <Divider sx={{ my: 2 }} />
-
-            {/* SUPPLIER INFO */}
-            <Stack spacing={1.2}>
-              <Row label="Lieferant" value={item.supplier ?? "–"} />
-              <Row label="Kaufdatum" value={item.purchase_date ?? "–"} />
-              <Row label="Garantie / Ablauf" value={item.warranty ?? "–"} />
-            </Stack>
-            <Divider sx={{ my: 2 }} />
-
-            {/* NOTES */}
-            <Row label="Notizen" value={item.notes ?? "–"} />
-          </Paper>
-        </Grid>
-
-        {/* RIGHT SIDE - REQUEST FORM */}
         <Grid item xs={12} md={7}>
           <Paper sx={{ p: 3, borderRadius: 3 }}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
@@ -1352,6 +1222,137 @@ export default function ItemDetailPage() {
             )}
           </Paper>
         </Grid>
+        <Grid item xs={12} md={5}>
+          <Paper sx={{ p: 3, borderRadius: 3 }}>
+            <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
+              Artikel
+            </Typography>
+
+            {/* IDENTIFICATION */}
+            <Stack spacing={1.2}>
+              <Row label="Bezeichnung" value={item.item_name} />
+              <Row label="Kategorie" value={item.category} />
+              <Row label="Einheit" value={item.unit} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* QUANTITIES */}
+            <Stack spacing={1.2}>
+              <Row label="Verfügbar" value={item.total_available ?? "–"} />
+              <Row label="In Verwendung" value={item.in_use ?? "–"} />
+              <Row label="Reserviert" value={item.reserved ?? "–"} />
+              <Row label="Beschädigt" value={item.damaged ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* CONDITION */}
+            <Stack spacing={1.2}>
+              <Row label="Letzte Prüfung" value={item.last_inspection ?? "–"} />
+              <Row label="Prüfintervall" value={item.inspection_frequency ?? "–"} />
+              <Row label="Verantwortlich" value={item.responsible_person ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* PHYSICAL ATTRIBUTES */}
+            <Stack spacing={1.2}>
+              <Row label="Größe (L/B/H)" value={item.size ?? "–"} />
+              <Row label="Gewicht" value={item.weight ?? "–"} />
+              <Row label="Volumen" value={item.volume ?? "–"} />
+              <Row label="Stapelfähig" value={item.stackable ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* NEW: PACKAGING */}
+            <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+              Verpackung
+            </Typography>
+            <Stack spacing={1.2}>
+              <Row label="Art" value={item.packaging_type ?? "–"} />
+              <Row label="Einheiten pro Verpackung" value={item.units_per_package ?? "–"} />
+              <Row label="Paketmaße" value={item.package_size ?? "–"} />
+              <Row label="Paketgewicht" value={item.package_weight ?? "–"} />
+              <Row label="Paketvolumen" value={item.package_volume ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* LOCATION */}
+            <Stack spacing={1.2}>
+              <Row label="Lagerort" value={item.storage_address ?? "–"} />
+              <Row label="GPS" value={item.gps ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* NEW: ACCESS & SECURITY */}
+            <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+              Zugang & Sicherheit (Lagerort)
+            </Typography>
+            <Stack spacing={1.2}>
+              <Row label="Zugang jederzeit" value={item.access?.anytime ? "Ja" : "Nein"} />
+              <Row label="Lagerort-Typ" value={item.access?.location_type ?? "–"} />
+              <Row
+                label="Max. Fahrzeughöhe"
+                value={
+                  item.access?.max_vehicle_height_m
+                    ? `${item.access.max_vehicle_height_m} m`
+                    : "–"
+                }
+              />
+              <Row label="Öffnungszeiten" value={item.access?.access_hours ?? "–"} />
+              <Row label="Sicherheit/Schlüssel" value={item.access?.security_notes ?? "–"} />
+              <Row label="Kontakt (Telefon)" value={item.access?.contact_phone ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* PHOTOS / DOCS */}
+            <Stack spacing={1.2}>
+              <Typography variant="subtitle2">Fotos & Dokumente</Typography>
+              {item.photo && (
+                <img
+                  src={item.photo}
+                  alt={item.item_name}
+                  style={{ width: "100%", borderRadius: 8 }}
+                />
+              )}
+              <Row label="Handbuch" value={item.manual ?? "–"} />
+              <Row label="Sicherheitsdatenblatt" value={item.safety_sheet ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* TRANSPORT */}
+            <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+              Transport / Fahrzeug
+            </Typography>
+            <Stack spacing={1.2}>
+              <Row label="Fahrzeugtyp (Standard)" value={item.transport_vehicle ?? "–"} />
+              <Row label="Mindestfahrzeug" value={item.min_vehicle ?? "–"} />
+              <Row label="Oversize / Übergröße" value={item.oversize ? "Ja" : "Nein"} />
+              <Row label="Personalbedarf" value={item.manpower ?? "–"} />
+              <Row label="Aufbauzeit" value={item.assembly_time ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* AVAILABILITY */}
+            <Stack spacing={1.2}>
+              <Row label="Bereitstellungszeit" value={item.deploy_time ?? "–"} />
+              <Row label="Status" value={item.readiness ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* SUPPLIER INFO */}
+            <Stack spacing={1.2}>
+              <Row label="Lieferant" value={item.supplier ?? "–"} />
+              <Row label="Kaufdatum" value={item.purchase_date ?? "–"} />
+              <Row label="Garantie / Ablauf" value={item.warranty ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* NOTES */}
+            <Row label="Notizen" value={item.notes ?? "–"} />
+          </Paper>
+        </Grid>
+
+        {/* RIGHT SIDE - REQUEST FORM */}
+        
       </Grid>
     </Box>
   );
