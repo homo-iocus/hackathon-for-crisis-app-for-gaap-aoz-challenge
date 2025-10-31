@@ -183,7 +183,7 @@ export default function OrgMaintenance() {
   const AUDIT = [
     '2025-10-31 10:12 – it2 expiry gesetzt (2025-11-30) – K.K./InvManager',
     '2025-10-30 17:05 – it1 qty 175 → 180 – M.H./InvManager',
-    '2025-10-30 09:22 – Neuer Artikel it3 angelegt – S.B./InvManager',
+    '2025-10-30 09:23 – Neuer Artikel it3 angelegt – S.B./InvManager',
   ]
 
   return (
