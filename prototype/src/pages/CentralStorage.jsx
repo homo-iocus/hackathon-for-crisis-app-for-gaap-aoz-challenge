@@ -3,7 +3,7 @@ import {
   AppBar, Toolbar, Typography, Container, Grid, Card, CardContent, Stack, Chip,
   Button, LinearProgress, Box, TextField, Table, TableHead, TableRow, TableCell,
   TableBody, Dialog, DialogTitle, DialogContent, DialogActions, Slider, Alert,
-  Tooltip, IconButton
+  Tooltip, IconButton, Divider
 } from '@mui/material'
 import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined'
 import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined'
@@ -13,8 +13,9 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
-// --- Kleine Hilfskomponenten -------------------------------------------------
+import { UnifiedDetails, getItemMeta } from '../ui/ItemMeta.jsx'
 
+// ===== Kleine Info-Komponenten
 const InfoLabel = ({ children, title }) => (
   <Stack direction="row" spacing={0.5} alignItems="center" component="span">
     <span>{children}</span>
@@ -23,12 +24,7 @@ const InfoLabel = ({ children, title }) => (
     </Tooltip>
   </Stack>
 )
-
-const withTip = (title, node) => (
-  <Tooltip arrow title={title}>
-    <span>{node}</span>
-  </Tooltip>
-)
+const withTip = (title, node) => (<Tooltip arrow title={title}><span>{node}</span></Tooltip>)
 
 // --- Kategorien (deutsch)
 const CATS = [
@@ -38,12 +34,12 @@ const CATS = [
   { key:'furniture',     label:'Möbel',         icon:<WeekendOutlinedIcon/> },
 ]
 
-// --- Organisationen (deutsch)
+// --- Organisationen
 const ORGS = ['Sozialdepartement', 'Zivilschutz Stadt Zürich', 'Tiefbauamt']
 
-// --- Zentrales Register (einheitliche Wahrheit)
+// --- Zentrales Register (Demo)
 const registry = {
-  demand: { food: 1200, accommodation: 900, hygiene: 1000, furniture: 150 }, // aus Planung
+  demand: { food: 1200, accommodation: 900, hygiene: 1000, furniture: 150 },
   min: {
     'Sozialdepartement':       { food: 900, accommodation: 400, hygiene: 500, furniture: 50 },
     'Zivilschutz Stadt Zürich':{ food: 600, accommodation: 350, hygiene: 400, furniture: 60 },
@@ -54,7 +50,7 @@ const registry = {
     { org:'Sozialdepartement',       storage:'Zentrallager',     cat:'hygiene',       item:'Hygiene-Set A',   qty:600, perishable:true,  expiryDays:26, readinessH:2 },
     { org:'Zivilschutz Stadt Zürich',storage:'Halle Nord',       cat:'accommodation', item:'Bett Single',     qty:420, perishable:false, readinessH:4 },
     { org:'Zivilschutz Stadt Zürich',storage:'Halle Nord',       cat:'food',          item:'Essenspaket B',   qty:500, perishable:true,  expiryDays:18, readinessH:4 },
-    { org:'Tiefbauamt',              storage:'Depot West',       cat:'furniture',     item:'Schrank',          qty:95,  perishable:false, readinessH:8 },
+    { org:'Tiefbauamt',              storage:'Depot West',       cat:'furniture',     item:'Schrank',         qty:95,  perishable:false, readinessH:8 },
     { org:'Tiefbauamt',              storage:'Depot West',       cat:'accommodation', item:'Bett Single',     qty:180, perishable:false, readinessH:8 },
     { org:'Tiefbauamt',              storage:'Depot West',       cat:'hygiene',       item:'Hygiene-Set B',   qty:160, perishable:true,  expiryDays:34, readinessH:8 },
   ]
@@ -62,7 +58,6 @@ const registry = {
 
 // --- Helpers
 function sumBy(list, pred){ return list.filter(pred).reduce((a,b)=>a + b.qty, 0) }
-
 function coverageTip(have, need){
   if (have >= need) return 'Deckung erfüllt: vorhandene Menge ≥ Bedarf.'
   if (have >= 0.7*need) return 'Engpass: 70–100% des Bedarfs vorhanden.'
@@ -73,8 +68,6 @@ function chipByCoverage(have, need){
   if (have >= 0.7*need) return withTip(coverageTip(have, need), <Chip size="small" color="warning" label="Eng" />)
   return withTip(coverageTip(have, need), <Chip size="small" color="error" label="Kritisch" />)
 }
-
-// Greedy-Planung: Deckung zuerst, dann FIFO bei Verderblichem
 function planAllocation(catKey, need){
   const pool = registry.stock
     .filter(x => x.cat===catKey && x.qty>0)
@@ -121,14 +114,9 @@ export default function CentralStorage(){
       <AppBar position="static" color="default" elevation={0}>
         <Toolbar>
           <Typography variant="h6" sx={{ flex:1 }}>Zentrale Übersicht (Alle Organisationen)</Typography>
-
           {withTip(
             'Erstellt einen automatischen Zuteilungsplan (Deckung zuerst, dann FIFO).',
-            <Button
-              variant="contained"
-              onClick={()=>openPlan('accommodation')}
-              aria-label="Schnell zuteilen"
-            >
+            <Button variant="contained" onClick={()=>openPlan('accommodation')} aria-label="Schnell zuteilen">
               Schnell zuteilen
             </Button>
           )}
@@ -204,11 +192,11 @@ export default function CentralStorage(){
                 <TableRow>
                   <TableCell><InfoLabel title="Name der verantwortlichen Organisation.">Organisation</InfoLabel></TableCell>
                   <TableCell><InfoLabel title="Konkreter Lagerort (Halle/Depot/Regal).">Lagerort</InfoLabel></TableCell>
-                  <TableCell><InfoLabel title="Übergeordnete Kategorie (Verpflegung, Unterkunft, …).">Kategorie</InfoLabel></TableCell>
-                  <TableCell><InfoLabel title="Artikelbezeichnung laut Stammdaten.">Artikel</InfoLabel></TableCell>
+                  <TableCell><InfoLabel title="Übergeordnete Kategorie.">Kategorie</InfoLabel></TableCell>
+                  <TableCell><InfoLabel title="Artikelbezeichnung & Details.">Artikel</InfoLabel></TableCell>
                   <TableCell><InfoLabel title="Verfügbare Stückzahl am Lagerort.">Menge</InfoLabel></TableCell>
                   <TableCell><InfoLabel title="Zeit bis zur Einsatzbereitschaft (Stunden).">Deckung</InfoLabel></TableCell>
-                  <TableCell><InfoLabel title="Verderblichkeit: Mindesthaltbarkeits-Tage (MHD).">Perishable</InfoLabel></TableCell>
+                  <TableCell><InfoLabel title="Verderblichkeit / MHD-Tage.">Perishable</InfoLabel></TableCell>
                   <TableCell align="right"><InfoLabel title="Aktionen je Bestandseintrag.">Aktionen</InfoLabel></TableCell>
                 </TableRow>
               </TableHead>
@@ -218,7 +206,14 @@ export default function CentralStorage(){
                     <TableCell>{withTip('Verantwortliche Stelle.', <span>{r.org}</span>)}</TableCell>
                     <TableCell>{withTip('Physischer Lagerort.', <span>{r.storage}</span>)}</TableCell>
                     <TableCell>{withTip('Kategorie des Artikels.', <span>{CATS.find(c=>c.key===r.cat)?.label}</span>)}</TableCell>
-                    <TableCell>{withTip('Artikelname.', <span>{r.item}</span>)}</TableCell>
+                    <TableCell>
+                      <Stack direction="row" spacing={0.5} alignItems="center">
+                        <span>{r.item}</span>
+                        <Tooltip arrow placement="right" title={<UnifiedDetails meta={getItemMeta(r.item)} />}>
+                          <IconButton size="small" aria-label="Details"><InfoOutlinedIcon fontSize="small" /></IconButton>
+                        </Tooltip>
+                      </Stack>
+                    </TableCell>
                     <TableCell>{withTip('Aktuelle verfügbare Menge.', <span>{r.qty}</span>)}</TableCell>
                     <TableCell>{withTip('Zeit bis Bereitstellung in Stunden.', <span>~{r.readinessH} Std.</span>)}</TableCell>
                     <TableCell>
@@ -228,7 +223,7 @@ export default function CentralStorage(){
                     </TableCell>
                     <TableCell align="right">
                       <Stack direction="row" spacing={1} justifyContent="flex-end">
-                        {withTip('Automatische Zuteilung für diese Kategorie planen.', 
+                        {withTip('Automatische Zuteilung für diese Kategorie planen.',
                           <Button size="small" variant="outlined" onClick={()=>openPlan(r.cat)} aria-label="Zuteilen">Zuteilen</Button>
                         )}
                         {r.perishable && withTip('First-In-First-Out priorisieren (ältere Chargen zuerst).',
@@ -321,10 +316,7 @@ export default function CentralStorage(){
                 </InfoLabel>
               </Typography>
 
-              <Tooltip
-                arrow
-                title={`Schieberegler für die endgültige Zuteilungsmenge (0 bis Bedarf: ${registry.demand[dlg.cat]||0}).`}
-              >
+              <Tooltip arrow title={`Schieberegler für die endgültige Zuteilungsmenge (0 bis Bedarf: ${registry.demand[dlg.cat]||0}).`}>
                 <Slider
                   min={0}
                   max={(registry.demand[dlg.cat]||0)}
@@ -361,3 +353,5 @@ export default function CentralStorage(){
     </Box>
   )
 }
+
+export { CentralStorage };
