@@ -60,7 +60,7 @@ export default function CategoryPage() {
         <Button
           variant="outlined"
           color="primary"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/stab")}
         >
           ← Zurück zum Dashboard
         </Button>

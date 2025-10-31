@@ -12,7 +12,6 @@ import {
   Alert,
   Divider,
 } from "@mui/material";
-import { initialRequests } from "../data/requests";
 
 const ITEM_LOOKUP = {
   "MED-001": { item_id: "MED-001", item_name: "Erste-Hilfe-Set", category: "Medizin", unit: "Stück" },
