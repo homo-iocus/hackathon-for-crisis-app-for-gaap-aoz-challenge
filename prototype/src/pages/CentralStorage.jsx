@@ -74,7 +74,7 @@ function chipByCoverage(have, need){
   return withTip(coverageTip(have, need), <Chip size="small" color="error" label="Kritisch" />)
 }
 
-// Greedy-Planung: Readiness zuerst, dann FIFO bei Verderblichem
+// Greedy-Planung: Deckung zuerst, dann FIFO bei Verderblichem
 function planAllocation(catKey, need){
   const pool = registry.stock
     .filter(x => x.cat===catKey && x.qty>0)
@@ -123,7 +123,7 @@ export default function CentralStorage(){
           <Typography variant="h6" sx={{ flex:1 }}>Zentrale Übersicht (Alle Organisationen)</Typography>
 
           {withTip(
-            'Erstellt einen automatischen Zuteilungsplan (Readiness zuerst, dann FIFO).',
+            'Erstellt einen automatischen Zuteilungsplan (Deckung zuerst, dann FIFO).',
             <Button
               variant="contained"
               onClick={()=>openPlan('accommodation')}
@@ -189,7 +189,7 @@ export default function CentralStorage(){
           </TextField>
           <TextField
             size="small"
-            label={<InfoLabel title="Sucht in Organisation, Lagerort (Storage) und Artikelname.">Suche (Organisation/Storage/Artikel)</InfoLabel>}
+            label={<InfoLabel title="Sucht in Organisation, Lagerort und Artikelname.">Suche (Organisation/Lagerort/Artikel)</InfoLabel>}
             value={q}
             onChange={e=>setQ(e.target.value)}
             fullWidth
@@ -203,11 +203,11 @@ export default function CentralStorage(){
               <TableHead>
                 <TableRow>
                   <TableCell><InfoLabel title="Name der verantwortlichen Organisation.">Organisation</InfoLabel></TableCell>
-                  <TableCell><InfoLabel title="Konkreter Lagerort (Halle/Depot/Regal).">Storage</InfoLabel></TableCell>
+                  <TableCell><InfoLabel title="Konkreter Lagerort (Halle/Depot/Regal).">Lagerort</InfoLabel></TableCell>
                   <TableCell><InfoLabel title="Übergeordnete Kategorie (Verpflegung, Unterkunft, …).">Kategorie</InfoLabel></TableCell>
                   <TableCell><InfoLabel title="Artikelbezeichnung laut Stammdaten.">Artikel</InfoLabel></TableCell>
                   <TableCell><InfoLabel title="Verfügbare Stückzahl am Lagerort.">Menge</InfoLabel></TableCell>
-                  <TableCell><InfoLabel title="Zeit bis zur Einsatzbereitschaft (Stunden).">Readiness</InfoLabel></TableCell>
+                  <TableCell><InfoLabel title="Zeit bis zur Einsatzbereitschaft (Stunden).">Deckung</InfoLabel></TableCell>
                   <TableCell><InfoLabel title="Verderblichkeit: Mindesthaltbarkeits-Tage (MHD).">Perishable</InfoLabel></TableCell>
                   <TableCell align="right"><InfoLabel title="Aktionen je Bestandseintrag.">Aktionen</InfoLabel></TableCell>
                 </TableRow>
@@ -220,7 +220,7 @@ export default function CentralStorage(){
                     <TableCell>{withTip('Kategorie des Artikels.', <span>{CATS.find(c=>c.key===r.cat)?.label}</span>)}</TableCell>
                     <TableCell>{withTip('Artikelname.', <span>{r.item}</span>)}</TableCell>
                     <TableCell>{withTip('Aktuelle verfügbare Menge.', <span>{r.qty}</span>)}</TableCell>
-                    <TableCell>{withTip('Zeit bis Bereitstellung in Stunden.', <span>~{r.readinessH}h</span>)}</TableCell>
+                    <TableCell>{withTip('Zeit bis Bereitstellung in Stunden.', <span>~{r.readinessH} Std.</span>)}</TableCell>
                     <TableCell>
                       {r.perishable
                         ? withTip('Mindesthaltbarkeit in Tagen (FIFO beachten).', <Chip size="small" color={(r.expiryDays<=14)?'error':'warning'} label={`MHD ${r.expiryDays}T`} />)
@@ -297,7 +297,7 @@ export default function CentralStorage(){
                   <TableRow>
                     <TableCell><InfoLabel title="Empfangende Organisation.">Organisation</InfoLabel></TableCell>
                     <TableCell><InfoLabel title="Ausgangslager/Depot.">Storage</InfoLabel></TableCell>
-                    <TableCell><InfoLabel title="Bereitstellungszeit in Stunden.">Readiness</InfoLabel></TableCell>
+                    <TableCell><InfoLabel title="Bereitstellungszeit in Stunden.">Deckung</InfoLabel></TableCell>
                     <TableCell><InfoLabel title="FIFO-Reihenfolge bei verderblichen Gütern.">Perishable</InfoLabel></TableCell>
                     <TableCell><InfoLabel title="Vorgeschlagene Teilmenge aus diesem Lager.">Teilmenge</InfoLabel></TableCell>
                   </TableRow>

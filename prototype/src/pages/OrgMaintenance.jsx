@@ -196,20 +196,6 @@ export default function OrgMaintenance() {
       <PageHeader
         icon={<Inventory2OutlinedIcon/>}
         title="Meine Organisation & Wartung"
-        subtitle="Proaktive Einsatzbereitschaft • Datenpflege • Rotation"
-        right={
-          <Stack direction="row" spacing={1} alignItems="center">
-            {withTip('Rollen & Berechtigungen (clientseitiger Prototyp).', <ToolbarHint>Rollen & Berechtigungen</ToolbarHint>)}
-            <SecurityOutlinedIcon sx={{ opacity:0.6 }} />
-            <TextField
-              size="small" select value={role} onChange={e=>setRole(e.target.value)}
-              sx={{ minWidth: 260 }} aria-label="Rolle wählen"
-              label={<InfoLabel title="Bestimmt, welche Aktionen Sie ausführen dürfen.">Rolle</InfoLabel>}
-            >
-              {ROLES.map(r => <MenuItem key={r.key} value={r.key}>{r.label}</MenuItem>)}
-            </TextField>
-          </Stack>
-        }
       />
 
       <Container sx={{ py:3 }}>
