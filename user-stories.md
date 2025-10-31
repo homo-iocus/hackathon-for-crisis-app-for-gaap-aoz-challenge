@@ -12,3 +12,4 @@
 - U12: As a Storage manager I want to have reminders on when to do inspections so that i can keep the goods in a good shape.
 - U13: As a user I want to login in order to use the app
 - U14: As a Storage Manager I want to populate the inventory of the system so that its up to date.
+- U15: As a Storage Manager I want to receive notification of pending request in order to fulfill them in time.
