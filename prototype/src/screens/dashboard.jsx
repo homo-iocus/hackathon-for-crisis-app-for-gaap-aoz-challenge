@@ -100,7 +100,7 @@ const AREAS = [
   },
 ];
 
-const STATUS_LABELS = {
+export const STATUS_LABELS = {
   pending: "Ausstehend",
   approved: "Genehmigt",
   rejected: "Abgelehnt",

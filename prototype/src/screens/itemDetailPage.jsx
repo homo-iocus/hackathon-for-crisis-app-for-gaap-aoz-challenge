@@ -45,6 +45,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-09-15",
     warranty: "2026-09-15",
     notes: "Regelmäßig steril überprüfen.",
+    
+    packaging_type: "Karton (Kiste)",
+    units_per_package: 10,
+    package_size: "60 x 40 x 30 cm",
+    package_weight: "13 kg",
+    package_volume: "72 L",
+    oversize: false,
+    min_vehicle: "PKW",
+    access: {
+      anytime: true,
+      location_type: "Ebenerdig",
+      max_vehicle_height_m: null,
+      security_notes: "Zutritt mit Zugangskarte.",
+      access_hours: "24/7",
+      contact_phone: "+49-89-111111",
+    },
   },
   "MED-002": {
     item_id: "MED-002",
@@ -76,6 +92,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-04-22",
     warranty: "2027-04-22",
     notes: "Steril lagern, nicht öffnen vor Gebrauch.",
+    
+    packaging_type: "Karton (Umkarton)",
+    units_per_package: 20,
+    package_size: "60 x 40 x 40 cm",
+    package_weight: "11 kg",
+    package_volume: "96 L",
+    oversize: false,
+    min_vehicle: "PKW",
+    access: {
+      anytime: false,
+      location_type: "Tiefgarage",
+      max_vehicle_height_m: 1.9,
+      security_notes: "Pförtner meldet Ankunft, Schlüssel erforderlich.",
+      access_hours: "06:00–22:00",
+      contact_phone: "+49-40-222222",
+    },
   },
   "MED-003": {
     item_id: "MED-003",
@@ -107,6 +139,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-10-10",
     warranty: "2026-10-10",
     notes: "Nur für medizinisches Personal freigegeben.",
+    
+    packaging_type: "Pharmakarton (Tray)",
+    units_per_package: 50,
+    package_size: "40 x 30 x 25 cm",
+    package_weight: "12 kg",
+    package_volume: "30 L",
+    oversize: false,
+    min_vehicle: "PKW",
+    access: {
+      anytime: false,
+      location_type: "Ebenerdig",
+      max_vehicle_height_m: null,
+      security_notes: "Betreute Abholung; Rezept/Freigabe erforderlich.",
+      access_hours: "08:00–18:00",
+      contact_phone: "+41-43-3333333",
+    },
   },
   "MED-004": {
     item_id: "MED-004",
@@ -138,6 +186,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-12-01",
     warranty: "2026-12-01",
     notes: "Regelmäßig auf Dichtigkeit prüfen.",
+    
+    packaging_type: "Karton, einzeln verpackt",
+    units_per_package: 12,
+    package_size: "60 x 40 x 35 cm",
+    package_weight: "7 kg",
+    package_volume: "84 L",
+    oversize: false,
+    min_vehicle: "PKW",
+    access: {
+      anytime: true,
+      location_type: "Ebenerdig",
+      max_vehicle_height_m: null,
+      security_notes: "Zutritt via PIN-Freisicherung.",
+      access_hours: "24/7",
+      contact_phone: "+49-30-444444",
+    },
   },
   "MED-005": {
     item_id: "MED-005",
@@ -169,8 +233,25 @@ const ITEM_LOOKUP = {
     purchase_date: "2022-08-08",
     warranty: "2026-08-08",
     notes: "Kalibrierung alle 12 Monate erforderlich.",
+    
+    packaging_type: "Karton (Schaumstoffeinlage)",
+    units_per_package: 8,
+    package_size: "50 x 40 x 35 cm",
+    package_weight: "9 kg",
+    package_volume: "70 L",
+    oversize: false,
+    min_vehicle: "PKW",
+    access: {
+      anytime: false,
+      location_type: "Tiefgarage",
+      max_vehicle_height_m: 2.0,
+      security_notes: "Zugang über Seiteneingang; Schlüssel beim Pförtner.",
+      access_hours: "07:00–20:00",
+      contact_phone: "+49-89-555555",
+    },
   },
 
+  // FOOD
   "FOOD-001": {
     item_id: "FOOD-001",
     item_name: "Wasserflaschen (1L)",
@@ -201,6 +282,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-02-01",
     warranty: "2028-02-01",
     notes: "Vor Hitze schützen, Lagerung <25°C.",
+    
+    packaging_type: "Kiste / Palette (EU)",
+    units_per_package: 12, // 12 Flaschen pro Kiste
+    package_size: "80 x 120 x 150 cm (Palette, gestapelt)",
+    package_weight: "300 kg (Palette)",
+    package_volume: "1.44 m³",
+    oversize: false,
+    min_vehicle: "Transporter",
+    access: {
+      anytime: false,
+      location_type: "Rampe",
+      max_vehicle_height_m: null,
+      security_notes: "Warenausgabe über Tor 3.",
+      access_hours: "08:00–18:00",
+      contact_phone: "+49-30-666666",
+    },
   },
   "FOOD-002": {
     item_id: "FOOD-002",
@@ -232,6 +329,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-01-10",
     warranty: "2029-01-10",
     notes: "Kühl und trocken lagern.",
+    
+    packaging_type: "Karton / Palette (EU)",
+    units_per_package: 24,
+    package_size: "80 x 120 x 140 cm (Palette)",
+    package_weight: "600 kg (Palette)",
+    package_volume: "1.34 m³",
+    oversize: false,
+    min_vehicle: "Transporter",
+    access: {
+      anytime: true,
+      location_type: "Ebenerdig",
+      max_vehicle_height_m: null,
+      security_notes: "Torcode wird telefonisch mitgeteilt.",
+      access_hours: "24/7",
+      contact_phone: "+49-341-777777",
+    },
   },
   "FOOD-003": {
     item_id: "FOOD-003",
@@ -263,6 +376,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-04-05",
     warranty: "2028-04-05",
     notes: "Vor Rost schützen.",
+    
+    packaging_type: "Karton / Palette (EU)",
+    units_per_package: 24,
+    package_size: "80 x 120 x 150 cm (Palette)",
+    package_weight: "750 kg (Palette)",
+    package_volume: "1.44 m³",
+    oversize: false,
+    min_vehicle: "Transporter",
+    access: {
+      anytime: false,
+      location_type: "Rampe",
+      max_vehicle_height_m: null,
+      security_notes: "Sicherheitsweste Pflicht.",
+      access_hours: "07:00–17:00",
+      contact_phone: "+49-511-888888",
+    },
   },
   "FOOD-004": {
     item_id: "FOOD-004",
@@ -294,6 +423,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-03-05",
     warranty: "2028-03-05",
     notes: "Trocken lagern.",
+    
+    packaging_type: "Sack / Palette (EU)",
+    units_per_package: 50, // 50 x 1kg pro Palette (z.B.)
+    package_size: "80 x 120 x 140 cm (Palette)",
+    package_weight: "1.0 t (Palette, max)",
+    package_volume: "1.34 m³",
+    oversize: false,
+    min_vehicle: "Transporter",
+    access: {
+      anytime: false,
+      location_type: "Tiefgarage",
+      max_vehicle_height_m: 2.1,
+      security_notes: "Zugang via Schranke; Transponder nötig.",
+      access_hours: "06:00–22:00",
+      contact_phone: "+49-711-999999",
+    },
   },
   "FOOD-005": {
     item_id: "FOOD-005",
@@ -325,8 +470,25 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-05-15",
     warranty: "2027-05-15",
     notes: "Frischware regelmäßig prüfen.",
+    
+    packaging_type: "Karton / Palette (EU)",
+    units_per_package: 36,
+    package_size: "80 x 120 x 160 cm (Palette)",
+    package_weight: "350 kg (Palette)",
+    package_volume: "1.54 m³",
+    oversize: false,
+    min_vehicle: "Transporter",
+    access: {
+      anytime: true,
+      location_type: "Ebenerdig",
+      max_vehicle_height_m: null,
+      security_notes: "Anlieferung über Hofseite.",
+      access_hours: "24/7",
+      contact_phone: "+49-421-123123",
+    },
   },
 
+  // HYG
   "HYG-001": {
     item_id: "HYG-001",
     item_name: "Seife (antibakteriell)",
@@ -357,6 +519,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-03-01",
     warranty: "2026-03-01",
     notes: "Vor Feuchtigkeit schützen.",
+    
+    packaging_type: "Karton / Tray",
+    units_per_package: 48,
+    package_size: "60 x 40 x 30 cm",
+    package_weight: "9 kg",
+    package_volume: "72 L",
+    oversize: false,
+    min_vehicle: "PKW",
+    access: {
+      anytime: false,
+      location_type: "Ebenerdig",
+      max_vehicle_height_m: null,
+      security_notes: "Zugang über Seitentür; Klingel.",
+      access_hours: "08:00–18:00",
+      contact_phone: "+41-44-121212",
+    },
   },
   "HYG-002": {
     item_id: "HYG-002",
@@ -388,6 +566,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-09-20",
     warranty: "2026-09-20",
     notes: "Nicht über 30°C lagern.",
+    
+    packaging_type: "Gefahrgut-Karton / Palette (EU)",
+    units_per_package: 24,
+    package_size: "80 x 120 x 140 cm (Palette)",
+    package_weight: "500 kg (Palette)",
+    package_volume: "1.34 m³",
+    oversize: false,
+    min_vehicle: "Transporter",
+    access: {
+      anytime: false,
+      location_type: "Tiefgarage",
+      max_vehicle_height_m: 2.0,
+      security_notes: "Gefahrstoffbereich – Anmeldung erforderlich.",
+      access_hours: "07:00–17:00",
+      contact_phone: "+49-711-232323",
+    },
   },
   "HYG-003": {
     item_id: "HYG-003",
@@ -419,6 +613,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-02-05",
     warranty: "2027-02-05",
     notes: "Trocken lagern, Verpackung geschlossen halten.",
+    
+    packaging_type: "Folie/Pakete / Palette (EU)",
+    units_per_package: 48,
+    package_size: "80 x 120 x 200 cm (Palette, leicht)",
+    package_weight: "120 kg (Palette)",
+    package_volume: "1.92 m³",
+    oversize: false,
+    min_vehicle: "Transporter",
+    access: {
+      anytime: true,
+      location_type: "Ebenerdig",
+      max_vehicle_height_m: null,
+      security_notes: "Anmeldung nicht erforderlich.",
+      access_hours: "24/7",
+      contact_phone: "+49-89-454545",
+    },
   },
   "HYG-004": {
     item_id: "HYG-004",
@@ -450,6 +660,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-04-20",
     warranty: "2027-04-20",
     notes: "In trockener Umgebung lagern.",
+    
+    packaging_type: "Karton",
+    units_per_package: 40,
+    package_size: "60 x 40 x 40 cm",
+    package_weight: "12 kg",
+    package_volume: "96 L",
+    oversize: false,
+    min_vehicle: "PKW",
+    access: {
+      anytime: false,
+      location_type: "Ebenerdig",
+      max_vehicle_height_m: null,
+      security_notes: "Klingel an Tor 2.",
+      access_hours: "08:00–18:00",
+      contact_phone: "+49-30-898989",
+    },
   },
   "HYG-005": {
     item_id: "HYG-005",
@@ -481,8 +707,25 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-11-10",
     warranty: "2026-11-10",
     notes: "Kühl und trocken lagern.",
+    
+    packaging_type: "Karton / Palette (EU)",
+    units_per_package: 30,
+    package_size: "80 x 120 x 140 cm (Palette)",
+    package_weight: "220 kg (Palette)",
+    package_volume: "1.34 m³",
+    oversize: false,
+    min_vehicle: "Transporter",
+    access: {
+      anytime: false,
+      location_type: "Tiefgarage",
+      max_vehicle_height_m: 1.9,
+      security_notes: "Schlüssel im Schlüsseltresor (Code).",
+      access_hours: "06:00–22:00",
+      contact_phone: "+49-511-787878",
+    },
   },
 
+  // BEDS / ACCOMMODATION
   "BED-001": {
     item_id: "BED-001",
     item_name: "Feldbett",
@@ -513,6 +756,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-05-15",
     warranty: "2027-05-15",
     notes: "Gelenke regelmäßig ölen.",
+    
+    packaging_type: "Bündel / Palette (EU)",
+    units_per_package: 5, // WICHTIG: wie besprochen
+    package_size: "220 x 100 x 120 cm (Palette)",
+    package_weight: "55 kg",
+    package_volume: "2.64 m³",
+    oversize: true,
+    min_vehicle: "LKW",
+    access: {
+      anytime: false,
+      location_type: "Tiefgarage",
+      max_vehicle_height_m: 2.0,
+      security_notes: "Höhenlimit beachten; Zufahrt über Tor B.",
+      access_hours: "07:00–20:00",
+      contact_phone: "+49-40-161616",
+    },
   },
   "BLK-010": {
     item_id: "BLK-010",
@@ -544,6 +803,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-11-11",
     warranty: "2028-11-11",
     notes: "Nach jedem Einsatz reinigen.",
+    
+    packaging_type: "Ballensack / Palette (EU)",
+    units_per_package: 30,
+    package_size: "80 x 120 x 180 cm (Palette, komprimiert)",
+    package_weight: "90 kg",
+    package_volume: "1.73 m³",
+    oversize: false,
+    min_vehicle: "Transporter",
+    access: {
+      anytime: true,
+      location_type: "Ebenerdig",
+      max_vehicle_height_m: null,
+      security_notes: "Zugang frei, Tor mit PIN.",
+      access_hours: "24/7",
+      contact_phone: "+49-221-343434",
+    },
   },
   "BED-002": {
     item_id: "BED-002",
@@ -575,6 +850,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-06-30",
     warranty: "2027-06-30",
     notes: "Nach Gebrauch trocken aufrollen.",
+    
+    packaging_type: "Ballen / Palette (EU)",
+    units_per_package: 20,
+    package_size: "80 x 120 x 160 cm (Palette)",
+    package_weight: "30 kg",
+    package_volume: "1.54 m³",
+    oversize: false,
+    min_vehicle: "Transporter",
+    access: {
+      anytime: false,
+      location_type: "Ebenerdig",
+      max_vehicle_height_m: null,
+      security_notes: "Zugang über Tor 1.",
+      access_hours: "08:00–18:00",
+      contact_phone: "+41-44-565656",
+    },
   },
   "BED-003": {
     item_id: "BED-003",
@@ -606,6 +897,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-01-12",
     warranty: "2027-01-12",
     notes: "Regelmäßig lüften und waschen.",
+    
+    packaging_type: "Sack / Palette (EU)",
+    units_per_package: 25,
+    package_size: "80 x 120 x 200 cm (Palette, leicht)",
+    package_weight: "60 kg",
+    package_volume: "1.92 m³",
+    oversize: false,
+    min_vehicle: "Transporter",
+    access: {
+      anytime: true,
+      location_type: "Ebenerdig",
+      max_vehicle_height_m: null,
+      security_notes: "Zugang frei.",
+      access_hours: "24/7",
+      contact_phone: "+49-30-252525",
+    },
   },
   "BED-004": {
     item_id: "BED-004",
@@ -637,6 +944,22 @@ const ITEM_LOOKUP = {
     purchase_date: "2022-05-05",
     warranty: "2027-05-05",
     notes: "Regelmäßig auf Dichtigkeit prüfen.",
+    
+    packaging_type: "Einzeltasche / Palette (Sondermaß)",
+    units_per_package: 2,
+    package_size: "240 x 120 x 120 cm (Palette)",
+    package_weight: "40 kg",
+    package_volume: "3.46 m³",
+    oversize: true,
+    min_vehicle: "LKW",
+    access: {
+      anytime: false,
+      location_type: "Rampe",
+      max_vehicle_height_m: null,
+      security_notes: "Sperrige Ware – Stapler notwendig.",
+      access_hours: "07:00–17:00",
+      contact_phone: "+49-221-121212",
+    },
   },
 };
 
@@ -755,34 +1078,68 @@ export default function ItemDetailPage() {
 
             {/* QUANTITIES */}
             <Stack spacing={1.2}>
-              <Row label="Verfügbar" value={item.total_available || "–"} />
-              <Row label="In Verwendung" value={item.in_use || "–"} />
-              <Row label="Reserviert" value={item.reserved || "–"} />
-              <Row label="Beschädigt" value={item.damaged || "–"} />
+              <Row label="Verfügbar" value={item.total_available ?? "–"} />
+              <Row label="In Verwendung" value={item.in_use ?? "–"} />
+              <Row label="Reserviert" value={item.reserved ?? "–"} />
+              <Row label="Beschädigt" value={item.damaged ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
             {/* CONDITION */}
             <Stack spacing={1.2}>
-              <Row label="Letzte Prüfung" value={item.last_inspection || "–"} />
-              <Row label="Prüfintervall" value={item.inspection_frequency || "–"} />
-              <Row label="Verantwortlich" value={item.responsible_person || "–"} />
+              <Row label="Letzte Prüfung" value={item.last_inspection ?? "–"} />
+              <Row label="Prüfintervall" value={item.inspection_frequency ?? "–"} />
+              <Row label="Verantwortlich" value={item.responsible_person ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
             {/* PHYSICAL ATTRIBUTES */}
             <Stack spacing={1.2}>
-              <Row label="Größe (L/B/H)" value={item.size || "–"} />
-              <Row label="Gewicht" value={item.weight || "–"} />
-              <Row label="Volumen" value={item.volume || "–"} />
-              <Row label="Stapelfähig" value={item.stackable || "–"} />
+              <Row label="Größe (L/B/H)" value={item.size ?? "–"} />
+              <Row label="Gewicht" value={item.weight ?? "–"} />
+              <Row label="Volumen" value={item.volume ?? "–"} />
+              <Row label="Stapelfähig" value={item.stackable ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* NEW: PACKAGING */}
+            <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+              Verpackung
+            </Typography>
+            <Stack spacing={1.2}>
+              <Row label="Art" value={item.packaging_type ?? "–"} />
+              <Row label="Einheiten pro Verpackung" value={item.units_per_package ?? "–"} />
+              <Row label="Paketmaße" value={item.package_size ?? "–"} />
+              <Row label="Paketgewicht" value={item.package_weight ?? "–"} />
+              <Row label="Paketvolumen" value={item.package_volume ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
             {/* LOCATION */}
             <Stack spacing={1.2}>
-              <Row label="Lagerort" value={item.storage_address || "–"} />
-              <Row label="GPS" value={item.gps || "–"} />
+              <Row label="Lagerort" value={item.storage_address ?? "–"} />
+              <Row label="GPS" value={item.gps ?? "–"} />
+            </Stack>
+            <Divider sx={{ my: 2 }} />
+
+            {/* NEW: ACCESS & SECURITY */}
+            <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+              Zugang & Sicherheit (Lagerort)
+            </Typography>
+            <Stack spacing={1.2}>
+              <Row label="Zugang jederzeit" value={item.access?.anytime ? "Ja" : "Nein"} />
+              <Row label="Lagerort-Typ" value={item.access?.location_type ?? "–"} />
+              <Row
+                label="Max. Fahrzeughöhe"
+                value={
+                  item.access?.max_vehicle_height_m
+                    ? `${item.access.max_vehicle_height_m} m`
+                    : "–"
+                }
+              />
+              <Row label="Öffnungszeiten" value={item.access?.access_hours ?? "–"} />
+              <Row label="Sicherheit/Schlüssel" value={item.access?.security_notes ?? "–"} />
+              <Row label="Kontakt (Telefon)" value={item.access?.contact_phone ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
@@ -796,36 +1153,41 @@ export default function ItemDetailPage() {
                   style={{ width: "100%", borderRadius: 8 }}
                 />
               )}
-              <Row label="Handbuch" value={item.manual || "–"} />
-              <Row label="Sicherheitsdatenblatt" value={item.safety_sheet || "–"} />
+              <Row label="Handbuch" value={item.manual ?? "–"} />
+              <Row label="Sicherheitsdatenblatt" value={item.safety_sheet ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
             {/* TRANSPORT */}
+            <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+              Transport / Fahrzeug
+            </Typography>
             <Stack spacing={1.2}>
-              <Row label="Fahrzeugtyp" value={item.transport_vehicle || "–"} />
-              <Row label="Personalbedarf" value={item.manpower || "–"} />
-              <Row label="Aufbauzeit" value={item.assembly_time || "–"} />
+              <Row label="Fahrzeugtyp (Standard)" value={item.transport_vehicle ?? "–"} />
+              <Row label="Mindestfahrzeug" value={item.min_vehicle ?? "–"} />
+              <Row label="Oversize / Übergröße" value={item.oversize ? "Ja" : "Nein"} />
+              <Row label="Personalbedarf" value={item.manpower ?? "–"} />
+              <Row label="Aufbauzeit" value={item.assembly_time ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
             {/* AVAILABILITY */}
             <Stack spacing={1.2}>
-              <Row label="Bereitstellungszeit" value={item.deploy_time || "–"} />
-              <Row label="Status" value={item.readiness || "–"} />
+              <Row label="Bereitstellungszeit" value={item.deploy_time ?? "–"} />
+              <Row label="Status" value={item.readiness ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
             {/* SUPPLIER INFO */}
             <Stack spacing={1.2}>
-              <Row label="Lieferant" value={item.supplier || "–"} />
-              <Row label="Kaufdatum" value={item.purchase_date || "–"} />
-              <Row label="Garantie / Ablauf" value={item.warranty || "–"} />
+              <Row label="Lieferant" value={item.supplier ?? "–"} />
+              <Row label="Kaufdatum" value={item.purchase_date ?? "–"} />
+              <Row label="Garantie / Ablauf" value={item.warranty ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
             {/* NOTES */}
-            <Row label="Notizen" value={item.notes || "–"} />
+            <Row label="Notizen" value={item.notes ?? "–"} />
           </Paper>
         </Grid>
 
@@ -1009,7 +1371,7 @@ function Section({ title, children }) {
 function Row({ label, value }) {
   return (
     <Stack direction="row" spacing={1}>
-      <Typography sx={{ minWidth: 150, color: "text.secondary" }}>
+      <Typography sx={{ minWidth: 180, color: "text.secondary" }}>
         {label}:
       </Typography>
       <Typography>{value}</Typography>

@@ -28,6 +28,7 @@ import {
   Edit as EditIcon,
 } from "@mui/icons-material";
 import { useRequests } from "../context/RequestsContext";
+import { STATUS_LABELS } from "../screens/dashboard";
 
 const RequestDetail = ({ request }) => {
   const { updateRequest } = useRequests();
@@ -92,7 +93,7 @@ const RequestDetail = ({ request }) => {
 
         <Stack direction="row" spacing={2} alignItems="center" mb={2}>
           <Chip
-            label={status.toUpperCase()}
+            label={STATUS_LABELS[status].toUpperCase()}
             color={
               status === "pending"
                 ? "warning"
@@ -106,7 +107,7 @@ const RequestDetail = ({ request }) => {
           <Stack direction="row" spacing={1} alignItems="center">
             <AccessTimeIcon fontSize="small" />
             <Typography variant="body2" color="text.secondary">
-              {new Date(request.timestamp).toLocaleString()}
+              {new Date(request.timestamp).toLocaleString("de")}
             </Typography>
           </Stack>
           {editing && (
@@ -116,10 +117,10 @@ const RequestDetail = ({ request }) => {
               onChange={(e) => setStatus(e.target.value)}
               sx={{ ml: 2 }}
             >
-              <MenuItem value="pending">Pending</MenuItem>
-              <MenuItem value="approved">Approved</MenuItem>
-              <MenuItem value="fulfilled">Fulfilled</MenuItem>
-              <MenuItem value="rejected">Rejected</MenuItem>
+              <MenuItem value="pending">{STATUS_LABELS["pending"]}</MenuItem>
+              <MenuItem value="approved">{STATUS_LABELS["approved"]}</MenuItem>
+              <MenuItem value="default">{STATUS_LABELS["default"]}</MenuItem>
+              <MenuItem value="rejected">{STATUS_LABELS["rejected"]}</MenuItem>
             </Select>
           )}
         </Stack>
@@ -216,7 +217,7 @@ const RequestDetail = ({ request }) => {
         <Box>
           <Typography variant="body1">
             <strong>Gewünschtes Lieferdatum:</strong>{" "}
-            {new Date(request.requested_delivery_date).toLocaleDateString()}
+            {new Date(request.requested_delivery_date).toLocaleDateString("de")}
           </Typography>
           <Typography variant="body1" sx={{ mt: 1 }}>
             <strong>Bemerkungen:</strong> {request.notes}
