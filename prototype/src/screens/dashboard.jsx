@@ -11,6 +11,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  TextField,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
@@ -156,11 +157,22 @@ export default function Dashboard() {
   const { requests } = useRequests();
 
   const [filterStatus, setFilterStatus] = React.useState("alle");
+  const [searchTerm, setSearchTerm] = React.useState("");
 
-  const filteredRequests =
-    filterStatus === "alle"
-      ? requests
-      : requests.filter((r) => r.status === filterStatus);
+  const filteredRequests = requests
+    ?.filter((r) => (filterStatus === "alle" ? true : r.status === filterStatus))
+    ?.filter((r) => {
+      const firstItem = r.requested_items?.[0];
+      const searchableText = [
+        firstItem?.item_name,
+        r.delivery_location?.facility_name,
+        r.delivery_location?.address,
+        r.request_id,
+      ]
+        .join(" ")
+        .toLowerCase();
+      return searchableText.includes(searchTerm.toLowerCase());
+    });
 
   return (
     <Box
@@ -205,26 +217,37 @@ export default function Dashboard() {
           Verlauf Ihrer Anfragen
         </Typography>
 
-        <FormControl size="small" sx={{ minWidth: 180 }}>
-          <InputLabel>Status filtern</InputLabel>
-          <Select
-            value={filterStatus}
-            label="Status filtern"
-            onChange={(e) => setFilterStatus(e.target.value)}
-          >
-            <MenuItem value="alle">Alle</MenuItem>
-            <MenuItem value="pending">Ausstehend</MenuItem>
-            <MenuItem value="approved">Genehmigt</MenuItem>
-            <MenuItem value="rejected">Abgelehnt</MenuItem>
-          </Select>
-        </FormControl>
+        <Stack direction="row" spacing={2} sx={{ width: "100%", maxWidth: 500 }}>
+          <FormControl size="small" sx={{ minWidth: 160 }}>
+            <InputLabel>Status filtern</InputLabel>
+            <Select
+              value={filterStatus}
+              label="Status filtern"
+              onChange={(e) => setFilterStatus(e.target.value)}
+            >
+              <MenuItem value="alle">Alle</MenuItem>
+              <MenuItem value="pending">Ausstehend</MenuItem>
+              <MenuItem value="approved">Genehmigt</MenuItem>
+              <MenuItem value="rejected">Abgelehnt</MenuItem>
+            </Select>
+          </FormControl>
+
+          <TextField
+            size="small"
+            variant="outlined"
+            label="Suche in Anfragen"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            fullWidth
+          />
+        </Stack>
       </Stack>
 
       {filteredRequests && filteredRequests.length > 0 ? (
         filteredRequests.map((req) => <RequestCard key={req.request_id} req={req} />)
       ) : (
         <Typography variant="body2" color="text.secondary">
-          Keine Anfragen mit diesem Status gefunden.
+          Keine passenden Anfragen gefunden.
         </Typography>
       )}
     </Box>
