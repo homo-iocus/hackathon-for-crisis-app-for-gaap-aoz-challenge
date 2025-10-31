@@ -4,4 +4,11 @@
 - U4: As a member of the crisis management I want to see the details about a good.
 - U5: As a member of the crisis management I want to make requests goods in order to allocate them as fast as possible.
 - U6: As a member of the crisis management I want to see all requests and their status in a place to avoid coordination problems.
-- U7:
+- U7: As a storage manager I want to execute an order and update its status so that everyone is informed on whats the status.
+- U8: As an Authorizer Entity I want to authorize requests from the crisis management so that they can further be processed by the storage manager.
+- U9: As a member of the crisis management I want to put together individual request based on different stocks so that I can fulfill certain needs.
+- U10: As an Authorizer I want ot have an dashboard of all actions I can do based on priorities so that they can act quickly.
+- U11: As a Storage manager I want to have an dashboard of all request I need to execute I can do based on priorities so that they can act quickly.
+- U12: As a Storage manager I want to have reminders on when to do inspections so that i can keep the goods in a good shape.
+
+- U13: As a user I want to login in order to use the app
