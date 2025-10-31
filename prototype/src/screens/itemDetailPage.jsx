@@ -251,7 +251,6 @@ const ITEM_LOOKUP = {
     },
   },
 
-  // FOOD
   "FOOD-001": {
     item_id: "FOOD-001",
     item_name: "Wasserflaschen (1L)",
@@ -284,7 +283,7 @@ const ITEM_LOOKUP = {
     notes: "Vor Hitze schützen, Lagerung <25°C.",
     
     packaging_type: "Kiste / Palette (EU)",
-    units_per_package: 12, // 12 Flaschen pro Kiste
+    units_per_package: 12, 
     package_size: "80 x 120 x 150 cm (Palette, gestapelt)",
     package_weight: "300 kg (Palette)",
     package_volume: "1.44 m³",
@@ -425,7 +424,7 @@ const ITEM_LOOKUP = {
     notes: "Trocken lagern.",
     
     packaging_type: "Sack / Palette (EU)",
-    units_per_package: 50, // 50 x 1kg pro Palette (z.B.)
+    units_per_package: 50, 
     package_size: "80 x 120 x 140 cm (Palette)",
     package_weight: "1.0 t (Palette, max)",
     package_volume: "1.34 m³",
@@ -488,8 +487,7 @@ const ITEM_LOOKUP = {
     },
   },
 
-  // HYG
-  "HYG-001": {
+  "HYG-001": { 
     item_id: "HYG-001",
     item_name: "Seife (antibakteriell)",
     category: "Hygiene",
@@ -725,7 +723,6 @@ const ITEM_LOOKUP = {
     },
   },
 
-  // BEDS / ACCOMMODATION
   "BED-001": {
     item_id: "BED-001",
     item_name: "Feldbett",
@@ -758,7 +755,7 @@ const ITEM_LOOKUP = {
     notes: "Gelenke regelmäßig ölen.",
     
     packaging_type: "Bündel / Palette (EU)",
-    units_per_package: 5, // WICHTIG: wie besprochen
+    units_per_package: 5, 
     package_size: "220 x 100 x 120 cm (Palette)",
     package_weight: "55 kg",
     package_volume: "2.64 m³",
@@ -1061,14 +1058,12 @@ export default function ItemDetailPage() {
   return (
     <Box sx={{ p: { xs: 2, md: 8 } }}>
       <Grid container spacing={3}>
-        {/* LEFT SIDE - ITEM DETAILS */}
         <Grid item xs={12} md={7}>
           <Paper sx={{ p: 3, borderRadius: 3 }}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
               Artikel anfordern
             </Typography>
 
-            {/* --- FORM SECTIONS --- */}
             <Section title="Anfordernde Organisation">
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -1228,7 +1223,6 @@ export default function ItemDetailPage() {
               Artikel
             </Typography>
 
-            {/* IDENTIFICATION */}
             <Stack spacing={1.2}>
               <Row label="Bezeichnung" value={item.item_name} />
               <Row label="Kategorie" value={item.category} />
@@ -1236,7 +1230,6 @@ export default function ItemDetailPage() {
             </Stack>
             <Divider sx={{ my: 2 }} />
 
-            {/* QUANTITIES */}
             <Stack spacing={1.2}>
               <Row label="Verfügbar" value={item.total_available ?? "–"} />
               <Row label="In Verwendung" value={item.in_use ?? "–"} />
@@ -1245,7 +1238,6 @@ export default function ItemDetailPage() {
             </Stack>
             <Divider sx={{ my: 2 }} />
 
-            {/* CONDITION */}
             <Stack spacing={1.2}>
               <Row label="Letzte Prüfung" value={item.last_inspection ?? "–"} />
               <Row label="Prüfintervall" value={item.inspection_frequency ?? "–"} />
@@ -1253,7 +1245,6 @@ export default function ItemDetailPage() {
             </Stack>
             <Divider sx={{ my: 2 }} />
 
-            {/* PHYSICAL ATTRIBUTES */}
             <Stack spacing={1.2}>
               <Row label="Größe (L/B/H)" value={item.size ?? "–"} />
               <Row label="Gewicht" value={item.weight ?? "–"} />
@@ -1262,7 +1253,6 @@ export default function ItemDetailPage() {
             </Stack>
             <Divider sx={{ my: 2 }} />
 
-            {/* NEW: PACKAGING */}
             <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
               Verpackung
             </Typography>
@@ -1275,14 +1265,12 @@ export default function ItemDetailPage() {
             </Stack>
             <Divider sx={{ my: 2 }} />
 
-            {/* LOCATION */}
             <Stack spacing={1.2}>
               <Row label="Lagerort" value={item.storage_address ?? "–"} />
               <Row label="GPS" value={item.gps ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
-            {/* NEW: ACCESS & SECURITY */}
             <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
               Zugang & Sicherheit (Lagerort)
             </Typography>
@@ -1303,7 +1291,6 @@ export default function ItemDetailPage() {
             </Stack>
             <Divider sx={{ my: 2 }} />
 
-            {/* PHOTOS / DOCS */}
             <Stack spacing={1.2}>
               <Typography variant="subtitle2">Fotos & Dokumente</Typography>
               {item.photo && (
@@ -1318,7 +1305,6 @@ export default function ItemDetailPage() {
             </Stack>
             <Divider sx={{ my: 2 }} />
 
-            {/* TRANSPORT */}
             <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
               Transport / Fahrzeug
             </Typography>
@@ -1331,14 +1317,12 @@ export default function ItemDetailPage() {
             </Stack>
             <Divider sx={{ my: 2 }} />
 
-            {/* AVAILABILITY */}
             <Stack spacing={1.2}>
               <Row label="Bereitstellungszeit" value={item.deploy_time ?? "–"} />
               <Row label="Status" value={item.readiness ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
-            {/* SUPPLIER INFO */}
             <Stack spacing={1.2}>
               <Row label="Lieferant" value={item.supplier ?? "–"} />
               <Row label="Kaufdatum" value={item.purchase_date ?? "–"} />
@@ -1346,13 +1330,10 @@ export default function ItemDetailPage() {
             </Stack>
             <Divider sx={{ my: 2 }} />
 
-            {/* NOTES */}
             <Row label="Notizen" value={item.notes ?? "–"} />
           </Paper>
         </Grid>
 
-        {/* RIGHT SIDE - REQUEST FORM */}
-        
       </Grid>
     </Box>
   );
