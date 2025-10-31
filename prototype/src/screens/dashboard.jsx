@@ -4,11 +4,13 @@ import {
   Grid,
   Typography,
   Stack,
-  Button,
   Paper,
-  Tooltip,
   Chip,
   Divider,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
@@ -48,6 +50,13 @@ const AREAS = [
     hint: "Betten, Matratzen, Decken, Kissen",
   },
 ];
+
+const STATUS_LABELS = {
+  pending: "Ausstehend",
+  approved: "Genehmigt",
+  rejected: "Abgelehnt",
+  default: "Unbekannt",
+};
 
 function AreaCard({ area, onClick }) {
   return (
@@ -91,6 +100,8 @@ function AreaCard({ area, onClick }) {
 
 function RequestCard({ req }) {
   const firstItem = req.requested_items?.[0];
+  const germanStatus = STATUS_LABELS[req.status] || STATUS_LABELS.default;
+
   return (
     <Paper
       variant="outlined"
@@ -103,21 +114,19 @@ function RequestCard({ req }) {
       }}
     >
       <Stack spacing={1}>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <Stack direction="row" justifyContent="space-between" alignItems="center">
           <Typography fontWeight={600}>
             {firstItem?.item_name || "Unbekannter Artikel"}
           </Typography>
           <Chip
-            label={req.status || "pending"}
+            label={germanStatus}
             color={
               req.status === "approved"
                 ? "success"
                 : req.status === "pending"
                 ? "warning"
+                : req.status === "rejected"
+                ? "error"
                 : "default"
             }
             size="small"
@@ -146,6 +155,13 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const { requests } = useRequests();
 
+  const [filterStatus, setFilterStatus] = React.useState("alle");
+
+  const filteredRequests =
+    filterStatus === "alle"
+      ? requests
+      : requests.filter((r) => r.status === filterStatus);
+
   return (
     <Box
       sx={{
@@ -156,12 +172,7 @@ export default function Dashboard() {
         py: { xs: 3, md: 4 },
       }}
     >
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ mb: 4 }}
-      >
+      <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
         <Typography variant="h5" sx={{ fontWeight: 700 }}>
           Übersicht
         </Typography>
@@ -183,18 +194,37 @@ export default function Dashboard() {
       </Grid>
 
       <Divider sx={{ my: 3 }} />
-      <Typography
-        variant="h6"
-        sx={{ mb: 2, fontWeight: 700, color: "text.primary" }}
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        justifyContent="space-between"
+        alignItems={{ xs: "flex-start", sm: "center" }}
+        sx={{ mb: 2 }}
+        spacing={2}
       >
-        Verlauf Ihrer Anfragen
-      </Typography>
+        <Typography variant="h6" sx={{ fontWeight: 700, color: "text.primary" }}>
+          Verlauf Ihrer Anfragen
+        </Typography>
 
-      {requests && requests.length > 0 ? (
-        requests.map((req) => <RequestCard key={req.request_id} req={req} />)
+        <FormControl size="small" sx={{ minWidth: 180 }}>
+          <InputLabel>Status filtern</InputLabel>
+          <Select
+            value={filterStatus}
+            label="Status filtern"
+            onChange={(e) => setFilterStatus(e.target.value)}
+          >
+            <MenuItem value="alle">Alle</MenuItem>
+            <MenuItem value="pending">Ausstehend</MenuItem>
+            <MenuItem value="approved">Genehmigt</MenuItem>
+            <MenuItem value="rejected">Abgelehnt</MenuItem>
+          </Select>
+        </FormControl>
+      </Stack>
+
+      {filteredRequests && filteredRequests.length > 0 ? (
+        filteredRequests.map((req) => <RequestCard key={req.request_id} req={req} />)
       ) : (
         <Typography variant="body2" color="text.secondary">
-          Noch keine Anfragen vorhanden.
+          Keine Anfragen mit diesem Status gefunden.
         </Typography>
       )}
     </Box>
