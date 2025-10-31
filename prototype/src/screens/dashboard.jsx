@@ -17,9 +17,57 @@ import { useNavigate } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
 
 import MedicalServicesRoundedIcon from "@mui/icons-material/MedicalServicesRounded";
-import RestaurantRoundedIcon from "@mui/icons-material/RestaurantRounded";
+import LocalPharmacyIcon from "@mui/icons-material/LocalPharmacy";
+import MasksIcon from "@mui/icons-material/Masks";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import BloodtypeIcon from "@mui/icons-material/Bloodtype";
+
+import LocalDrinkIcon from "@mui/icons-material/LocalDrink";
+import LunchDiningIcon from "@mui/icons-material/LunchDining";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
+import RiceBowlIcon from "@mui/icons-material/RiceBowl";
+import BakeryDiningIcon from "@mui/icons-material/BakeryDining";
+
+import SoapIcon from "@mui/icons-material/Soap";
 import SanitizerIcon from "@mui/icons-material/Sanitizer";
-import HotelRoundedIcon from "@mui/icons-material/HotelRounded";
+import ToiletIcon from "@mui/icons-material/Wc";
+import ToothIcon from "@mui/icons-material/EmojiEmotions";
+import FemaleIcon from "@mui/icons-material/Female";
+
+import BedIcon from "@mui/icons-material/Bed";
+import LayersIcon from "@mui/icons-material/Layers";
+import NightShelterIcon from "@mui/icons-material/NightShelter";
+import HotelIcon from "@mui/icons-material/Hotel";
+import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+
+const ITEM_ICONS = {
+  "MED-001": <MedicalServicesRoundedIcon sx={{ fontSize: 32, color: "primary.main" }} />,
+  "MED-002": <LocalPharmacyIcon sx={{ fontSize: 32, color: "primary.main" }} />,
+  "MED-003": <FavoriteIcon sx={{ fontSize: 32, color: "primary.main" }} />,
+  "MED-004": <MasksIcon sx={{ fontSize: 32, color: "primary.main" }} />,
+  "MED-005": <BloodtypeIcon sx={{ fontSize: 32, color: "primary.main" }} />,
+
+  "FOOD-001": <LocalDrinkIcon sx={{ fontSize: 32, color: "secondary.main" }} />,
+  "FOOD-002": <LunchDiningIcon sx={{ fontSize: 32, color: "secondary.main" }} />,
+  "FOOD-003": <Inventory2Icon sx={{ fontSize: 32, color: "secondary.main" }} />,
+  "FOOD-004": <RiceBowlIcon sx={{ fontSize: 32, color: "secondary.main" }} />,
+  "FOOD-005": <BakeryDiningIcon sx={{ fontSize: 32, color: "secondary.main" }} />,
+  "FOOD-006": <LocalDrinkIcon sx={{ fontSize: 32, color: "secondary.main" }} />,
+
+  "HYG-001": <SoapIcon sx={{ fontSize: 32, color: "warning.main" }} />,
+  "HYG-002": <SanitizerIcon sx={{ fontSize: 32, color: "warning.main" }} />,
+  "HYG-003": <ToiletIcon sx={{ fontSize: 32, color: "warning.main" }} />,
+  "HYG-004": <ToothIcon sx={{ fontSize: 32, color: "warning.main" }} />,
+  "HYG-005": <FemaleIcon sx={{ fontSize: 32, color: "warning.main" }} />,
+
+  "BED-001": <BedIcon sx={{ fontSize: 32, color: "success.main" }} />,
+  "BLK-010": <BeachAccessIcon sx={{ fontSize: 32, color: "success.main" }} />,
+  "BED-002": <LayersIcon sx={{ fontSize: 32, color: "success.main" }} />,
+  "BED-003": <HotelIcon sx={{ fontSize: 32, color: "success.main" }} />,
+  "BED-004": <NightShelterIcon sx={{ fontSize: 32, color: "success.main" }} />,
+};
 
 const AREAS = [
   {
@@ -32,7 +80,7 @@ const AREAS = [
   {
     id: "food",
     title: "Verpflegung",
-    icon: <RestaurantRoundedIcon fontSize="medium" />,
+    icon: <LunchDiningIcon fontSize="medium" />,
     color: "secondary",
     hint: "Lebensmittel, warme/kalte Mahlzeiten, Wasser",
   },
@@ -46,7 +94,7 @@ const AREAS = [
   {
     id: "accommodation",
     title: "Unterkunft",
-    icon: <HotelRoundedIcon fontSize="medium" />,
+    icon: <HotelIcon fontSize="medium" />,
     color: "success",
     hint: "Betten, Matratzen, Decken, Kissen",
   },
@@ -59,48 +107,22 @@ const STATUS_LABELS = {
   default: "Unbekannt",
 };
 
-function AreaCard({ area, onClick }) {
-  return (
-    <Paper
-      variant="outlined"
-      onClick={onClick}
-      sx={{
-        p: 2.5,
-        borderRadius: 3,
-        borderColor: "divider",
-        cursor: "pointer",
-        boxShadow: (t) => t.shadows[1],
-        transition: "all .15s ease",
-        "&:hover": { bgcolor: "action.hover" },
-      }}
-    >
-      <Stack direction="row" spacing={1.5} alignItems="center">
-        <Box
-          sx={{
-            width: 50,
-            height: 50,
-            borderRadius: 2,
-            display: "grid",
-            placeItems: "center",
-            bgcolor: "action.hover",
-            color: `${area.color}.main`,
-          }}
-        >
-          {area.icon}
-        </Box>
-        <Box sx={{ flexGrow: 1 }}>
-          <Typography fontWeight={700}>{area.title}</Typography>
-          <Typography variant="body2" color="text.secondary">
-            {area.hint}
-          </Typography>
-        </Box>
-      </Stack>
-    </Paper>
-  );
-}
-
 function RequestCard({ req }) {
   const firstItem = req.requested_items?.[0];
+  const itemId = firstItem?.item_id || firstItem?.id || "";
+  const normalizedId = itemId.toUpperCase();
+  const itemName = firstItem?.item_name?.toLowerCase() || "";
+
+  let itemIcon = ITEM_ICONS[normalizedId];
+
+  if (!itemIcon && itemName.includes("wasser")) {
+    itemIcon = ITEM_ICONS["FOOD-001"];
+  }
+
+  if (!itemIcon) {
+    itemIcon = <LocalHospitalIcon sx={{ fontSize: 36, color: "grey.500" }} />;
+  }
+
   const germanStatus = STATUS_LABELS[req.status] || STATUS_LABELS.default;
 
   return (
@@ -114,39 +136,54 @@ function RequestCard({ req }) {
         "&:hover": { boxShadow: (t) => t.shadows[2] },
       }}
     >
-      <Stack spacing={1}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
-          <Typography fontWeight={600}>
-            {firstItem?.item_name || "Unbekannter Artikel"}
+      <Stack direction="row" spacing={2} alignItems="center">
+        <Box
+          sx={{
+            width: 48,
+            height: 48,
+            borderRadius: 2,
+            display: "grid",
+            placeItems: "center",
+            bgcolor: "action.hover",
+          }}
+        >
+          {itemIcon}
+        </Box>
+
+        <Stack spacing={0.5} sx={{ flexGrow: 1 }}>
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <Typography fontWeight={600}>
+              {firstItem?.item_name || "Unbekannter Artikel"}
+            </Typography>
+            <Chip
+              label={germanStatus}
+              color={
+                req.status === "approved"
+                  ? "success"
+                  : req.status === "pending"
+                  ? "warning"
+                  : req.status === "rejected"
+                  ? "error"
+                  : "default"
+              }
+              size="small"
+            />
+          </Stack>
+          <Typography variant="body2" color="text.secondary">
+            Menge: {firstItem?.quantity_requested} {firstItem?.unit}
           </Typography>
-          <Chip
-            label={germanStatus}
-            color={
-              req.status === "approved"
-                ? "success"
-                : req.status === "pending"
-                ? "warning"
-                : req.status === "rejected"
-                ? "error"
-                : "default"
-            }
-            size="small"
-          />
+          <Typography variant="body2" color="text.secondary">
+            Lieferung an: {req.delivery_location?.facility_name},{" "}
+            {req.delivery_location?.address}
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            Angefordert am:{" "}
+            {new Date(req.timestamp).toLocaleString("de-DE", {
+              dateStyle: "short",
+              timeStyle: "short",
+            })}
+          </Typography>
         </Stack>
-        <Typography variant="body2" color="text.secondary">
-          Menge: {firstItem?.quantity_requested} {firstItem?.unit}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lieferung an: {req.delivery_location?.facility_name},{" "}
-          {req.delivery_location?.address}
-        </Typography>
-        <Typography variant="caption" color="text.secondary">
-          Angefordert am:{" "}
-          {new Date(req.timestamp).toLocaleString("de-DE", {
-            dateStyle: "short",
-            timeStyle: "short",
-          })}
-        </Typography>
       </Stack>
     </Paper>
   );
@@ -184,27 +221,61 @@ export default function Dashboard() {
         py: { xs: 3, md: 4 },
       }}
     >
+      {/* Header */}
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
         <Typography variant="h5" sx={{ fontWeight: 700 }}>
           Übersicht
         </Typography>
       </Stack>
 
-      <Typography
-        variant="subtitle1"
-        sx={{ mb: 2, fontWeight: 600, color: "text.secondary" }}
-      >
+      {/* Areas */}
+      <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 600, color: "text.secondary" }}>
         Was können wir tun? (Handlungsbereiche)
       </Typography>
 
       <Grid container spacing={2} sx={{ mb: 5 }}>
         {AREAS.map((a) => (
           <Grid key={a.id} item xs={12} sm={6} md={4} lg={3}>
-            <AreaCard area={a} onClick={() => navigate(`/category/${a.id}`)} />
+            <Paper
+              variant="outlined"
+              onClick={() => navigate(`/category/${a.id}`)}
+              sx={{
+                p: 2.5,
+                borderRadius: 3,
+                borderColor: "divider",
+                cursor: "pointer",
+                boxShadow: (t) => t.shadows[1],
+                transition: "all .15s ease",
+                "&:hover": { bgcolor: "action.hover" },
+              }}
+            >
+              <Stack direction="row" spacing={1.5} alignItems="center">
+                <Box
+                  sx={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: 2,
+                    display: "grid",
+                    placeItems: "center",
+                    bgcolor: "action.hover",
+                    color: `${a.color}.main`,
+                  }}
+                >
+                  {a.icon}
+                </Box>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Typography fontWeight={700}>{a.title}</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {a.hint}
+                  </Typography>
+                </Box>
+              </Stack>
+            </Paper>
           </Grid>
         ))}
       </Grid>
 
+      {/* Request list */}
       <Divider sx={{ my: 3 }} />
       <Stack
         direction={{ xs: "column", sm: "row" }}
