@@ -33,7 +33,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja",
     storage_address: "Zentrallager München, Raum M1",
     gps: "48.1351, 11.5820",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Erste-Hilfe-Set.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/4/4b/Erste-Hilfe-Set.jpg",
     manual: "Erste_Hilfe_Set_Manual.pdf",
     safety_sheet: "Safety_Data_Sheet.pdf",
     transport_vehicle: "PKW",
@@ -45,7 +46,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-09-15",
     warranty: "2026-09-15",
     notes: "Regelmässig steril überprüfen.",
-    
+
     packaging_type: "Karton (Kiste)",
     units_per_package: 10,
     package_size: "60 x 40 x 30 cm",
@@ -92,7 +93,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-04-22",
     warranty: "2027-04-22",
     notes: "Steril lagern, nicht öffnen vor Gebrauch.",
-    
+
     packaging_type: "Karton (Umkarton)",
     units_per_package: 20,
     package_size: "60 x 40 x 40 cm",
@@ -139,7 +140,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-10-10",
     warranty: "2026-10-10",
     notes: "Nur für medizinisches Personal freigegeben.",
-    
+
     packaging_type: "Pharmakarton (Tray)",
     units_per_package: 50,
     package_size: "40 x 30 x 25 cm",
@@ -174,7 +175,8 @@ const ITEM_LOOKUP = {
     stackable: "Nein",
     storage_address: "Lager Berlin, Medizinabteilung B2",
     gps: "52.5200, 13.4050",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Medical_mask.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/f/f3/Medical_mask.jpg",
     manual: "Beatmungsmaske_Manual.pdf",
     safety_sheet: "AirSafety.pdf",
     transport_vehicle: "PKW",
@@ -186,7 +188,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-12-01",
     warranty: "2026-12-01",
     notes: "Regelmäßig auf Dichtigkeit prüfen.",
-    
+
     packaging_type: "Karton, einzeln verpackt",
     units_per_package: 12,
     package_size: "60 x 40 x 35 cm",
@@ -221,7 +223,8 @@ const ITEM_LOOKUP = {
     stackable: "Nein",
     storage_address: "Lager München, Regal C1",
     gps: "48.1351, 11.5820",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Blood_pressure_monitor.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/8/8c/Blood_pressure_monitor.jpg",
     manual: "Blutdruckmessgeraet_Manual.pdf",
     safety_sheet: "Safety_Info.pdf",
     transport_vehicle: "PKW",
@@ -233,7 +236,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2022-08-08",
     warranty: "2026-08-08",
     notes: "Kalibrierung alle 12 Monate erforderlich.",
-    
+
     packaging_type: "Karton (Schaumstoffeinlage)",
     units_per_package: 8,
     package_size: "50 x 40 x 35 cm",
@@ -269,7 +272,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja (Kistenweise)",
     storage_address: "Lager Berlin, Zone C3",
     gps: "52.5200, 13.4050",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Water_bottles.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/e/e5/Water_bottles.jpg",
     manual: "Wasserflaschen_Info.pdf",
     safety_sheet: "Nicht erforderlich",
     transport_vehicle: "LKW",
@@ -281,9 +285,9 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-02-01",
     warranty: "2028-02-01",
     notes: "Vor Hitze schützen, Lagerung <25°C.",
-    
+
     packaging_type: "Kiste / Palette (EU)",
-    units_per_package: 12, 
+    units_per_package: 12,
     package_size: "80 x 120 x 150 cm (Palette, gestapelt)",
     package_weight: "300 kg (Palette)",
     package_volume: "1.44 m³",
@@ -316,7 +320,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja",
     storage_address: "Lager Leipzig, Zone F1",
     gps: "51.3397, 12.3731",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/5/54/MRE_Menu_23.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/5/54/MRE_Menu_23.jpg",
     manual: "MRE_Info.pdf",
     safety_sheet: "Food_Safety.pdf",
     transport_vehicle: "LKW",
@@ -328,7 +333,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-01-10",
     warranty: "2029-01-10",
     notes: "Kühl und trocken lagern.",
-    
+
     packaging_type: "Karton / Palette (EU)",
     units_per_package: 24,
     package_size: "80 x 120 x 140 cm (Palette)",
@@ -363,7 +368,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja",
     storage_address: "Lager Hannover, Raum G3",
     gps: "52.3759, 9.7320",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Canned_food.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/a/a9/Canned_food.jpg",
     manual: "Konserven_Info.pdf",
     safety_sheet: "Food_Storage.pdf",
     transport_vehicle: "LKW",
@@ -375,7 +381,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-04-05",
     warranty: "2028-04-05",
     notes: "Vor Rost schützen.",
-    
+
     packaging_type: "Karton / Palette (EU)",
     units_per_package: 24,
     package_size: "80 x 120 x 150 cm (Palette)",
@@ -410,7 +416,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja",
     storage_address: "Lager Stuttgart, Regal R5",
     gps: "48.7758, 9.1829",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/1/1b/Rice_and_pasta.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/1/1b/Rice_and_pasta.jpg",
     manual: "Reis_Nudeln_Info.pdf",
     safety_sheet: "Nicht erforderlich",
     transport_vehicle: "LKW",
@@ -422,9 +429,9 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-03-05",
     warranty: "2028-03-05",
     notes: "Trocken lagern.",
-    
+
     packaging_type: "Sack / Palette (EU)",
-    units_per_package: 50, 
+    units_per_package: 50,
     package_size: "80 x 120 x 140 cm (Palette)",
     package_weight: "1.0 t (Palette, max)",
     package_volume: "1.34 m³",
@@ -457,7 +464,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja",
     storage_address: "Lager Bremen, Regal B4",
     gps: "53.0793, 8.8017",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Bread_and_crackers.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/0/0b/Bread_and_crackers.jpg",
     manual: "Brot_Cracker_Info.pdf",
     safety_sheet: "Nicht erforderlich",
     transport_vehicle: "LKW",
@@ -469,7 +477,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-05-15",
     warranty: "2027-05-15",
     notes: "Frischware regelmäßig prüfen.",
-    
+
     packaging_type: "Karton / Palette (EU)",
     units_per_package: 36,
     package_size: "80 x 120 x 160 cm (Palette)",
@@ -487,7 +495,7 @@ const ITEM_LOOKUP = {
     },
   },
 
-  "HYG-001": { 
+  "HYG-001": {
     item_id: "HYG-001",
     item_name: "Seife (antibakteriell)",
     category: "Hygiene",
@@ -505,7 +513,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja",
     storage_address: "Lager Zürich, Regalfach H2",
     gps: "50.1109, 8.6821",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Bar_of_Soap.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/d/d8/Bar_of_Soap.jpg",
     manual: "Seife_Info.pdf",
     safety_sheet: "Hygiene_Safety.pdf",
     transport_vehicle: "PKW",
@@ -517,7 +526,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-03-01",
     warranty: "2026-03-01",
     notes: "Vor Feuchtigkeit schützen.",
-    
+
     packaging_type: "Karton / Tray",
     units_per_package: 48,
     package_size: "60 x 40 x 30 cm",
@@ -552,7 +561,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja",
     storage_address: "Lager Stuttgart, Regal D4",
     gps: "48.7758, 9.1829",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Hand_sanitizer.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/7/7d/Hand_sanitizer.jpg",
     manual: "Desinfektion_Info.pdf",
     safety_sheet: "Safety_Chemical.pdf",
     transport_vehicle: "PKW",
@@ -564,7 +574,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-09-20",
     warranty: "2026-09-20",
     notes: "Nicht über 30°C lagern.",
-    
+
     packaging_type: "Gefahrgut-Karton / Palette (EU)",
     units_per_package: 24,
     package_size: "80 x 120 x 140 cm (Palette)",
@@ -599,7 +609,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja (Pakete)",
     storage_address: "Lager München, Zone TP",
     gps: "48.1351, 11.5820",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Toilet_paper.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/e/e6/Toilet_paper.jpg",
     manual: "Toilettenpapier_Info.pdf",
     safety_sheet: "Nicht erforderlich",
     transport_vehicle: "LKW",
@@ -611,7 +622,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-02-05",
     warranty: "2027-02-05",
     notes: "Trocken lagern, Verpackung geschlossen halten.",
-    
+
     packaging_type: "Folie/Pakete / Palette (EU)",
     units_per_package: 48,
     package_size: "80 x 120 x 200 cm (Palette, leicht)",
@@ -646,7 +657,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja",
     storage_address: "Lager Berlin, Regal Z1",
     gps: "52.5200, 13.4050",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Toothbrush_and_toothpaste.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/3/3d/Toothbrush_and_toothpaste.jpg",
     manual: "Zahnpflege_Info.pdf",
     safety_sheet: "Nicht erforderlich",
     transport_vehicle: "PKW",
@@ -658,7 +670,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-04-20",
     warranty: "2027-04-20",
     notes: "In trockener Umgebung lagern.",
-    
+
     packaging_type: "Karton",
     units_per_package: 40,
     package_size: "60 x 40 x 40 cm",
@@ -693,7 +705,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja",
     storage_address: "Lager Hannover, Raum F3",
     gps: "52.3759, 9.7320",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Sanitary_products.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/2/2c/Sanitary_products.jpg",
     manual: "Damenhygiene_Info.pdf",
     safety_sheet: "Nicht erforderlich",
     transport_vehicle: "PKW",
@@ -705,7 +718,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-11-10",
     warranty: "2026-11-10",
     notes: "Kühl und trocken lagern.",
-    
+
     packaging_type: "Karton / Palette (EU)",
     units_per_package: 30,
     package_size: "80 x 120 x 140 cm (Palette)",
@@ -753,9 +766,9 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-05-15",
     warranty: "2027-05-15",
     notes: "Gelenke regelmäßig ölen.",
-    
+
     packaging_type: "Bündel / Palette (EU)",
-    units_per_package: 5, 
+    units_per_package: 5,
     package_size: "220 x 100 x 120 cm (Palette)",
     package_weight: "55 kg",
     package_volume: "2.64 m³",
@@ -800,7 +813,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-11-11",
     warranty: "2028-11-11",
     notes: "Nach jedem Einsatz reinigen.",
-    
+
     packaging_type: "Ballensack / Palette (EU)",
     units_per_package: 30,
     package_size: "80 x 120 x 180 cm (Palette, komprimiert)",
@@ -835,7 +848,8 @@ const ITEM_LOOKUP = {
     stackable: "Ja (gerollt)",
     storage_address: "Lager Zürich, Raum B5",
     gps: "50.1109, 8.6821",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/b/bc/Sleeping_pad.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/b/bc/Sleeping_pad.jpg",
     manual: "Isomatte_Info.pdf",
     safety_sheet: "Nicht erforderlich",
     transport_vehicle: "PKW",
@@ -847,7 +861,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-06-30",
     warranty: "2027-06-30",
     notes: "Nach Gebrauch trocken aufrollen.",
-    
+
     packaging_type: "Ballen / Palette (EU)",
     units_per_package: 20,
     package_size: "80 x 120 x 160 cm (Palette)",
@@ -894,7 +908,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-01-12",
     warranty: "2027-01-12",
     notes: "Regelmäßig lüften und waschen.",
-    
+
     packaging_type: "Sack / Palette (EU)",
     units_per_package: 25,
     package_size: "80 x 120 x 200 cm (Palette, leicht)",
@@ -929,7 +943,8 @@ const ITEM_LOOKUP = {
     stackable: "Nein",
     storage_address: "Lager Köln, Raum A7",
     gps: "50.9375, 6.9603",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Camping_tent_example.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/9/9c/Camping_tent_example.jpg",
     manual: "Zelt_Aufbauanleitung.pdf",
     safety_sheet: "Nicht erforderlich",
     transport_vehicle: "LKW",
@@ -941,7 +956,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2022-05-05",
     warranty: "2027-05-05",
     notes: "Regelmäßig auf Dichtigkeit prüfen.",
-    
+
     packaging_type: "Einzeltasche / Palette (Sondermaß)",
     units_per_package: 2,
     package_size: "240 x 120 x 120 cm (Palette)",
@@ -1058,7 +1073,7 @@ export default function ItemDetailPage() {
   return (
     <Box sx={{ p: { xs: 2, md: 8 } }}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={7}>
+        <Grid item xs={12} md={7} sx={{ maxWidth: "60%" }}>
           <Paper sx={{ p: 3, borderRadius: 3 }}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
               Artikel anfordern
@@ -1102,76 +1117,77 @@ export default function ItemDetailPage() {
             </Section>
 
             <Section title="Lieferort">
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  required
-                  label="Einrichtung"
-                  value={form.facility_name}
-                  onChange={handleChange("facility_name")}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  required
-                  label="Adresse"
-                  value={form.address}
-                  onChange={handleChange("address")}
-                />
-              </Grid>
-
-              <Grid
-  item
-  xs={12}
-  sm={4}
-  sx={{
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-end",
-  }}
->
-  <TextField
-    select
-    fullWidth
-    label="Lieferung in Tiefgarage"
-    value={form.delivery_in_tiefgarage || "nein"}
-    onChange={(e) =>
-      setForm((f) => ({ ...f, delivery_in_tiefgarage: e.target.value }))
-    }
-    InputLabelProps={{
-      shrink: true,
-      style: { whiteSpace: "normal", overflow: "visible" }, 
-    }}
-    sx={{
-      minWidth: 195, 
-      "& .MuiInputLabel-root": {
-        whiteSpace: "normal",
-        width: "100%",
-      },
-    }}
-  >
-    <MenuItem value="ja">Ja</MenuItem>
-    <MenuItem value="nein">Nein</MenuItem>
-  </TextField>
-</Grid>
-
-
-
-              {form.delivery_in_tiefgarage === "ja" && item.access?.max_vehicle_height_m && (
+              <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
-                    label="Max. Fahrzeughöhe (m)"
-                    value={`${item.access.max_vehicle_height_m} m`}
-                    InputProps={{ readOnly: true }}
+                    required
+                    label="Einrichtung"
+                    value={form.facility_name}
+                    onChange={handleChange("facility_name")}
                   />
                 </Grid>
-              )}
-            </Grid>
-          </Section>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    required
+                    label="Adresse"
+                    value={form.address}
+                    onChange={handleChange("address")}
+                  />
+                </Grid>
 
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <TextField
+                    select
+                    fullWidth
+                    label="Lieferung in Tiefgarage"
+                    value={form.delivery_in_tiefgarage || "nein"}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        delivery_in_tiefgarage: e.target.value,
+                      }))
+                    }
+                    InputLabelProps={{
+                      shrink: true,
+                      style: { whiteSpace: "normal", overflow: "visible" },
+                    }}
+                    sx={{
+                      minWidth: 195,
+                      "& .MuiInputLabel-root": {
+                        whiteSpace: "normal",
+                        width: "100%",
+                      },
+                    }}
+                  >
+                    <MenuItem value="ja">Ja</MenuItem>
+                    <MenuItem value="nein">Nein</MenuItem>
+                  </TextField>
+                </Grid>
+
+                {form.delivery_in_tiefgarage === "ja" &&
+                  item.access?.max_vehicle_height_m && (
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        fullWidth
+                        label="Max. Fahrzeughöhe (m)"
+                        value={`${item.access.max_vehicle_height_m} m`}
+                        InputProps={{ readOnly: true }}
+                      />
+                    </Grid>
+                  )}
+              </Grid>
+            </Section>
 
             <Section title="Artikel & Menge">
               <Grid container spacing={2}>
@@ -1266,7 +1282,7 @@ export default function ItemDetailPage() {
             )}
           </Paper>
         </Grid>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={5} sx={{ maxWidth: "35%" }}>
           <Paper sx={{ p: 3, borderRadius: 3 }}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
               Artikel
@@ -1289,8 +1305,14 @@ export default function ItemDetailPage() {
 
             <Stack spacing={1.2}>
               <Row label="Letzte Prüfung" value={item.last_inspection ?? "–"} />
-              <Row label="Prüfintervall" value={item.inspection_frequency ?? "–"} />
-              <Row label="Verantwortlich" value={item.responsible_person ?? "–"} />
+              <Row
+                label="Prüfintervall"
+                value={item.inspection_frequency ?? "–"}
+              />
+              <Row
+                label="Verantwortlich"
+                value={item.responsible_person ?? "–"}
+              />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
@@ -1307,7 +1329,10 @@ export default function ItemDetailPage() {
             </Typography>
             <Stack spacing={1.2}>
               <Row label="Art" value={item.packaging_type ?? "–"} />
-              <Row label="Einheiten pro Verpackung" value={item.units_per_package ?? "–"} />
+              <Row
+                label="Einheiten pro Verpackung"
+                value={item.units_per_package ?? "–"}
+              />
               <Row label="Paketmaße" value={item.package_size ?? "–"} />
               <Row label="Paketgewicht" value={item.package_weight ?? "–"} />
               <Row label="Paketvolumen" value={item.package_volume ?? "–"} />
@@ -1324,8 +1349,14 @@ export default function ItemDetailPage() {
               Zugang & Sicherheit (Lagerort)
             </Typography>
             <Stack spacing={1.2}>
-              <Row label="Zugang jederzeit" value={item.access?.anytime ? "Ja" : "Nein"} />
-              <Row label="Lagerort-Typ" value={item.access?.location_type ?? "–"} />
+              <Row
+                label="Zugang jederzeit"
+                value={item.access?.anytime ? "Ja" : "Nein"}
+              />
+              <Row
+                label="Lagerort-Typ"
+                value={item.access?.location_type ?? "–"}
+              />
               <Row
                 label="Max. Fahrzeughöhe"
                 value={
@@ -1334,9 +1365,18 @@ export default function ItemDetailPage() {
                     : "–"
                 }
               />
-              <Row label="Öffnungszeiten" value={item.access?.access_hours ?? "–"} />
-              <Row label="Sicherheit/Schlüssel" value={item.access?.security_notes ?? "–"} />
-              <Row label="Kontakt (Telefon)" value={item.access?.contact_phone ?? "–"} />
+              <Row
+                label="Öffnungszeiten"
+                value={item.access?.access_hours ?? "–"}
+              />
+              <Row
+                label="Sicherheit/Schlüssel"
+                value={item.access?.security_notes ?? "–"}
+              />
+              <Row
+                label="Kontakt (Telefon)"
+                value={item.access?.contact_phone ?? "–"}
+              />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
@@ -1350,7 +1390,10 @@ export default function ItemDetailPage() {
                 />
               )}
               <Row label="Handbuch" value={item.manual ?? "–"} />
-              <Row label="Sicherheitsdatenblatt" value={item.safety_sheet ?? "–"} />
+              <Row
+                label="Sicherheitsdatenblatt"
+                value={item.safety_sheet ?? "–"}
+              />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
@@ -1358,16 +1401,25 @@ export default function ItemDetailPage() {
               Transport / Fahrzeug
             </Typography>
             <Stack spacing={1.2}>
-              <Row label="Fahrzeugtyp (Standard)" value={item.transport_vehicle ?? "–"} />
+              <Row
+                label="Fahrzeugtyp (Standard)"
+                value={item.transport_vehicle ?? "–"}
+              />
               <Row label="Mindestfahrzeug" value={item.min_vehicle ?? "–"} />
-              <Row label="Oversize / Übergröße" value={item.oversize ? "Ja" : "Nein"} />
+              <Row
+                label="Oversize / Übergröße"
+                value={item.oversize ? "Ja" : "Nein"}
+              />
               <Row label="Personalbedarf" value={item.manpower ?? "–"} />
               <Row label="Aufbauzeit" value={item.assembly_time ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
 
             <Stack spacing={1.2}>
-              <Row label="Bereitstellungszeit" value={item.deploy_time ?? "–"} />
+              <Row
+                label="Bereitstellungszeit"
+                value={item.deploy_time ?? "–"}
+              />
               <Row label="Status" value={item.readiness ?? "–"} />
             </Stack>
             <Divider sx={{ my: 2 }} />
@@ -1382,7 +1434,6 @@ export default function ItemDetailPage() {
             <Row label="Notizen" value={item.notes ?? "–"} />
           </Paper>
         </Grid>
-
       </Grid>
     </Box>
   );
