@@ -10,5 +10,5 @@
 - U10: As an Authorizer I want ot have an dashboard of all actions I can do based on priorities so that they can act quickly.
 - U11: As a Storage manager I want to have an dashboard of all request I need to execute I can do based on priorities so that they can act quickly.
 - U12: As a Storage manager I want to have reminders on when to do inspections so that i can keep the goods in a good shape.
-
 - U13: As a user I want to login in order to use the app
+- U14: As a Storage Manager I want to populate the inventory of the system so that its up to date.
