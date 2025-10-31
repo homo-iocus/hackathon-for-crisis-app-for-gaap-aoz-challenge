@@ -10,3 +10,7 @@
 ### 31.10.2025:
 
 - Presented process and idea to Leo and got feedback.
+- Discussed what to use Figma vs React
+- Started to vibe with ai models to get at a first iteration of the prototype
+- Did feedback round with Leo showed him our first iteration of the prototype
+- Implemented some critical bug fixes and
