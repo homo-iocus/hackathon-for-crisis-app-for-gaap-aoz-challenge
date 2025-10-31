@@ -13,3 +13,4 @@
 - U13: As a user I want to login in order to use the app
 - U14: As a Storage Manager I want to populate the inventory of the system so that its up to date.
 - U15: As a Storage Manager I want to receive notification of pending request in order to fulfill them in time.
+- U16: As a member of the crisis management I want to see icons next to all requests so that I can identify them better.
