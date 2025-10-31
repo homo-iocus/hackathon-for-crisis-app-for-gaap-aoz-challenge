@@ -14,12 +14,6 @@ import {
 } from "@mui/material";
 import { useRequests } from "../context/RequestsContext";
 
-/**
- * Minimal-invasive Erweiterung:
- * - packaging_type, units_per_package, package_size, package_weight, package_volume
- * - oversize (boolean), min_vehicle ("PKW"|"Transporter"|"LKW")
- * - access: { anytime, location_type, max_vehicle_height_m, security_notes, access_hours, contact_phone }
- */
 const ITEM_LOOKUP = {
   "MED-001": {
     item_id: "MED-001",
@@ -51,7 +45,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-09-15",
     warranty: "2026-09-15",
     notes: "Regelmäßig steril überprüfen.",
-    // NEW:
+    
     packaging_type: "Karton (Kiste)",
     units_per_package: 10,
     package_size: "60 x 40 x 30 cm",
@@ -98,7 +92,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-04-22",
     warranty: "2027-04-22",
     notes: "Steril lagern, nicht öffnen vor Gebrauch.",
-    // NEW:
+    
     packaging_type: "Karton (Umkarton)",
     units_per_package: 20,
     package_size: "60 x 40 x 40 cm",
@@ -145,7 +139,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-10-10",
     warranty: "2026-10-10",
     notes: "Nur für medizinisches Personal freigegeben.",
-    // NEW:
+    
     packaging_type: "Pharmakarton (Tray)",
     units_per_package: 50,
     package_size: "40 x 30 x 25 cm",
@@ -192,7 +186,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-12-01",
     warranty: "2026-12-01",
     notes: "Regelmäßig auf Dichtigkeit prüfen.",
-    // NEW:
+    
     packaging_type: "Karton, einzeln verpackt",
     units_per_package: 12,
     package_size: "60 x 40 x 35 cm",
@@ -239,7 +233,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2022-08-08",
     warranty: "2026-08-08",
     notes: "Kalibrierung alle 12 Monate erforderlich.",
-    // NEW:
+    
     packaging_type: "Karton (Schaumstoffeinlage)",
     units_per_package: 8,
     package_size: "50 x 40 x 35 cm",
@@ -288,7 +282,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-02-01",
     warranty: "2028-02-01",
     notes: "Vor Hitze schützen, Lagerung <25°C.",
-    // NEW:
+    
     packaging_type: "Kiste / Palette (EU)",
     units_per_package: 12, // 12 Flaschen pro Kiste
     package_size: "80 x 120 x 150 cm (Palette, gestapelt)",
@@ -335,7 +329,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-01-10",
     warranty: "2029-01-10",
     notes: "Kühl und trocken lagern.",
-    // NEW:
+    
     packaging_type: "Karton / Palette (EU)",
     units_per_package: 24,
     package_size: "80 x 120 x 140 cm (Palette)",
@@ -382,7 +376,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-04-05",
     warranty: "2028-04-05",
     notes: "Vor Rost schützen.",
-    // NEW:
+    
     packaging_type: "Karton / Palette (EU)",
     units_per_package: 24,
     package_size: "80 x 120 x 150 cm (Palette)",
@@ -429,7 +423,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-03-05",
     warranty: "2028-03-05",
     notes: "Trocken lagern.",
-    // NEW:
+    
     packaging_type: "Sack / Palette (EU)",
     units_per_package: 50, // 50 x 1kg pro Palette (z.B.)
     package_size: "80 x 120 x 140 cm (Palette)",
@@ -476,7 +470,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-05-15",
     warranty: "2027-05-15",
     notes: "Frischware regelmäßig prüfen.",
-    // NEW:
+    
     packaging_type: "Karton / Palette (EU)",
     units_per_package: 36,
     package_size: "80 x 120 x 160 cm (Palette)",
@@ -525,7 +519,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-03-01",
     warranty: "2026-03-01",
     notes: "Vor Feuchtigkeit schützen.",
-    // NEW:
+    
     packaging_type: "Karton / Tray",
     units_per_package: 48,
     package_size: "60 x 40 x 30 cm",
@@ -572,7 +566,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-09-20",
     warranty: "2026-09-20",
     notes: "Nicht über 30°C lagern.",
-    // NEW:
+    
     packaging_type: "Gefahrgut-Karton / Palette (EU)",
     units_per_package: 24,
     package_size: "80 x 120 x 140 cm (Palette)",
@@ -619,7 +613,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-02-05",
     warranty: "2027-02-05",
     notes: "Trocken lagern, Verpackung geschlossen halten.",
-    // NEW:
+    
     packaging_type: "Folie/Pakete / Palette (EU)",
     units_per_package: 48,
     package_size: "80 x 120 x 200 cm (Palette, leicht)",
@@ -666,7 +660,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-04-20",
     warranty: "2027-04-20",
     notes: "In trockener Umgebung lagern.",
-    // NEW:
+    
     packaging_type: "Karton",
     units_per_package: 40,
     package_size: "60 x 40 x 40 cm",
@@ -713,7 +707,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-11-10",
     warranty: "2026-11-10",
     notes: "Kühl und trocken lagern.",
-    // NEW:
+    
     packaging_type: "Karton / Palette (EU)",
     units_per_package: 30,
     package_size: "80 x 120 x 140 cm (Palette)",
@@ -762,7 +756,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-05-15",
     warranty: "2027-05-15",
     notes: "Gelenke regelmäßig ölen.",
-    // NEW:
+    
     packaging_type: "Bündel / Palette (EU)",
     units_per_package: 5, // WICHTIG: wie besprochen
     package_size: "220 x 100 x 120 cm (Palette)",
@@ -809,7 +803,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-11-11",
     warranty: "2028-11-11",
     notes: "Nach jedem Einsatz reinigen.",
-    // NEW:
+    
     packaging_type: "Ballensack / Palette (EU)",
     units_per_package: 30,
     package_size: "80 x 120 x 180 cm (Palette, komprimiert)",
@@ -856,7 +850,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2023-06-30",
     warranty: "2027-06-30",
     notes: "Nach Gebrauch trocken aufrollen.",
-    // NEW:
+    
     packaging_type: "Ballen / Palette (EU)",
     units_per_package: 20,
     package_size: "80 x 120 x 160 cm (Palette)",
@@ -903,7 +897,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2024-01-12",
     warranty: "2027-01-12",
     notes: "Regelmäßig lüften und waschen.",
-    // NEW:
+    
     packaging_type: "Sack / Palette (EU)",
     units_per_package: 25,
     package_size: "80 x 120 x 200 cm (Palette, leicht)",
@@ -950,7 +944,7 @@ const ITEM_LOOKUP = {
     purchase_date: "2022-05-05",
     warranty: "2027-05-05",
     notes: "Regelmäßig auf Dichtigkeit prüfen.",
-    // NEW:
+    
     packaging_type: "Einzeltasche / Palette (Sondermaß)",
     units_per_package: 2,
     package_size: "240 x 120 x 120 cm (Palette)",
