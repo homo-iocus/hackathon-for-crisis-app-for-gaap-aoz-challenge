@@ -52,7 +52,7 @@ const AREAS = [
   },
 ];
 
-const STATUS_LABELS = {
+export const STATUS_LABELS = {
   pending: "Ausstehend",
   approved: "Genehmigt",
   rejected: "Abgelehnt",
@@ -115,7 +115,11 @@ function RequestCard({ req }) {
       }}
     >
       <Stack spacing={1}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Typography fontWeight={600}>
             {firstItem?.item_name || "Unbekannter Artikel"}
           </Typography>
@@ -125,10 +129,10 @@ function RequestCard({ req }) {
               req.status === "approved"
                 ? "success"
                 : req.status === "pending"
-                ? "warning"
-                : req.status === "rejected"
-                ? "error"
-                : "default"
+                  ? "warning"
+                  : req.status === "rejected"
+                    ? "error"
+                    : "default"
             }
             size="small"
           />
@@ -160,7 +164,9 @@ export default function Dashboard() {
   const [searchTerm, setSearchTerm] = React.useState("");
 
   const filteredRequests = requests
-    ?.filter((r) => (filterStatus === "alle" ? true : r.status === filterStatus))
+    ?.filter((r) =>
+      filterStatus === "alle" ? true : r.status === filterStatus,
+    )
     ?.filter((r) => {
       const firstItem = r.requested_items?.[0];
       const searchableText = [
@@ -184,7 +190,12 @@ export default function Dashboard() {
         py: { xs: 3, md: 4 },
       }}
     >
-      <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{ mb: 4 }}
+      >
         <Typography variant="h5" sx={{ fontWeight: 700 }}>
           Übersicht
         </Typography>
@@ -213,11 +224,18 @@ export default function Dashboard() {
         sx={{ mb: 2 }}
         spacing={2}
       >
-        <Typography variant="h6" sx={{ fontWeight: 700, color: "text.primary" }}>
+        <Typography
+          variant="h6"
+          sx={{ fontWeight: 700, color: "text.primary" }}
+        >
           Verlauf Ihrer Anfragen
         </Typography>
 
-        <Stack direction="row" spacing={2} sx={{ width: "100%", maxWidth: 500 }}>
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{ width: "100%", maxWidth: 500 }}
+        >
           <FormControl size="small" sx={{ minWidth: 160 }}>
             <InputLabel>Status filtern</InputLabel>
             <Select
@@ -244,7 +262,9 @@ export default function Dashboard() {
       </Stack>
 
       {filteredRequests && filteredRequests.length > 0 ? (
-        filteredRequests.map((req) => <RequestCard key={req.request_id} req={req} />)
+        filteredRequests.map((req) => (
+          <RequestCard key={req.request_id} req={req} />
+        ))
       ) : (
         <Typography variant="body2" color="text.secondary">
           Keine passenden Anfragen gefunden.

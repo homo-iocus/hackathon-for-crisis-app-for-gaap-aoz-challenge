@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
+import { STATUS_LABELS } from "../screens/dashboard";
 
 const RequestList = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const RequestList = () => {
               >
                 <Typography variant="h6">{req.request_id}</Typography>
                 <Chip
-                  label={req.status.toUpperCase()}
+                  label={STATUS_LABELS[req.status].toUpperCase()}
                   color={getStatusColor(req.status)}
                 />
               </Stack>
