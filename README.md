@@ -18,6 +18,8 @@ Relief organizations struggle with:
 
 ---
 
+---
+
 ## 🚀 Features
 
 - **🗺️ Centralized Dashboard:** Visualize supply and demand in real time.
@@ -26,6 +28,15 @@ Relief organizations struggle with:
 - **🌐 Multi-role Access:** Separate dashboards for crisis management team, logistics teams, and administrators.
 
 ---
+
+## Screenshots
+
+![dashboard](doc/dashboard_crisis_management.png)
+![inventory overview](doc/central_overview.png)
+![request detail](doc/request-detail.png)
+![request form](doc/request-form.png)
+![local overview](doc/local_overview.png)
+![roles](doc/roles_overview.png)
 
 ## 🧠 Tech Stack
 
