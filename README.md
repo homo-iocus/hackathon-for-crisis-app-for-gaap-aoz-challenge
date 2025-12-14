@@ -65,27 +65,27 @@ The final integration and validation of the single components remained manual to
 ## 👥 Team & Responsibilities
 
 - **Daniel Maksimovic**  
-  Daniel was responsible for implementing the crisis management dashboard, where the crisis management team can view
-  specific categories of items and the list of pending requests, which displays the current status of the requests.
+  Solution: Daniel was responsible for implementing the crisis management dashboard, where the crisis management team can
+  view specific categories of items and the list of pending requests, which displays the current status of the requests.
   Additionally, Daniel implemented the functionality that when the crisis management team clicks on a specific category, the
   items under this category are displayed on a new page. The request item page, where the crisis management team can
   request items, was also a responsibility of Daniel.
 
-  Regarding the report, Daniel was responsible for the sections 4.1 Partner/User Interview Results, 4.3 Peer Interview
+  Report: Daniel was responsible for the sections 4.1 Partner/User Interview Results, 4.3 Peer Interview
   Results, 6. Reflections, and Appendix B.
 
 - **Katerina Kuneva**  
-  Katerina was responsible for the organization dashboard, where the inventory is managed and all the goods in the inventory
-  can be viewed.
+  Soltion: Katerina was responsible for the organization dashboard, where the inventory is managed and all the goods in the
+  inventory can be viewed.
 
-  Regarding the report, Katerina was responsible for the abstract and for the sections 1. Problem and Motivation, 2. Solution
+  Report: Katerina was responsible for the abstract and for the sections 1. Problem and Motivation, 2. Solution
   Design and Fit to the GaaP Concept, and 7. Conclusions.
 
 - **Nils Grob**  
-  Nils implemented the dashboard of the authorization role, where the requests from the crisis management team can be
-  authorized, partially authorized, or declined.
+  Solution: Nils implemented the dashboard of the authorization role, where the requests from the crisis management team
+  can be authorized, partially authorized, or declined.
 
-  Regarding the report, Nils was responsible for the sections 3. Approach, 4.2 Incident Catalogue, and 5. Analysis.
+  Report: Nils was responsible for the sections 3. Approach, 4.2 Incident Catalogue, and 5. Analysis.
 
 
 Effort and responsibility during the hackathon were divided equally among all team members.
