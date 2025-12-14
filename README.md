@@ -79,7 +79,7 @@ The final integration and validation of the single components remained manual to
   inventory can be viewed.
 
   Report: Katerina was responsible for the abstract and for the sections 1. Problem and Motivation, 2. Solution
-  Design and Fit to the GaaP Concept, and 7. Conclusions.
+  Design and Fit to the GaaP Concept, 7. Conclusions, and Appendix A.
 
 - **Nils Grob**  
   Solution: Nils implemented the dashboard of the authorization role, where the requests from the crisis management team
