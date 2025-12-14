@@ -40,9 +40,9 @@ Relief organizations struggle with:
 
 ## 🧠 Tech Stack
 
-| Category      | Technology          |
-| ------------- | ------------------- |
-| **Prototype** | React.js + Python   |
+| Category      | Technology        |
+| ------------- | ----------------- |
+| **Prototype** | React.js + Python |
 
 ## AI Usage during the development phase
 
@@ -59,8 +59,11 @@ The group used AI to generate both the HTML elements and the underlying data str
 5. They manually integrated the finalized component into the existing project scaffold.
 
 This workflow was repeated multiple times for most of the different components.
-
 The final integration and validation of the single components remained manual to ensure architectural coherence and reliability.
+
+Overall AI was helpful by providing boilerplate code and generating self contained components. It was most effective for the group when used to solve clearly defined sub-tasks quickly. For example, it helped the group to generate JSON data structures, MUI-based React components, and user interface layouts very rapidly, and it was useful for solving coding errors, such as missing imports or merge conflicts.
+
+We also encountered some clear limitations when using AI assistance. AI struggled when asked to fulfill more complex tasks, such as handling application state or backend logic, and often hallucinated structures, which were not aligned with the actual architecture of the group. Moreover, small code changes using AI led to large, unintended code adjustments. Therefore, manually adjusting these parts was often faster and safer.
 
 ## 👥 Team & Responsibilities
 
@@ -87,10 +90,9 @@ The final integration and validation of the single components remained manual to
 
   Report: Nils was responsible for the sections 3. Approach, 4.2 Incident Catalogue, and 5. Analysis.
 
-
 Effort and responsibility during the hackathon were divided equally among all team members.
 The same goes for the written report.
 
 ## Demo video
 
-The demo video can be found on [Sharepoint](https://uzh.sharepoint.com/:v:/r/sites/SeminarDigitalPlatformsforResilience/Shared%20Documents/General/Recordings/View%20Only/Besprechung%20in%20Allgemein-20251213_161106-Meeting%20Recording.mp4?csf=1&web=1&e=XEvlgN)
+The demo video can be found on [Sharepoint](https://uzh.sharepoint.com/:v:/s/SeminarDigitalPlatformsforResilience/IQBkA8X2akPJSJEei-a929D_AQP6QWgcHqhqiA8tU2JkvmQ?e=JRtKYx)
